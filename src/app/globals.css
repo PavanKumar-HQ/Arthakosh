@@ -1,0 +1,267 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Arthakosh — Design Token System
+   Inspired by Linear × Notion × Stripe × Apple Health × Zerodha
+   ============================================================ */
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Arthakosh custom semantic colors */
+  --color-emerald: var(--emerald);
+  --color-amber: var(--amber);
+  --color-rose: var(--rose-accent);
+  --color-violet: var(--violet);
+  --color-blue: var(--blue-accent);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+}
+
+:root {
+  --background: oklch(0.985 0.002 90);
+  --foreground: oklch(0.145 0.005 285);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0.005 285);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0.005 285);
+  --primary: oklch(0.205 0.01 285);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.965 0.002 90);
+  --secondary-foreground: oklch(0.205 0.01 285);
+  --muted: oklch(0.965 0.002 90);
+  --muted-foreground: oklch(0.50 0.005 285);
+  --accent: oklch(0.965 0.002 90);
+  --accent-foreground: oklch(0.205 0.01 285);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.91 0.004 90);
+  --input: oklch(0.91 0.004 90);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.714);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0.002 90);
+  --sidebar-foreground: oklch(0.145 0.005 285);
+  --sidebar-primary: oklch(0.205 0.01 285);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.965 0.002 90);
+  --sidebar-accent-foreground: oklch(0.205 0.01 285);
+  --sidebar-border: oklch(0.91 0.004 90);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Arthakosh semantic tokens */
+  --emerald: oklch(0.596 0.145 163.225);
+  --amber: oklch(0.666 0.16 75.834);
+  --rose-accent: oklch(0.577 0.245 17.325);
+  --violet: oklch(0.541 0.244 293.401);
+  --blue-accent: oklch(0.546 0.245 262.881);
+  --surface: oklch(1 0 0);
+  --surface-raised: oklch(0.97 0.002 90);
+  --text-secondary: oklch(0.45 0.005 285);
+  --text-muted: oklch(0.58 0.005 285);
+}
+
+.dark {
+  --background: oklch(0.115 0.005 285);
+  --foreground: oklch(0.96 0.005 90);
+  --card: oklch(0.155 0.005 285);
+  --card-foreground: oklch(0.96 0.005 90);
+  --popover: oklch(0.155 0.005 285);
+  --popover-foreground: oklch(0.96 0.005 90);
+  --primary: oklch(0.91 0 0);
+  --primary-foreground: oklch(0.155 0.005 285);
+  --secondary: oklch(0.205 0.005 285);
+  --secondary-foreground: oklch(0.96 0.005 90);
+  --muted: oklch(0.205 0.005 285);
+  --muted-foreground: oklch(0.60 0.005 285);
+  --accent: oklch(0.205 0.005 285);
+  --accent-foreground: oklch(0.96 0.005 90);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.714);
+  --chart-3: oklch(0.588 0.158 241.966);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.155 0.005 285);
+  --sidebar-foreground: oklch(0.96 0.005 90);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.205 0.005 285);
+  --sidebar-accent-foreground: oklch(0.96 0.005 90);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+
+  /* Arthakosh dark semantic tokens */
+  --emerald: oklch(0.696 0.17 162.48);
+  --amber: oklch(0.766 0.16 75.834);
+  --rose-accent: oklch(0.677 0.245 17.325);
+  --violet: oklch(0.641 0.244 293.401);
+  --blue-accent: oklch(0.646 0.245 262.881);
+  --surface: oklch(0.155 0.005 285);
+  --surface-raised: oklch(0.19 0.005 285);
+  --text-secondary: oklch(0.65 0.005 285);
+  --text-muted: oklch(0.48 0.005 285);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+
+  /* Typography hierarchy */
+  h1 {
+    @apply text-4xl font-bold tracking-tight leading-tight;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    @apply text-3xl font-semibold tracking-tight leading-tight;
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    @apply text-2xl font-semibold tracking-tight;
+    letter-spacing: -0.015em;
+  }
+  h4 {
+    @apply text-xl font-semibold;
+  }
+  h5 {
+    @apply text-lg font-medium;
+  }
+
+  /* Premium selection color */
+  ::selection {
+    background: oklch(0.546 0.245 262.881 / 20%);
+  }
+  .dark ::selection {
+    background: oklch(0.646 0.245 262.881 / 25%);
+  }
+}
+
+@layer utilities {
+  /* Arthakosh layout utilities */
+  .container-page {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .container-narrow {
+    @apply mx-auto max-w-3xl px-4 sm:px-6;
+  }
+  .container-wide {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+  .section-spacing-sm {
+    @apply py-10 sm:py-12 lg:py-16;
+  }
+
+  /* Glass effects */
+  .glass {
+    @apply bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-white/20 dark:border-white/5;
+  }
+  .glass-subtle {
+    @apply bg-white/50 dark:bg-zinc-900/50 backdrop-blur-md;
+  }
+
+  /* Subtle card hover */
+  .card-hover {
+    @apply transition-all duration-200 ease-out hover:shadow-md hover:-translate-y-0.5;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, oklch(0.546 0.245 262.881), oklch(0.541 0.244 293.401));
+  }
+  .text-gradient-emerald {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, oklch(0.596 0.145 163.225), oklch(0.546 0.245 262.881));
+  }
+
+  /* Subtle divider */
+  .divider-subtle {
+    @apply border-t border-border/50;
+  }
+
+  /* Number display (for financial figures) */
+  .font-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Focus ring */
+  .focus-ring {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
