@@ -37,7 +37,7 @@ export default function GoalsDashboard() {
       description: "Build 3–6 months of expenses as a financial safety net.",
       color: "text-red-500",
       bg: "bg-red-50",
-      href: "/tools?tool=emergency-fund",
+      href: "/tools/emergency-fund",
       tag: "Priority #1",
       tagColor: "bg-red-100 text-red-600",
     },
