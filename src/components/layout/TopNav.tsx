@@ -2,26 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_CATEGORIES, APP_NAME } from "@/lib/constants";
-import { 
-  LayoutDashboard, FlaskConical, GitBranch,
-  Target, Wallet, ShieldAlert, TrendingUp,
-  Briefcase, BrainCircuit, Activity, Split,
-  ChevronDown, BookOpen, Menu
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { APP_NAME } from "@/lib/constants";
+import { AlignJustify } from "lucide-react";
 
-const iconMap: Record<string, React.ElementType> = {
-  LayoutDashboard, FlaskConical, GitBranch,
-  Target, Wallet, ShieldAlert, TrendingUp,
-  Briefcase, BrainCircuit, Activity, Split,
-  BookOpen,
-};
 
 const pathnameToTitle: Record<string, string> = {
   "/": "Landing Page",
@@ -54,36 +37,37 @@ export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
   };
 
   return (
-    <header className="h-16 flex-none border-b border-border/50 bg-background/95 backdrop-blur-md flex items-center justify-between px-4 lg:px-8 z-50 sticky top-0 shrink-0 relative">
-      {/* Left: Dynamic page title on desktop, logo/menu on mobile */}
-      <div className="flex items-center gap-2 z-10 shrink-0 lg:w-64">
-        {/* Mobile menu trigger */}
+    <header className="h-16 flex-none border-b border-border/50 bg-background/95 backdrop-blur-md flex items-center justify-between px-4 lg:px-8 z-50 sticky top-0 shrink-0">
+      {/* Left: Mobile menu button + logo, or Desktop page title */}
+      <div className="flex items-center gap-3 shrink-0 lg:w-64">
+        {/* Mobile hamburger menu trigger — always visible on mobile */}
         {onMenuClick && (
           <button
+            id="mobile-menu-trigger"
             onClick={onMenuClick}
-            className="lg:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors mr-1 shrink-0"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-foreground text-background hover:opacity-85 active:scale-95 transition-all shrink-0 shadow-sm"
+            aria-label="Open navigation menu"
           >
-            <Menu className="w-5 h-5" />
+            <AlignJustify className="w-5 h-5" />
           </button>
         )}
 
-        {/* Desktop title */}
+        {/* Mobile app logo */}
+        <Link href="/" className="lg:hidden flex items-center gap-2 group">
+          <div className="w-7 h-7 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
+            <img src="/logo.png" alt="Arthakosh" className="w-full h-full object-cover" />
+          </div>
+          <span className="font-bold text-base tracking-tight">{APP_NAME}</span>
+        </Link>
+
+        {/* Desktop page title */}
         <span className="font-bold text-sm tracking-tight hidden lg:block text-foreground/80">
           {getPageTitle()}
         </span>
-        
-        {/* Mobile logo link */}
-        <Link href="/" className="lg:hidden flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
-            <img src="/logo.png" alt="Arthakosh" className="w-full h-full object-cover" />
-          </div>
-          <span className="font-bold text-lg tracking-tight hidden sm:block">{APP_NAME}</span>
-        </Link>
       </div>
 
       {/* Right: Actions */}
-      <div className="flex items-center gap-4 z-10 shrink-0 lg:w-64 justify-end">
+      <div className="flex items-center gap-3 shrink-0 lg:w-64 justify-end">
         <button className="text-xs text-muted-foreground bg-accent/50 hover:bg-accent px-2.5 py-1.5 rounded-md border border-border/50 hidden sm:flex items-center gap-1.5 transition-colors">
           <span className="font-mono text-[10px]">⌘</span>K
           <span className="font-medium">Command</span>

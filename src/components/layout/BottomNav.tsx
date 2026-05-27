@@ -60,17 +60,20 @@ export function BottomNav() {
           );
         })}
         
-        {/* Menu Button */}
+        {/* Menu Button — prominently styled */}
         <button
+          id="bottom-nav-menu"
           onClick={() => setMenuOpen(true)}
-          className={`flex flex-col items-center justify-center w-[20%] h-full gap-1 transition-colors ${
-            menuOpen ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-          }`}
+          className="flex flex-col items-center justify-center w-[20%] h-full gap-1 transition-colors"
         >
-          <div className={`p-1.5 rounded-full transition-all duration-200 ${menuOpen ? "bg-foreground/10 text-foreground scale-110" : "bg-transparent text-muted-foreground scale-100"}`}>
+          <div className={`flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-200 shadow-sm ${
+            menuOpen 
+              ? "bg-foreground text-background scale-105" 
+              : "bg-foreground text-background hover:opacity-85 active:scale-95"
+          }`}>
             <Menu className="w-5 h-5" />
           </div>
-          <span className="text-[10px] font-medium">Menu</span>
+          <span className="text-[10px] font-semibold text-foreground">All</span>
         </button>
       </nav>
 
