@@ -30,8 +30,8 @@ export function TopNav() {
       {/* Left: Logo */}
       <div className="flex items-center z-10 shrink-0 lg:w-48">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center transition-transform group-hover:scale-105">
-            <span className="text-background font-bold text-sm leading-none">अ</span>
+          <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
+            <img src="/logo.png" alt="Arthakosh" className="w-full h-full object-cover" />
           </div>
           <span className="font-bold text-lg tracking-tight hidden sm:block">{APP_NAME}</span>
         </Link>

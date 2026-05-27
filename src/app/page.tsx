@@ -75,10 +75,10 @@ export default function LandingPage() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center">
-              <span className="text-white font-bold text-sm leading-none">अ</span>
+            <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+              <img src="/logo.png" alt="Arthakosh Logo" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-base tracking-tight">Arthakosh</span>
           </Link>
@@ -97,7 +97,7 @@ export default function LandingPage() {
 
           <Link
             href="/dashboard"
-            className="flex items-center gap-1.5 bg-zinc-900 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors"
+            className="flex items-center gap-1.5 bg-zinc-900 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors"
           >
             Open App
             <ArrowRight className="w-3.5 h-3.5" />
@@ -106,14 +106,14 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+      <section className="pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 bg-zinc-100 text-zinc-600 text-[10px] sm:text-xs font-semibold px-3 py-1.5 rounded-full mb-6 sm:mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             Financial Operating System for Indian Professionals
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.05] text-zinc-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] text-zinc-900 mb-6">
             The financial decisions
             <br />
             <span className="text-zinc-400">you face are not taught</span>
@@ -121,21 +121,21 @@ export default function LandingPage() {
             in any classroom.
           </h1>
 
-          <p className="text-lg sm:text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-base sm:text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10">
             Arthakosh is a professional-grade financial simulation platform. Build intuition for salary negotiations, portfolio behavior, crisis resilience, and behavioral biases through deep, interactive modules — not theory.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center w-full sm:w-auto">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 bg-zinc-900 text-white font-semibold px-6 py-3 rounded-full hover:bg-zinc-800 transition-colors text-sm"
+              className="inline-flex items-center justify-center gap-2 bg-zinc-900 text-white font-semibold px-6 py-3.5 sm:py-3 rounded-full hover:bg-zinc-800 transition-colors text-sm w-full sm:w-auto"
             >
               Start Simulating
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/scenarios"
-              className="inline-flex items-center gap-2 bg-white border border-zinc-200 text-zinc-700 font-semibold px-6 py-3 rounded-full hover:border-zinc-300 transition-colors text-sm"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-zinc-200 text-zinc-700 font-semibold px-6 py-3.5 sm:py-3 rounded-full hover:border-zinc-300 transition-colors text-sm w-full sm:w-auto"
             >
               View All Scenarios
             </Link>

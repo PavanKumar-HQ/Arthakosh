@@ -32,7 +32,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="min-h-full flex flex-col"
+              className="min-h-full flex flex-col pb-20 lg:pb-0"
             >
               {children}
             </motion.div>
