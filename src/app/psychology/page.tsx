@@ -86,8 +86,8 @@ export default function PsychologyPage() {
       ) : (
         <div className="space-y-8">
           {/* Custom Tabs Navigation */}
-          <div className="flex items-center justify-between border-b border-border/30 pb-1">
-            <div className="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/30 pb-4">
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar p-1">
               {[
                 { id: "matrix", label: "Mindset Matrix", icon: <Brain className="w-4 h-4" /> },
                 { id: "spending", label: "Emotional Journal", icon: <ShoppingBag className="w-4 h-4" /> },
@@ -98,10 +98,10 @@ export default function PsychologyPage() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as any)}
-                    className={`flex items-center gap-2 pb-3.5 text-sm font-semibold transition-all relative border-b-2 -mb-[2px] whitespace-nowrap ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap shadow-sm border ${
                       isActive 
-                        ? "border-violet text-foreground font-bold" 
-                        : "border-transparent text-muted-foreground hover:text-foreground"
+                        ? "bg-foreground text-background border-foreground shadow-md" 
+                        : "bg-background text-muted-foreground border-border hover:border-violet/40 hover:bg-violet/5 hover:text-foreground"
                     }`}
                   >
                     {tab.icon}

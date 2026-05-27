@@ -170,12 +170,12 @@ export default function ToolsPage() {
       </AnimatedSection>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="mb-8 overflow-x-auto scrollbar-hide flex w-full justify-start border-b border-border/40 bg-transparent h-auto p-0 gap-6">
+        <TabsList className="mb-10 overflow-x-auto scrollbar-hide flex w-full justify-start border-none bg-transparent h-auto p-1 gap-3">
           {categories.map((cat) => (
             <TabsTrigger
               key={cat.id}
               value={cat.id}
-              className="text-sm font-medium border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:bg-transparent rounded-none p-2 bg-transparent shrink-0"
+              className="px-5 py-2.5 rounded-full text-[13px] font-bold tracking-wide transition-all duration-300 whitespace-nowrap data-[state=active]:bg-violet data-[state=active]:text-white data-[state=active]:shadow-lg data-[state=active]:shadow-violet/25 bg-accent/50 text-muted-foreground hover:bg-accent hover:text-foreground shrink-0 border-none"
             >
               {cat.label}
             </TabsTrigger>

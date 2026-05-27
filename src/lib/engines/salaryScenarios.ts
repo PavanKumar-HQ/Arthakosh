@@ -19,6 +19,9 @@ export const SCENARIOS: Scenario[] = [
         avatar: '👨‍💼',
         tone: 'Passionate, highly budget-conscious, direct, and values raw commitment.',
         description: 'Series A founder managing burn rate. Expects extreme ownership; values stock options over base cash.',
+        behavioralTendencies: ['Avoids silence', 'Appeals to loyalty/mission', 'Uses guilt around burn rate'],
+        negotiationStyle: 'Emotional & Visionary',
+        urgencySignals: 'Immediate start date required',
         baseLeverage: 30,
         initialOffer: {
           base: 8.0,
@@ -44,6 +47,9 @@ export const SCENARIOS: Scenario[] = [
         avatar: '⚡',
         tone: 'Aggressive, fast-moving, uses competitive urgency and take-it-or-leave-it anchors.',
         description: 'External headhunter driven by closing metrics. Uses tight deadlines and "other candidates" to force signatures.',
+        behavioralTendencies: ['Uses exploding offers', 'Refers to other candidates', 'Talks fast'],
+        negotiationStyle: 'High-Pressure Transactional',
+        urgencySignals: 'Mentions a 24-hour deadline',
         baseLeverage: 40,
         initialOffer: {
           base: 8.5,
@@ -81,6 +87,9 @@ export const SCENARIOS: Scenario[] = [
         avatar: '👩‍💻',
         tone: 'Polite, structured, bound by strict compensation bands, standard procedures, and benefits lists.',
         description: 'Career HR professional. Moves slowly, strictly follows salary bands, but has flexibility in bonuses/benefits.',
+        behavioralTendencies: ['Cites company policy', 'Moves very slowly', 'Relies heavily on forms/processes'],
+        negotiationStyle: 'Bureaucratic & Rule-bound',
+        urgencySignals: 'Mentions payroll cut-off dates',
         baseLeverage: 50,
         initialOffer: {
           base: 15.5,
@@ -106,6 +115,9 @@ export const SCENARIOS: Scenario[] = [
         avatar: '🌟',
         tone: 'Professional, highly accommodating but savvy, values market benchmark comparisons, pushes total comp.',
         description: 'Elite recruiter. Hard to rattle, deeply values structured counteroffers with competing offers, and can unlock major sign-on bonuses.',
+        behavioralTendencies: ['Remains unfazed by high counters', 'Asks for competing offer letters', 'Focuses on total comp (TC)'],
+        negotiationStyle: 'Sophisticated & Benchmark-driven',
+        urgencySignals: 'Subtle mentions of team growth limits',
         baseLeverage: 60,
         initialOffer: {
           base: 17.5,
@@ -133,6 +145,12 @@ export function getDialogueFlow(recruiter: RecruiterArchetype): Record<DialogueN
   return {
     intro: {
       id: 'intro',
+      delayMs: 2500,
+      thinkingMoment: {
+        title: 'Initial Offer Analysis',
+        insight: `The recruiter just anchored at ₹${initialBase} LPA. This is likely their safe lower bound.`,
+        strategicAdvice: 'Do not accept the first offer. Responding too enthusiastically gives away your leverage. Consider anchoring higher or gathering more information on total comp.'
+      },
       recruiterMessage: `Hi there, we're absolutely thrilled with your interviews! The team raved about your final technical round. I'd like to extend an official offer: we can do a base salary of ₹${initialBase} LPA, along with standard insurance and perks. How are you feeling about this?`,
       recruiterSentiment: 'Warm',
       choices: [
@@ -173,6 +191,12 @@ export function getDialogueFlow(recruiter: RecruiterArchetype): Record<DialogueN
 
     react_to_offer: {
       id: 'react_to_offer',
+      delayMs: 3500,
+      thinkingMoment: {
+        title: 'Recruiter Resistance',
+        insight: 'The recruiter is pushing back on base salary by citing constraints (budget, parity, or runway).',
+        strategicAdvice: 'This is a standard objection. Do not fold immediately. If base cash is truly capped, pivot to total comp (sign-on bonus or equity) or justify your value firmly to force an exception.'
+      },
       recruiterMessage: recruiter.id === 'founder' 
         ? `We are a lean Series A company, and cash is tight. If we raise the base salary too high, we can't hire other team members. I can adjust base slightly, but I'd prefer to offer you more equity. How about that?`
         : recruiter.id === 'high_pressure'
@@ -209,6 +233,12 @@ export function getDialogueFlow(recruiter: RecruiterArchetype): Record<DialogueN
 
     negotiate_benefits: {
       id: 'negotiate_benefits',
+      delayMs: 4000,
+      thinkingMoment: {
+        title: 'Closing the Gap',
+        insight: 'The recruiter is offering concessions (bonus, equity, or perks) to secure a verbal agreement right now.',
+        strategicAdvice: 'Do not give a verbal acceptance on the spot. Always ask for the offer in writing to lock in the concessions before making your final decision.'
+      },
       recruiterMessage: recruiter.id === 'founder'
         ? `Okay, I hear you. I can add another ₹1.5L ESOP grant, but we can't do a signing bonus. Also, we really need someone who can work in the office five days a week. We value team presence. Can we finalize this now?`
         : recruiter.id === 'high_pressure'
@@ -245,6 +275,12 @@ export function getDialogueFlow(recruiter: RecruiterArchetype): Record<DialogueN
 
     handling_deadline: {
       id: 'handling_deadline',
+      delayMs: 3000,
+      thinkingMoment: {
+        title: 'Manufactured Urgency',
+        insight: 'The recruiter is applying artificial deadline pressure (e.g., "noon tomorrow") to prevent you from shopping the offer around.',
+        strategicAdvice: 'Remain calm. A genuine offer rarely expires in 24 hours. Acknowledge the timeline, but maintain your professional boundaries.'
+      },
       recruiterMessage: recruiter.id === 'high_pressure' || recruiter.id === 'founder'
         ? `We are moving very fast. I can hold these numbers for you, but we must have a signed PDF uploaded by noon tomorrow. Otherwise, we'll have to start onboarding the next candidate. Can we count on you?`
         : `No problem at all. Take your time to review the documents. However, our next system payroll cycle begins next Monday, so we'd appreciate if you could finalize the paperwork by Friday.`,

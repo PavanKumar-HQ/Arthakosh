@@ -6,20 +6,46 @@ export const APP_NAME = 'Arthakosh';
 export const APP_TAGLINE = 'Financial literacy for real life, not just investing.';
 export const APP_DESCRIPTION = 'A premium platform for financial literacy and real-life money decision making, designed for Indian students, young professionals, freelancers, and working adults.';
 
-export const NAV_ITEMS = [
-  { label: 'Goals', href: '/goals', icon: 'Target', description: 'Plan and track financial goals' },
-  { label: 'Scenarios', href: '/scenarios', icon: 'GitBranch', description: 'Interactive money decisions' },
-  { label: 'Learn', href: '/learn', icon: 'BookOpen', description: 'Practical financial simulations' },
-  { label: 'Tools', href: '/tools', icon: 'Calculator', description: 'Calculators and planners' },
-  { label: 'Salary', href: '/salary', icon: 'TrendingUp', description: 'Negotiation mastery' },
-  { label: 'Estate', href: '/estate', icon: 'Shield', description: 'Legacy planning basics' },
-  { label: 'Psychology', href: '/psychology', icon: 'Brain', description: 'Money mindset' },
-] as const;
+export const NAV_CATEGORIES = [
+  {
+    category: "CORE",
+    items: [
+      { label: 'Home', href: '/', icon: 'LayoutDashboard', description: 'Command Center' },
+      { label: 'Labs', href: '/labs', icon: 'FlaskConical', description: 'Interactive decision labs' },
+      { label: 'Simulations', href: '/scenarios', icon: 'GitBranch', description: 'Scenario testing' },
+    ]
+  },
+  {
+    category: "PLANNING",
+    items: [
+      { label: 'Goals', href: '/goals', icon: 'Target', description: 'Plan and track financial goals' },
+      { label: 'Budgeting', href: '/budget', icon: 'Wallet', description: 'Cashflow management' },
+      { label: 'Emergency', href: '/emergency', icon: 'ShieldAlert', description: 'Shock readiness' },
+      { label: 'Investing', href: '/investing', icon: 'TrendingUp', description: 'Growth strategies' },
+    ]
+  },
+  {
+    category: "CAREER",
+    items: [
+      { label: 'Salary', href: '/salary', icon: 'Briefcase', description: 'Negotiation mastery' },
+    ]
+  },
+  {
+    category: "MINDSET",
+    items: [
+      { label: 'Psychology', href: '/psychology', icon: 'BrainCircuit', description: 'Money mindset' },
+      { label: 'Behavior', href: '/behavior', icon: 'Activity', description: 'Cognitive patterns' },
+      { label: 'Decision Making', href: '/decisions', icon: 'Split', description: 'Mental models' },
+    ]
+  }
+];
+
+export const NAV_ITEMS = NAV_CATEGORIES.flatMap(c => c.items);
 
 export const FOOTER_LINKS = {
   product: [
     { label: 'Goal Planning', href: '/goals' },
-    { label: 'Scenario Simulator', href: '/scenarios' },
+    { label: 'Decision Labs', href: '/labs' },
     { label: 'Learning Hub', href: '/learn' },
     { label: 'Money Toolkit', href: '/tools' },
   ],

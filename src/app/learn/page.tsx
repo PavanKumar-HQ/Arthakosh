@@ -40,94 +40,103 @@ export default function LearnPage() {
   const [activeSimulator, setActiveSimulator] = useState<string | null>(null);
 
   return (
-    <div className="container-page py-8 sm:py-12">
-      <AnimatedSection className="mb-10">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Learn by Doing</h1>
-        <p className="text-muted-foreground max-w-xl text-sm sm:text-base">
-          Interactive simulators that teach financial concepts through experience — not lectures.
-        </p>
-      </AnimatedSection>
-
-      <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-        {simulators.map((sim) => {
-          const isSelected = activeSimulator === sim.id;
-          return (
-            <StaggerItem key={sim.id}>
-              {sim.status === "available" ? (
-                <button
-                  onClick={() => setActiveSimulator(sim.id)}
-                  className={`text-left w-full h-full flex flex-col justify-between p-5 rounded-xl border transition-all duration-200 hover:scale-[1.01] hover:shadow-md active:scale-[0.99] cursor-pointer group focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 ${
-                    isSelected
-                      ? "ring-2 ring-violet border-violet bg-violet/[0.01]"
-                      : "border-border/60 hover:border-violet/40"
-                  }`}
-                >
-                  <div className="w-full">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${sim.color}15`, color: sim.color }}>
-                        {sim.icon}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {isSelected ? (
-                          <Badge className="bg-violet text-white border-none shadow-sm text-[10px] shrink-0">
-                            Active
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="text-[10px] text-muted-foreground opacity-60 group-hover:opacity-100 group-hover:border-violet/30 transition-opacity shrink-0">
-                            Launch
-                          </Badge>
-                        )}
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground ml-1.5">
-                          <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                          {sim.time}
-                        </span>
-                      </div>
-                    </div>
-                    <h3 className="text-sm font-bold mb-1 text-foreground">{sim.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{sim.description}</p>
-                  </div>
-                </button>
-              ) : (
-                <div className="p-5 h-full opacity-60 flex flex-col justify-between border border-border/40 bg-accent/10 rounded-xl">
-                  <div>
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${sim.color}15`, color: sim.color }}>
-                        {sim.icon}
-                      </div>
-                      <Badge variant="outline" className="text-xs">Coming Soon</Badge>
-                    </div>
-                    <h3 className="text-sm font-semibold mb-1 text-muted-foreground">{sim.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{sim.description}</p>
-                  </div>
-                </div>
-              )}
-            </StaggerItem>
-          );
-        })}
-      </StaggerChildren>
-
-      {/* Active simulator container */}
-      {activeSimulator && (
-        <div className="mt-12 pt-8 border-t border-border/45 relative animate-in fade-in-50 duration-200">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider pl-1">
-              Simulator Workspace
-            </h3>
-            <button
-              onClick={() => setActiveSimulator(null)}
-              className="text-xs font-semibold text-muted-foreground hover:text-foreground flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/45 hover:bg-accent transition-colors cursor-pointer"
-            >
-              Close Simulator <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          {activeSimulator === "budget-allocator" && <BudgetAllocator />}
-          {activeSimulator === "credit-score" && <CreditScoreSimulator />}
-          {activeSimulator === "debt-spiral" && <DebtSpiralSimulator />}
-          {activeSimulator === "investment-allocation" && <InvestmentAllocationSimulator />}
-          {activeSimulator === "emergency-drill" && <EmergencyDrillSimulator />}
+    <div className="flex flex-col h-full p-4 lg:p-6 overflow-hidden">
+      <div className="shrink-0 mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight mb-1">Learn by Doing</h1>
+          <p className="text-muted-foreground text-sm">
+            Interactive simulators that teach financial concepts through experience.
+          </p>
         </div>
-      )}
+      </div>
+
+      <div className="flex-1 flex gap-6 overflow-hidden">
+        {/* Left Pane: List of Simulators */}
+        <div className={`overflow-y-auto pr-2 pb-8 scrollbar-hide ${activeSimulator ? 'hidden lg:flex flex-col w-80 shrink-0 gap-4' : 'flex-1'}`}>
+          <StaggerChildren className={activeSimulator ? 'flex flex-col gap-4' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'}>
+            {simulators.map((sim) => {
+              const isSelected = activeSimulator === sim.id;
+              return (
+                <StaggerItem key={sim.id}>
+                  {sim.status === "available" ? (
+                    <button
+                      onClick={() => setActiveSimulator(sim.id)}
+                      className={`text-left w-full h-full flex flex-col justify-between p-5 rounded-xl border transition-all duration-200 hover:scale-[1.01] hover:shadow-md active:scale-[0.99] cursor-pointer group focus:outline-none focus:ring-2 focus:ring-violet focus:ring-offset-2 ${
+                        isSelected
+                          ? "ring-2 ring-violet border-violet bg-violet/[0.01]"
+                          : "border-border/60 hover:border-violet/40 bg-surface-raised"
+                      }`}
+                    >
+                      <div className="w-full">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${sim.color}15`, color: sim.color }}>
+                            {sim.icon}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {isSelected ? (
+                              <Badge className="bg-violet text-white border-none shadow-sm text-[10px] shrink-0">
+                                Active
+                              </Badge>
+                            ) : (
+                              <Badge variant="outline" className="text-[10px] text-muted-foreground opacity-60 group-hover:opacity-100 group-hover:border-violet/30 transition-opacity shrink-0">
+                                Launch
+                              </Badge>
+                            )}
+                            <span className="flex items-center gap-1 text-xs text-muted-foreground ml-1.5">
+                              <Clock className="w-3.5 h-3.5 text-muted-foreground" />
+                              {sim.time}
+                            </span>
+                          </div>
+                        </div>
+                        <h3 className="text-sm font-bold mb-1 text-foreground">{sim.title}</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{sim.description}</p>
+                      </div>
+                    </button>
+                  ) : (
+                    <div className="p-5 h-full opacity-60 flex flex-col justify-between border border-border/40 bg-accent/10 rounded-xl">
+                      <div>
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${sim.color}15`, color: sim.color }}>
+                            {sim.icon}
+                          </div>
+                          <Badge variant="outline" className="text-xs">Coming Soon</Badge>
+                        </div>
+                        <h3 className="text-sm font-semibold mb-1 text-muted-foreground">{sim.title}</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{sim.description}</p>
+                      </div>
+                    </div>
+                  )}
+                </StaggerItem>
+              );
+            })}
+          </StaggerChildren>
+        </div>
+
+        {/* Right Pane: Active Simulator Workspace */}
+        {activeSimulator && (
+          <div className="flex-1 flex flex-col border border-border/45 rounded-xl bg-surface relative animate-in fade-in-50 duration-200 overflow-hidden">
+            <div className="flex items-center justify-between p-4 border-b border-border/45 bg-surface-raised shrink-0">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                Simulator Workspace
+              </h3>
+              <button
+                onClick={() => setActiveSimulator(null)}
+                className="text-xs font-semibold text-muted-foreground hover:text-foreground flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border/45 hover:bg-accent transition-colors cursor-pointer"
+              >
+                Close Simulator <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-4 lg:p-6 scrollbar-hide">
+              {activeSimulator === "budget-allocator" && <BudgetAllocator />}
+              {activeSimulator === "credit-score" && <CreditScoreSimulator />}
+              {activeSimulator === "debt-spiral" && <DebtSpiralSimulator />}
+              {activeSimulator === "investment-allocation" && <InvestmentAllocationSimulator />}
+              {activeSimulator === "emergency-drill" && <EmergencyDrillSimulator />}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

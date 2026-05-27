@@ -8,6 +8,9 @@ export interface RecruiterArchetype {
   avatar: string;
   tone: string;
   description: string;
+  behavioralTendencies?: string[];
+  negotiationStyle?: string;
+  urgencySignals?: string;
   baseLeverage: number; // 0-100
   initialOffer: Compensation;
   maxOffer: Compensation;
@@ -50,12 +53,20 @@ export interface UserChoice {
   nextNodeId: DialogueNodeId | 'outcome';
 }
 
+export interface ThinkingMoment {
+  title: string;
+  insight: string;
+  strategicAdvice: string;
+}
+
 export interface DialogueNode {
   id: DialogueNodeId;
   recruiterMessage: string;
   recruiterSentiment: 'Warm' | 'Professional' | 'Skeptical' | 'Annoyed' | 'Impatient';
   choices: UserChoice[];
   pressureApplied?: string; // Pressure phrase if any
+  delayMs?: number; // Artificial typing delay
+  thinkingMoment?: ThinkingMoment;
 }
 
 export interface Scenario {

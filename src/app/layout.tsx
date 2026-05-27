@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { AppShell } from "@/components/layout/AppShell";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,10 +17,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#09090b",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "Arthakosh — Financial Literacy for Real Life",
   description:
     "A premium platform for financial literacy and real-life money decision making. Designed for Indian students, young professionals, freelancers, and working adults.",
+  manifest: "/manifest.json",
   keywords: [
     "financial literacy",
     "India",
@@ -56,9 +63,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased bg-background text-foreground">
         <ThemeProvider>
           <TooltipProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <AppShell>
+              {children}
+            </AppShell>
           </TooltipProvider>
         </ThemeProvider>
       </body>
