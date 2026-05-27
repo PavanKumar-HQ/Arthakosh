@@ -7,7 +7,7 @@ import {
   LayoutDashboard, FlaskConical, GitBranch,
   Target, Wallet, ShieldAlert, TrendingUp,
   Briefcase, BrainCircuit, Activity, Split,
-  ChevronDown, BookOpen
+  ChevronDown, BookOpen, Menu
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -41,7 +41,7 @@ const pathnameToTitle: Record<string, string> = {
   "/estate": "Estate & Legacy Checklist",
 };
 
-export function TopNav() {
+export function TopNav({ onMenuClick }: { onMenuClick?: () => void }) {
   const pathname = usePathname();
 
   const getPageTitle = () => {
@@ -55,8 +55,19 @@ export function TopNav() {
 
   return (
     <header className="h-16 flex-none border-b border-border/50 bg-background/95 backdrop-blur-md flex items-center justify-between px-4 lg:px-8 z-50 sticky top-0 shrink-0 relative">
-      {/* Left: Dynamic page title on desktop, logo on mobile */}
-      <div className="flex items-center z-10 shrink-0 lg:w-64">
+      {/* Left: Dynamic page title on desktop, logo/menu on mobile */}
+      <div className="flex items-center gap-2 z-10 shrink-0 lg:w-64">
+        {/* Mobile menu trigger */}
+        {onMenuClick && (
+          <button
+            onClick={onMenuClick}
+            className="lg:hidden p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors mr-1 shrink-0"
+            aria-label="Toggle navigation menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+
         {/* Desktop title */}
         <span className="font-bold text-sm tracking-tight hidden lg:block text-foreground/80">
           {getPageTitle()}

@@ -8,7 +8,7 @@ import { OnboardingProfile } from "@/types/onboarding";
 import {
   LayoutDashboard, FlaskConical, GitBranch, Target, Wallet, ShieldAlert,
   TrendingUp, Briefcase, BrainCircuit, Activity, Split, BookOpen,
-  User, RotateCcw, ShieldCheck, HelpCircle
+  User, RotateCcw, ShieldCheck, HelpCircle, X
 } from "lucide-react";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -28,9 +28,10 @@ const iconMap: Record<string, React.ElementType> = {
 
 interface SidebarProps {
   className?: string;
+  onClose?: () => void;
 }
 
-export function Sidebar({ className = "" }: SidebarProps) {
+export function Sidebar({ className = "", onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [profile, setProfile] = useState<OnboardingProfile | null>(null);
@@ -49,19 +50,29 @@ export function Sidebar({ className = "" }: SidebarProps) {
   const handleReset = () => {
     localStorage.removeItem("user_onboarding_profile");
     setProfile(null);
+    if (onClose) onClose();
     router.push("/onboarding");
   };
 
   return (
-    <aside className={`flex-col h-screen w-64 bg-background/95 backdrop-blur-md border-r border-border/50 shrink-0 z-40 relative ${className}`}>
+    <aside className={`flex flex-col h-screen w-64 bg-background/95 backdrop-blur-md border-r border-border/50 shrink-0 z-40 relative ${className}`}>
       {/* Header / Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-border/50 shrink-0">
+      <div className="h-16 flex items-center justify-between px-6 border-b border-border/50 shrink-0">
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
             <img src="/logo.png" alt="Arthakosh" className="w-full h-full object-cover" />
           </div>
           <span className="font-bold text-lg tracking-tight">{APP_NAME}</span>
         </Link>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="lg:hidden p-1.5 rounded-lg border border-border/50 hover:bg-accent text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Close sidebar menu"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
       {/* Navigation Links Scrollable Section */}
@@ -84,6 +95,7 @@ export function Sidebar({ className = "" }: SidebarProps) {
                   <Link
                     key={item.label}
                     href={item.href}
+                    onClick={onClose}
                     className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide transition-all relative group ${
                       isActive
                         ? "bg-foreground text-background shadow-md shadow-foreground/5"
