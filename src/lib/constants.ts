@@ -13,6 +13,7 @@ export const NAV_CATEGORIES = [
       { label: 'Home', href: '/', icon: 'LayoutDashboard', description: 'Command Center' },
       { label: 'Labs', href: '/labs', icon: 'FlaskConical', description: 'Interactive decision labs' },
       { label: 'Simulations', href: '/scenarios', icon: 'GitBranch', description: 'Scenario testing' },
+      { label: 'Resources', href: '/resources', icon: 'BookOpen', description: 'Guides, PDFs & Videos' },
     ]
   },
   {

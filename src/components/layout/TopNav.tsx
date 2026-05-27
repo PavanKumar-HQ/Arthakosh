@@ -7,7 +7,7 @@ import {
   LayoutDashboard, FlaskConical, GitBranch,
   Target, Wallet, ShieldAlert, TrendingUp,
   Briefcase, BrainCircuit, Activity, Split,
-  ChevronDown
+  ChevronDown, BookOpen
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -20,6 +20,7 @@ const iconMap: Record<string, React.ElementType> = {
   LayoutDashboard, FlaskConical, GitBranch,
   Target, Wallet, ShieldAlert, TrendingUp,
   Briefcase, BrainCircuit, Activity, Split,
+  BookOpen,
 };
 
 export function TopNav() {
