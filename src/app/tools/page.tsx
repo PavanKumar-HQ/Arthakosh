@@ -37,6 +37,19 @@ interface ToolItem {
 
 const tools: ToolItem[] = [
   {
+    id: "tax-estimator",
+    name: "Regime Battleground",
+    description: "Compare New vs Old Tax Regime. Estimate your tax liabilities, apply standard deductions, and choose the correct regime.",
+    emotionalContext: "Maximize your take-home pay by choosing the correct tax regime for your income structure.",
+    category: "planning",
+    icon: <Wallet className="w-5 h-5" />,
+    color: "#10B981",
+    completionTime: "3 min comparison",
+    complexity: "Medium",
+    pressure: "Calm",
+    outcomePreview: "Optimal regime & net savings"
+  },
+  {
     id: "emi-calculator",
     name: "EMI Stress Analysis",
     description: "Go beyond basic EMIs. Analyze stress probability, emergency vulnerability, and monthly breathing room before borrowing.",
