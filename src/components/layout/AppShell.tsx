@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { TopNav } from "./TopNav";
 import { BottomNav } from "./BottomNav";
+import { Sidebar } from "./Sidebar";
 import { CommandPalette } from "../shared/CommandPalette";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -15,15 +16,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex flex-col h-screen w-full bg-background overflow-hidden text-foreground">
-      {/* Top Navigation */}
-      <TopNav />
-      
-      {/* Mobile Bottom Nav */}
-      <BottomNav />
+    <div className="flex h-screen w-full bg-background overflow-hidden text-foreground">
+      {/* Desktop Left Sidebar */}
+      <Sidebar className="hidden lg:flex" />
 
-      {/* Main Content Area */}
-      <div className="flex flex-col flex-1 min-h-0 relative">
+      {/* Main Right Content Panel */}
+      <div className="flex flex-col flex-1 min-w-0 h-full relative">
+        {/* Top Navigation Bar */}
+        <TopNav />
+
+        {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto overflow-x-hidden relative scrollbar-hide bg-surface/30">
           <AnimatePresence mode="wait">
             <motion.div
@@ -38,6 +40,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </motion.div>
           </AnimatePresence>
         </main>
+        
+        {/* Mobile Bottom Nav */}
+        <BottomNav />
       </div>
 
       <CommandPalette />
