@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, Shield, Brain, Target, Wallet, Activity } from "lucide-react";
+import { ArrowRight, TrendingUp, Shield, Brain, Target, Wallet, Activity, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const NAV_LINKS = [
   { label: "Goals", href: "/goals" },
@@ -70,6 +72,8 @@ const MODULES = [
 ];
 
 export default function LandingPage() {
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans">
 
@@ -83,6 +87,7 @@ export default function LandingPage() {
             <span className="font-bold text-base tracking-tight">Arthakosh</span>
           </Link>
 
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <Link
@@ -95,14 +100,61 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-1.5 bg-zinc-900 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors"
-          >
-            Open App
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/dashboard"
+              className="hidden sm:flex items-center gap-1.5 bg-zinc-900 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors"
+            >
+              Open App
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+
+            {/* Mobile Menu Toggler */}
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden p-2 rounded-xl text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        <AnimatePresence>
+          {isMobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden bg-white border-b border-zinc-100 overflow-hidden"
+            >
+              <div className="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className="px-3 py-2.5 text-sm font-bold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 rounded-lg transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="pt-4">
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setIsMobileOpen(false)}
+                    className="flex items-center justify-center gap-1.5 bg-zinc-900 text-white text-sm font-bold px-4 py-3 rounded-xl hover:bg-zinc-850 transition-colors w-full"
+                  >
+                    Open App
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero */}
