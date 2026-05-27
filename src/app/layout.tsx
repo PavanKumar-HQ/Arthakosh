@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { AppShell } from "@/components/layout/AppShell";
+import { InstallPwaPopup } from "@/components/shared/InstallPwaPopup";
 import "./globals.css";
 
 const inter = Inter({
@@ -66,6 +67,7 @@ export default function RootLayout({
             <AppShell>
               {children}
             </AppShell>
+            <InstallPwaPopup />
           </TooltipProvider>
         </ThemeProvider>
       </body>
