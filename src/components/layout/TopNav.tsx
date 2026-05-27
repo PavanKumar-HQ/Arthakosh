@@ -9,6 +9,12 @@ import {
   Briefcase, BrainCircuit, Activity, Split,
   ChevronDown
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const iconMap: Record<string, React.ElementType> = {
   LayoutDashboard, FlaskConical, GitBranch,
@@ -35,42 +41,33 @@ export function TopNav() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <nav className="hidden lg:flex items-center gap-2 pointer-events-auto">
           {NAV_CATEGORIES.map((category) => (
-            <div key={category.category} className="relative group">
-              <button className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface rounded-md transition-colors">
+            <DropdownMenu key={category.category}>
+              <DropdownMenuTrigger className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-surface rounded-md transition-colors outline-none focus:ring-0 data-[state=open]:bg-surface data-[state=open]:text-foreground">
                 {category.category}
-                <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 group-hover:rotate-180 transition-all" />
-              </button>
+                <ChevronDown className="w-3.5 h-3.5 opacity-50" />
+              </DropdownMenuTrigger>
               
-              {/* Dropdown Menu */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-64 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto translate-y-2 group-hover:translate-y-0 transition-all bg-background border border-border/50 rounded-xl shadow-2xl p-2 z-50">
-                <div className="space-y-1">
-                  {category.items.map((item) => {
-                    const Icon = iconMap[item.icon];
-                    const isActive = pathname === item.href || (item.href !== '/dashboard' && item.href !== '/' && pathname.startsWith(item.href));
-                      
-                    return (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
-                          isActive 
-                            ? "bg-surface text-foreground font-semibold" 
-                            : "text-muted-foreground hover:bg-surface/50 hover:text-foreground"
-                        }`}
-                      >
+              <DropdownMenuContent align="center" className="w-64 p-2 rounded-xl shadow-2xl bg-background border-border/50">
+                {category.items.map((item) => {
+                  const Icon = iconMap[item.icon];
+                  const isActive = pathname === item.href || (item.href !== '/dashboard' && item.href !== '/' && pathname.startsWith(item.href));
+                    
+                  return (
+                    <DropdownMenuItem key={item.label} asChild className={`cursor-pointer rounded-lg px-3 py-2.5 mb-1 last:mb-0 ${isActive ? "bg-surface" : ""}`}>
+                      <Link href={item.href} className="flex items-center gap-3 w-full">
                         {Icon && (
                           <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-foreground" : "text-muted-foreground"}`} />
                         )}
                         <div className="min-w-0">
-                          <span className="block text-sm truncate">{item.label}</span>
+                          <span className={`block text-sm truncate ${isActive ? "font-semibold text-foreground" : "text-foreground/90"}`}>{item.label}</span>
                           <span className="block text-[10px] truncate text-muted-foreground/70">{item.description}</span>
                         </div>
                       </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+                    </DropdownMenuItem>
+                  );
+                })}
+              </DropdownMenuContent>
+            </DropdownMenu>
           ))}
         </nav>
       </div>

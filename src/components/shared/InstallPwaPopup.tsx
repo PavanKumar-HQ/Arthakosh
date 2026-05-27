@@ -10,9 +10,15 @@ export function InstallPwaPopup() {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    // Force show for local testing preview
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 1500);
+
     // Check if already running as a standalone PWA
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setIsStandalone(true);
+      clearTimeout(timer);
       return;
     }
 
@@ -28,12 +34,17 @@ export function InstallPwaPopup() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     };
   }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      console.log("Mock install triggered (Dev mode)");
+      setShowPopup(false);
+      return;
+    }
 
     // Show the native browser install prompt
     deferredPrompt.prompt();
