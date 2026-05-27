@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { AnimatedSection, StaggerChildren, StaggerItem } from "@/components/shared/AnimatedSection";
 import { formatCurrency } from "@/lib/constants";
-import { ShieldAlert, Flame, Activity, TrendingDown, AlertOctagon, HeartPulse } from "lucide-react";
+import { ShieldAlert, Flame, Activity, TrendingDown, AlertOctagon, HeartPulse, Shield } from "lucide-react";
 import { useBudgetStore } from "@/lib/store/budget";
 import { EmergencyState, EMERGENCY_ACTIONS, calculateEmergencyRunway } from "@/lib/engines/emergencySimulator";
+import { InsuranceEstimator } from "@/components/tools/InsuranceEstimator";
 
 export default function EmergencyWarRoom() {
   const { incomes, expenses } = useBudgetStore();
@@ -190,6 +191,20 @@ export default function EmergencyWarRoom() {
               </div>
             </Card>
           </div>
+        </div>
+
+        {/* Insurance Coverage Section */}
+        <div className="mt-12 pt-12 border-t border-border/50">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold flex items-center gap-2">
+              <Shield className="w-5 h-5 text-blue-500" />
+              Insurance Coverage (First Line of Defense)
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Before touching your emergency fund or selling investments, check if you are adequately covered by insurance.
+            </p>
+          </div>
+          <InsuranceEstimator hideHeader />
         </div>
 
       </AnimatedSection>

@@ -7,7 +7,11 @@ import { ResultCard } from "@/components/shared/ResultCard";
 import { calculateInsurance } from "@/lib/calculators";
 import { formatCurrency } from "@/lib/constants";
 
-export function InsuranceEstimator() {
+interface InsuranceEstimatorProps {
+  hideHeader?: boolean;
+}
+
+export function InsuranceEstimator({ hideHeader = false }: InsuranceEstimatorProps = {}) {
   const [age, setAge] = useState(28);
   const [income, setIncome] = useState(800000);
   const [dependents, setDependents] = useState(2);
@@ -17,10 +21,12 @@ export function InsuranceEstimator() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Insurance Estimator</h1>
-        <p className="text-sm text-muted-foreground">Calculate recommended life and health insurance coverage</p>
-      </div>
+      {!hideHeader && (
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold tracking-tight mb-1">Insurance Estimator</h1>
+          <p className="text-sm text-muted-foreground">Calculate recommended life and health insurance coverage</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <Card className="p-6 lg:col-span-2 space-y-6">

@@ -8,7 +8,7 @@ import { RecommendationBanner } from "@/components/goals/RecommendationBanner";
 import { AnimatedSection, StaggerChildren, StaggerItem } from "@/components/shared/AnimatedSection";
 import { Card } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/constants";
-import { Target, Plus, AlertCircle, ArrowRight, ShieldAlert } from "lucide-react";
+import { Target, Plus, AlertCircle, ArrowRight, ShieldAlert, Shield, Wallet, Home, GraduationCap, Plane } from "lucide-react";
 import { useState } from "react";
 import { MultiGoalConflict } from "@/lib/engines/multiGoal";
 
@@ -29,25 +29,101 @@ export default function GoalsDashboard() {
     }
   };
 
+  const GOAL_TEMPLATES = [
+    {
+      icon: Shield,
+      emoji: "🛡️",
+      title: "Emergency Fund",
+      description: "Build 3–6 months of expenses as a financial safety net.",
+      color: "text-red-500",
+      bg: "bg-red-50",
+      href: "/tools?tool=emergency-fund",
+      tag: "Priority #1",
+      tagColor: "bg-red-100 text-red-600",
+    },
+    {
+      icon: Home,
+      emoji: "🏠",
+      title: "Buy a Home",
+      description: "Plan for down payment, EMI capacity, and registration costs.",
+      color: "text-blue-500",
+      bg: "bg-blue-50",
+      href: "/goals/create",
+      tag: "Long-term",
+      tagColor: "bg-blue-100 text-blue-600",
+    },
+    {
+      icon: GraduationCap,
+      emoji: "🎓",
+      title: "Education / Upskilling",
+      description: "Save for a course, degree, or career transition fund.",
+      color: "text-purple-500",
+      bg: "bg-purple-50",
+      href: "/goals/create",
+      tag: "Career",
+      tagColor: "bg-purple-100 text-purple-600",
+    },
+    {
+      icon: Plane,
+      emoji: "✈️",
+      title: "Dream Trip",
+      description: "Set a target, timeline, and monthly savings for travel.",
+      color: "text-green-500",
+      bg: "bg-green-50",
+      href: "/goals/create",
+      tag: "Lifestyle",
+      tagColor: "bg-green-100 text-green-600",
+    },
+    {
+      icon: Wallet,
+      emoji: "💰",
+      title: "Custom Goal",
+      description: "Anything else — retirement corpus, wedding, car, or sabbatical.",
+      color: "text-amber-500",
+      bg: "bg-amber-50",
+      href: "/goals/create",
+      tag: "Flexible",
+      tagColor: "bg-amber-100 text-amber-600",
+    },
+  ];
+
   if (goals.length === 0) {
     return (
-      <div className="container-page py-16 sm:py-24 text-center">
-        <AnimatedSection>
-          <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner shadow-black/5">
+      <div className="container-page py-10 sm:py-16">
+        <AnimatedSection className="mb-10">
+          <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6 text-3xl">
             🎯
           </div>
-          <h1 className="text-3xl font-bold tracking-tight mb-4">Financial clarity starts with one goal.</h1>
-          <p className="text-muted-foreground max-w-lg mx-auto mb-8 text-lg">
-            Whether it&apos;s an emergency fund, a career break, or buying a home. Tell us what matters to you, and we&apos;ll help you map out the path.
+          <h1 className="text-3xl font-bold tracking-tight mb-3">Financial clarity starts with one goal.</h1>
+          <p className="text-muted-foreground max-w-lg text-base mb-2">
+            Pick a goal below or create your own. We&apos;ll help you build a realistic savings plan.
           </p>
-          <Link 
-            href="/goals/create" 
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foreground text-background font-semibold hover:opacity-90 shadow-lg shadow-foreground/10"
-          >
-            Create Your First Goal
-            <ArrowRight className="w-4 h-4" />
-          </Link>
         </AnimatedSection>
+
+        <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {GOAL_TEMPLATES.map((tmpl) => {
+            const Icon = tmpl.icon;
+            return (
+              <StaggerItem key={tmpl.title}>
+                <Link href={tmpl.href} className="group block">
+                  <Card className="p-5 h-full border-border/60 hover:border-foreground/30 hover:shadow-md transition-all duration-200 bg-white">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-10 h-10 rounded-xl ${tmpl.bg} flex items-center justify-center`}>
+                        <Icon className={`w-5 h-5 ${tmpl.color}`} />
+                      </div>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${tmpl.tagColor}`}>{tmpl.tag}</span>
+                    </div>
+                    <h3 className="font-bold text-base mb-1">{tmpl.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{tmpl.description}</p>
+                    <div className="flex items-center gap-1 text-sm font-semibold text-muted-foreground group-hover:text-foreground transition-colors">
+                      Start planning <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Card>
+                </Link>
+              </StaggerItem>
+            );
+          })}
+        </StaggerChildren>
       </div>
     );
   }
