@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isDesktopSidebarCollapsed, setIsDesktopSidebarCollapsed] = useState(false);
 
   // Root landing page bypass
   if (pathname === "/") {
@@ -19,8 +20,21 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden text-foreground">
-      {/* Desktop Left Sidebar */}
-      <Sidebar className="hidden lg:flex" />
+      {/* Desktop Left Sidebar — collapsible */}
+      <AnimatePresence initial={false}>
+        {!isDesktopSidebarCollapsed && (
+          <motion.div
+            key="desktop-sidebar"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 256, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ type: "spring", damping: 28, stiffness: 220 }}
+            className="hidden lg:block overflow-hidden shrink-0 h-full"
+          >
+            <Sidebar className="flex" />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Sidebar Overlay Drawer */}
       <AnimatePresence>
@@ -51,7 +65,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Main Right Content Panel */}
       <div className="flex flex-col flex-1 min-w-0 h-full relative">
         {/* Top Navigation Bar */}
-        <TopNav onMenuClick={() => setIsMobileSidebarOpen(true)} />
+        <TopNav
+          onMenuClick={() => setIsMobileSidebarOpen(true)}
+          onDesktopToggle={() => setIsDesktopSidebarCollapsed(prev => !prev)}
+          isDesktopCollapsed={isDesktopSidebarCollapsed}
+        />
 
         {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto overflow-x-hidden relative scrollbar-hide bg-surface/30">

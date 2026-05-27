@@ -19,17 +19,34 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const theme: Theme = "light";
+  const [theme, setThemeState] = useState<Theme>("light");
 
+  // On mount: read from localStorage or system preference
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove("dark");
-    root.classList.add("light");
-    localStorage.setItem("arthakosh-theme", "light");
+    const saved = localStorage.getItem("arthakosh-theme") as Theme | null;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const resolved: Theme = saved ?? (prefersDark ? "dark" : "light");
+    applyTheme(resolved);
+    setThemeState(resolved);
   }, []);
 
-  const toggleTheme = () => {};
-  const setTheme = () => {};
+  const applyTheme = (t: Theme) => {
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(t);
+    localStorage.setItem("arthakosh-theme", t);
+  };
+
+  const toggleTheme = () => {
+    const next: Theme = theme === "light" ? "dark" : "light";
+    applyTheme(next);
+    setThemeState(next);
+  };
+
+  const setTheme = (t: Theme) => {
+    applyTheme(t);
+    setThemeState(t);
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
