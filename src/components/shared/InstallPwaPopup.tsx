@@ -17,11 +17,13 @@ export function InstallPwaPopup() {
 
     // Check if already running as a standalone PWA
     if (window.matchMedia('(display-mode: standalone)').matches) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsStandalone(true);
       clearTimeout(timer);
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleBeforeInstallPrompt = (e: any) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();

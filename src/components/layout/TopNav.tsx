@@ -53,7 +53,7 @@ export function TopNav() {
                   const isActive = pathname === item.href || (item.href !== '/dashboard' && item.href !== '/' && pathname.startsWith(item.href));
                     
                   return (
-                    <DropdownMenuItem key={item.label} asChild className={`cursor-pointer rounded-lg px-3 py-2.5 mb-1 last:mb-0 ${isActive ? "bg-surface" : ""}`}>
+                    <DropdownMenuItem key={item.label} className={`cursor-pointer rounded-lg px-3 py-2.5 mb-1 last:mb-0 ${isActive ? "bg-surface" : ""}`}>
                       <Link href={item.href} className="flex items-center gap-3 w-full">
                         {Icon && (
                           <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-foreground" : "text-muted-foreground"}`} />
