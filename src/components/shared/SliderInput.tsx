@@ -75,7 +75,7 @@ export function SliderInput({
           [&::-moz-range-thumb]:border-0
           [&::-moz-range-thumb]:cursor-pointer"
         style={{
-          background: `linear-gradient(to right, hsl(var(--foreground)) 0%, hsl(var(--foreground)) ${percentage}%, hsl(var(--secondary)) ${percentage}%, hsl(var(--secondary)) 100%)`,
+          background: `linear-gradient(to right, var(--foreground) 0%, var(--foreground) ${percentage}%, var(--secondary) ${percentage}%, var(--secondary) 100%)`,
         }}
       />
       <div className="flex justify-between mt-1">
