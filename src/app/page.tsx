@@ -88,7 +88,7 @@ export default function LandingPage() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
@@ -112,7 +112,7 @@ export default function LandingPage() {
             {/* Mobile Menu Toggler */}
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden p-2 rounded-xl text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
+              className="lg:hidden p-2 rounded-xl text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -128,7 +128,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden bg-white border-b border-zinc-100 overflow-hidden"
+              className="lg:hidden bg-white border-b border-zinc-100 overflow-hidden"
             >
               <div className="px-4 pt-2 pb-6 space-y-2 flex flex-col">
                 {NAV_LINKS.map((link) => (
