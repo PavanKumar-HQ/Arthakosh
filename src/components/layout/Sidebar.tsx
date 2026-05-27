@@ -8,7 +8,7 @@ import { OnboardingProfile } from "@/types/onboarding";
 import {
   LayoutDashboard, FlaskConical, GitBranch, Target, Wallet, ShieldAlert,
   TrendingUp, Briefcase, BrainCircuit, Activity, Split, BookOpen,
-  User, RotateCcw, ShieldCheck, HelpCircle, X
+  User, RotateCcw, ShieldCheck, HelpCircle, X, Wrench
 } from "lucide-react";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -24,6 +24,7 @@ const iconMap: Record<string, React.ElementType> = {
   Activity,
   Split,
   BookOpen,
+  Wrench,
 };
 
 interface SidebarProps {

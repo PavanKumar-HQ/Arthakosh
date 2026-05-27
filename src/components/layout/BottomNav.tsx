@@ -10,7 +10,7 @@ import {
   GitBranch, Target, Wallet, ShieldAlert, TrendingUp, 
   Briefcase, LineChart, FileText, Laptop, 
   BrainCircuit, Activity, Split, 
-  Clock, Lightbulb, Shield, Brain, Calculator, BookOpen
+  Clock, Lightbulb, Shield, Brain, Calculator, BookOpen, Wrench
 } from "lucide-react";
 
 const mobileNav = [
@@ -25,7 +25,7 @@ const iconMap: Record<string, React.ElementType> = {
   Target, Wallet, ShieldAlert, TrendingUp, 
   Briefcase, LineChart, FileText, Laptop, 
   BrainCircuit, Activity, Split, 
-  Clock, Lightbulb, MonitorPlay, Shield, Brain, Calculator, BookOpen
+  Clock, Lightbulb, MonitorPlay, Shield, Brain, Calculator, BookOpen, Wrench
 };
 
 export function BottomNav() {

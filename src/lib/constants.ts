@@ -11,6 +11,7 @@ export const NAV_CATEGORIES = [
     category: "CORE",
     items: [
       { label: 'Home', href: '/', icon: 'LayoutDashboard', description: 'Command Center' },
+      { label: 'Toolkit', href: '/tools', icon: 'Wrench', description: 'Interactive calculators & simulators' },
       { label: 'Labs', href: '/labs', icon: 'FlaskConical', description: 'Interactive decision labs' },
       { label: 'Simulations', href: '/scenarios', icon: 'GitBranch', description: 'Scenario testing' },
       { label: 'Resources', href: '/resources', icon: 'BookOpen', description: 'Guides, PDFs & Videos' },
