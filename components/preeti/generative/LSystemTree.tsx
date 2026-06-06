@@ -3,12 +3,12 @@
 import { useEffect, useRef } from "react";
 
 interface LSystemTreeProps {
-  growthPhase: number; // 0 to 1
-  width?: number;
-  height?: number;
+  growthPhase: number; // 0.0 to 1.0
+  width: number;
+  height: number;
 }
 
-export function LSystemTree({ growthPhase, width = 600, height = 600 }: LSystemTreeProps) {
+export function LSystemTree({ growthPhase, width, height }: LSystemTreeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -17,48 +17,76 @@ export function LSystemTree({ growthPhase, width = 600, height = 600 }: LSystemT
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Clear canvas
     ctx.clearRect(0, 0, width, height);
+    
+    // The physics/tree configuration
+    const maxDepth = 10; // Extremely high depth for realism
+    const currentDepthLimit = Math.floor(growthPhase * maxDepth);
+    const branchLength = 120;
+    const branchAngle = Math.PI / 7;
 
-    // Only draw if growth > 0
-    if (growthPhase <= 0) return;
+    // A recursive function to draw realistic textured branches
+    function drawBranch(
+      x: number, 
+      y: number, 
+      length: number, 
+      angle: number, 
+      depth: number, 
+      branchWidth: number
+    ) {
+      if (depth > currentDepthLimit) return;
 
-    const maxDepth = Math.max(1, Math.floor(growthPhase * 10)); // Depth from 1 to 10
-    const branchAngle = Math.PI / 6; // 30 degrees
-    const startLength = height * 0.25;
+      const endX = x + length * Math.cos(angle);
+      const endY = y + length * Math.sin(angle);
 
-    // A simple recursive tree function
-    const drawBranch = (x: number, y: number, length: number, angle: number, depth: number) => {
-      if (depth === 0) return;
-
-      const endX = x + length * Math.sin(angle);
-      const endY = y - length * Math.cos(angle);
-
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(endX, endY);
+      // Draw the bark (thick and dark)
+      ctx!.beginPath();
+      ctx!.moveTo(x, y);
+      ctx!.lineTo(endX, endY);
       
-      // Thicker branches at base, thinner at top
-      ctx.lineWidth = depth * 1.5;
+      // Bark gradient for realism
+      const gradient = ctx!.createLinearGradient(x, y, endX, endY);
+      gradient.addColorStop(0, "#3e2723"); // Dark brown
+      gradient.addColorStop(1, "#5d4037"); // Lighter brown
       
-      // Color gradient from dark brown trunk to green leaves
-      if (depth <= 2) {
-        ctx.strokeStyle = `rgba(34, 197, 94, ${growthPhase})`; // Green leaves
-      } else {
-        ctx.strokeStyle = `rgba(69, 43, 24, ${growthPhase})`; // Brown trunk
+      ctx!.strokeStyle = gradient;
+      ctx!.lineWidth = branchWidth;
+      ctx!.lineCap = "round";
+      ctx!.stroke();
+
+      // If we are at the edge of the growth phase, spawn green leaves!
+      if (depth === currentDepthLimit || depth > 6) {
+        // Only draw leaves if growth phase is advanced enough
+        if (growthPhase > 0.4) {
+          ctx!.beginPath();
+          ctx!.arc(endX, endY, (growthPhase * 4) + Math.random() * 2, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${30 + Math.random() * 50}, ${150 + Math.random() * 80}, ${40 + Math.random() * 40}, 0.8)`;
+          ctx!.fill();
+        }
       }
-      
-      ctx.lineCap = "round";
-      ctx.stroke();
 
-      // Recursive calls for left and right branches
-      // We reduce length and depth
-      drawBranch(endX, endY, length * 0.7, angle - branchAngle, depth - 1);
-      drawBranch(endX, endY, length * 0.7, angle + branchAngle, depth - 1);
-    };
+      // Recursively branch out
+      if (depth < currentDepthLimit) {
+        const nextLength = length * 0.75;
+        const nextWidth = branchWidth * 0.7;
+        
+        // Add slight random organic curves to the angle
+        const curve1 = angle - branchAngle + (Math.random() * 0.1 - 0.05);
+        const curve2 = angle + branchAngle + (Math.random() * 0.1 - 0.05);
 
-    // Animate the tree drawing upwards
-    // Start from bottom center
-    drawBranch(width / 2, height, startLength * growthPhase, 0, maxDepth);
+        drawBranch(endX, endY, nextLength, curve1, depth + 1, nextWidth);
+        drawBranch(endX, endY, nextLength, curve2, depth + 1, nextWidth);
+        
+        // Randomly spawn a third middle branch for bushiness
+        if (Math.random() > 0.5) {
+          drawBranch(endX, endY, nextLength * 0.8, angle + (Math.random() * 0.2 - 0.1), depth + 1, nextWidth);
+        }
+      }
+    }
+
+    // Start drawing from bottom center
+    drawBranch(width / 2, height, branchLength * growthPhase, -Math.PI / 2, 0, 16 * growthPhase);
 
   }, [growthPhase, width, height]);
 
@@ -67,7 +95,7 @@ export function LSystemTree({ growthPhase, width = 600, height = 600 }: LSystemT
       ref={canvasRef} 
       width={width} 
       height={height} 
-      className="max-w-full max-h-full drop-shadow-[0_0_15px_rgba(253,224,71,0.5)]"
+      className="drop-shadow-2xl"
     />
   );
 }

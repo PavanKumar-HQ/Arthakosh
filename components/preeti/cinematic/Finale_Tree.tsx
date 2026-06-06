@@ -3,49 +3,66 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
+import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
 export function Finale_Tree() {
-  const [phase, setPhase] = useState(0); // 0: enter, 1: text 1, 2: text 2, 3: grand reveal
+  const [phase, setPhase] = useState(0); 
 
   useEffect(() => {
     const sequence = async () => {
-      await new Promise(r => setTimeout(r, 3000));
-      setPhase(1); // Type 1
-      await new Promise(r => setTimeout(r, 4000));
-      setPhase(2); // Type 2
-      await new Promise(r => setTimeout(r, 4000));
+      await new Promise(r => setTimeout(r, 1000));
+      setPhase(1); // Tree growing + text 1
+      await new Promise(r => setTimeout(r, 6000));
+      setPhase(2); // text 2
+      await new Promise(r => setTimeout(r, 6000));
       setPhase(3); // Glow & Happy Birthday
     };
     sequence();
   }, []);
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-black flex flex-col items-center justify-center">
+    <div className="w-full h-full relative overflow-hidden bg-gradient-to-b from-[#e8f5e9] to-[#faf8f5] flex flex-col items-center justify-end">
       
-      {/* Massive Realistic Tree Background */}
+      {/* Ambient Empty Space Filler: Dynamic God Rays */}
       <motion.div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/grand-tree-bg.png')" }}
-        initial={{ scale: 1.5, filter: "brightness(0.3) blur(5px)" }}
-        animate={{ 
-          scale: 1, 
-          filter: phase >= 3 ? "brightness(1.2) blur(0px)" : "brightness(0.6) blur(0px)"
-        }}
-        transition={{ duration: 15, ease: "easeOut" }}
+        className="absolute inset-0 bg-gradient-to-t from-transparent via-emerald-100/30 to-amber-100/50 mix-blend-overlay pointer-events-none z-10"
+        animate={{ opacity: phase >= 3 ? [0.6, 1, 0.6] : [0.2, 0.5, 0.2], rotate: [-2, 2, -2] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Magical God Rays */}
+      {/* Floating Ambient Orbs filling the sky */}
+      {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={`orb-${i}`}
+          className="absolute w-32 h-32 bg-amber-100/20 rounded-full blur-[40px] z-0 pointer-events-none"
+          style={{ 
+            left: `${Math.random() * 100}%`, 
+            top: `${Math.random() * 80}%`
+          }}
+          animate={{ 
+            scale: [1, 1.5, 1], 
+            opacity: [0.2, 0.6, 0.2],
+            y: [-20, 20, -20]
+          }}
+          transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+
+      {/* Massive Procedural L-System Tree */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-t from-transparent via-amber-200/20 to-amber-100/30 mix-blend-overlay pointer-events-none"
-        animate={{ opacity: phase >= 3 ? [0.6, 1, 0.6] : 0 }}
-        transition={{ duration: 4, repeat: Infinity }}
-      />
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, scale: phase >= 3 ? 1.1 : 1 }}
+        transition={{ duration: 5, ease: "easeOut" }}
+      >
+        <LSystemTree growthPhase={phase >= 3 ? 1 : (phase * 0.3)} width={1200} height={1000} />
+      </motion.div>
 
       {/* Floating Butterflies */}
       {phase >= 1 && Array.from({ length: 15 }).map((_, i) => (
         <motion.div
           key={`butterfly-${i}`}
-          className="absolute z-30 drop-shadow-2xl"
+          className="absolute z-30 drop-shadow-2xl pointer-events-none"
           style={{ 
             left: `${10 + Math.random() * 80}%`, 
             top: `${10 + Math.random() * 80}%`,
@@ -64,10 +81,10 @@ export function Finale_Tree() {
       ))}
 
       {/* Falling Petals */}
-      {phase >= 1 && Array.from({ length: 40 }).map((_, i) => (
+      {phase >= 1 && Array.from({ length: 60 }).map((_, i) => (
         <motion.div
           key={`petal-${i}`}
-          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20"
+          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20 pointer-events-none"
           style={{ 
             left: `${Math.random() * 100}%`, 
             top: "-10%",
@@ -75,15 +92,15 @@ export function Finale_Tree() {
           }}
           animate={{ 
             y: ["0vh", "120vh"], 
-            x: [0, (Math.random() - 0.5) * 300, (Math.random() - 0.5) * 300],
+            x: [0, (Math.random() - 0.5) * 400, (Math.random() - 0.5) * 400],
             rotate: [0, 180, 360, 720] 
           }}
           transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear" }}
         />
       ))}
 
-      {/* Text Sequence with Glassmorphism */}
-      <div className="relative z-40 text-center w-full max-w-4xl px-4 pointer-events-none">
+      {/* Text Sequence */}
+      <div className="absolute top-[15%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-4xl px-4 pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === 1 && (
             <motion.div
@@ -92,9 +109,8 @@ export function Finale_Tree() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 2 }}
-              className="px-8 py-6 bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl mx-auto shadow-2xl"
             >
-              <p className="font-playfair text-3xl md:text-5xl text-amber-50 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
                 Every branch, every leaf, every flower...
               </p>
             </motion.div>
@@ -107,9 +123,8 @@ export function Finale_Tree() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 2 }}
-              className="px-8 py-6 bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl mx-auto shadow-2xl"
             >
-              <p className="font-playfair text-3xl md:text-5xl text-amber-50 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
                 Grew because you believed in the seed.
               </p>
             </motion.div>
@@ -121,14 +136,14 @@ export function Finale_Tree() {
               initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 3, delay: 1 }}
-              className="px-12 py-8 bg-black/50 backdrop-blur-lg border border-white/30 rounded-[3rem] mx-auto shadow-[0_0_100px_rgba(253,224,71,0.3)]"
+              className="px-12 py-8 bg-white/20 backdrop-blur-lg border border-white/40 rounded-[3rem] mx-auto shadow-[0_0_100px_rgba(253,224,71,0.5)]"
             >
-              <h1 className="font-playfair font-bold text-5xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-200 drop-shadow-2xl">
+              <h1 className="font-playfair font-bold text-5xl md:text-7xl text-emerald-900 drop-shadow-md">
                 HAPPY BIRTHDAY
                 <br />
                 PREETI MA'AM
               </h1>
-              <p className="mt-6 font-serif text-xl md:text-2xl text-amber-100/90 tracking-widest uppercase">
+              <p className="mt-6 font-serif text-xl md:text-2xl text-emerald-700 tracking-widest uppercase font-bold">
                 From all your students.
               </p>
             </motion.div>

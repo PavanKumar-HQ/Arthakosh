@@ -2,9 +2,10 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { SVGSprout } from "@/components/preeti/generative/SVGSprout";
 
 export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
-  const [phase, setPhase] = useState(0); // 0: sky/pan down, 1: land, 2: sprout, 3: text 1, 4: text 2, 5: exit
+  const [phase, setPhase] = useState(0); 
 
   useEffect(() => {
     const sequence = async () => {
@@ -25,32 +26,55 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-black">
+    <div className="w-full h-full relative overflow-hidden bg-[#faf8f5]">
       
-      {/* Rich, Photorealistic Background Environment */}
-      <motion.div 
-        className="absolute inset-0 bg-cover bg-center opacity-80"
-        style={{ backgroundImage: "url('/soil-macro-bg.png')" }}
-        initial={{ scale: 1.2, y: "-10vh" }}
-        animate={{ scale: 1, y: "0vh" }}
-        transition={{ duration: 15, ease: "easeOut" }}
-      />
+      {/* Ambient Generative Background (fills empty space) */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Soft floating morning mist/glows */}
+        <motion.div 
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-amber-100/50 rounded-full blur-[100px]"
+          animate={{ x: [0, 50, 0], y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute top-1/3 -right-20 w-[600px] h-[600px] bg-green-50/50 rounded-full blur-[120px]"
+          animate={{ x: [0, -50, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        
+        {/* Floating pollen particles */}
+        {Array.from({ length: 30 }).map((_, i) => (
+          <motion.div
+            key={`pollen-${i}`}
+            className="absolute w-1 h-1 bg-amber-400/40 rounded-full blur-[1px]"
+            style={{ 
+              left: `${Math.random() * 100}%`, 
+              top: `${Math.random() * 100}%` 
+            }}
+            animate={{ 
+              y: [0, -100 - Math.random() * 50],
+              x: [0, (Math.random() - 0.5) * 50],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear" }}
+          />
+        ))}
 
-      <div className="absolute inset-0 bg-black/40 z-0" /> {/* Darken soil slightly for text readability */}
-
-      {/* Sun rays overlay */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-amber-200/20 to-transparent mix-blend-overlay z-10 pointer-events-none"
-        animate={{ opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
+        {/* Dynamic God Rays using CSS */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-tr from-transparent via-amber-200/10 to-transparent mix-blend-overlay"
+          style={{ transformOrigin: "top right" }}
+          animate={{ rotate: [-5, 5, -5], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
       {/* The Seed Falling */}
       <AnimatePresence>
         {phase === 0 && (
           <motion.div 
             key="seed"
-            className="absolute left-1/2 top-0 w-3 h-4 bg-amber-800 rounded-full drop-shadow-xl z-20"
+            className="absolute left-1/2 top-0 w-3 h-4 bg-amber-800 rounded-full drop-shadow-md z-20"
             style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}
             initial={{ y: "-20vh", x: "-50%", opacity: 0 }}
             animate={{ y: "60vh", x: "-50%", opacity: 1 }}
@@ -60,27 +84,23 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
-      {/* The Realistic Sprout */}
+      {/* The Generative SVG Sprout */}
       <AnimatePresence>
         {phase >= 2 && phase < 5 && (
           <motion.div 
-            className="absolute left-1/2 bottom-[15%] -translate-x-1/2 z-20"
-            initial={{ opacity: 0, scale: 0.5, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.5, filter: "blur(10px)" }}
-            transition={{ duration: 3, ease: "easeOut" }}
+            className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-full z-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: "blur(10px)", scale: 1.2 }}
+            transition={{ duration: 2 }}
           >
-            <img 
-              src="/realistic-sprout.png" 
-              alt="Sprout" 
-              className="w-64 h-64 object-contain mix-blend-screen drop-shadow-[0_0_30px_rgba(253,224,71,0.6)]" 
-            />
+            <SVGSprout isGrowing={true} />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* The Text - Glassmorphic for readability */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-30 pointer-events-none">
+      {/* The Text (No Glassmorphism needed since background is soft) */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full text-center z-30 pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === 3 && (
             <motion.div
@@ -89,9 +109,8 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 1.5 }}
-              className="px-8 py-4 bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl mx-auto w-max shadow-2xl"
             >
-              <p className="font-playfair text-3xl md:text-5xl text-amber-50 drop-shadow-md">
+              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
                 Every garden begins with a seed.
               </p>
             </motion.div>
@@ -103,9 +122,8 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 1.5 }}
-              className="px-8 py-4 bg-black/20 backdrop-blur-md border border-white/10 rounded-2xl mx-auto w-max shadow-2xl"
             >
-              <p className="font-playfair text-3xl md:text-5xl text-amber-50 drop-shadow-md">
+              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
                 So does every student.
               </p>
             </motion.div>
