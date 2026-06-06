@@ -14,6 +14,7 @@ import { Chapter9_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Gree
 import { Chapter10_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
 import { Finale_Tree } from "@/components/preeti/cinematic/Finale_Tree";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
+import { GardenAmbient } from "@/components/preeti/generative/GardenAmbient";
 
 export default function PreetiGardenOfGrowth() {
   const [chapter, setChapter] = useState(1);
@@ -21,9 +22,10 @@ export default function PreetiGardenOfGrowth() {
   const nextChapter = () => setChapter((prev) => prev + 1);
 
   return (
-    <main className="w-screen h-screen overflow-hidden bg-[#faf8f5] relative font-sans">
+    <main className="w-screen h-screen overflow-hidden relative font-sans">
       
-      {/* Global Background Layer */}
+      {/* Global Animated Ambient Background — always visible behind every chapter */}
+      <GardenAmbient chapter={chapter} />
       <BackgroundGreenhouse chapterProgress={chapter} />
 
       <AnimatePresence mode="wait">
