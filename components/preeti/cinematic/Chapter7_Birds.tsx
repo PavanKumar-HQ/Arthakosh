@@ -83,7 +83,7 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
           }}
           onClick={() => handleCatch(b.id, b.type)}
         >
-          🐦
+          <img src="/real-bird.png" alt="Bird" className="w-16 h-16 object-contain mix-blend-multiply" />
         </motion.div>
       ))}
 

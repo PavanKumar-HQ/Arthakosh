@@ -83,7 +83,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
               animate={isBloomed ? { rotate: [0, 5, -5, 0] } : {}}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              🌸
+              <img src="/real-flower.png" alt="Flower" className="w-16 h-16 object-contain mix-blend-multiply drop-shadow-sm" />
             </motion.div>
           </motion.div>
         );

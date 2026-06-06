@@ -80,7 +80,7 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
             : { duration: 3, repeat: Infinity }
         }
       >
-        🌻
+        <img src="/real-golden-flower.png" alt="Golden Flower" className="w-64 h-64 object-contain mix-blend-multiply" />
       </motion.div>
 
     </div>

@@ -36,9 +36,7 @@ export function Finale_Tree() {
         animate={{ scale: phase >= 4 ? 1.2 : 1, opacity: 1 }}
         transition={{ duration: 5, ease: "easeOut" }}
       >
-        <div className="text-[30rem] leading-none drop-shadow-[0_0_50px_rgba(253,224,71,0.8)]">
-          🌳
-        </div>
+        <img src="/magical-tree.png" alt="Magical Tree" className="w-[800px] h-[800px] object-contain mix-blend-multiply drop-shadow-[0_0_50px_rgba(253,224,71,0.5)]" />
       </motion.div>
 
       {/* Falling Petals */}
@@ -73,7 +71,7 @@ export function Finale_Tree() {
             y: { duration: 4 + Math.random() * 2, repeat: Infinity }
           }}
         >
-          🦋
+          <img src="/real-butterfly.png" alt="Butterfly" className="w-8 h-8 object-contain mix-blend-multiply" />
         </motion.div>
       ))}
 

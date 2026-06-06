@@ -82,7 +82,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
-          🦋
+          <img src="/real-butterfly.png" alt="Butterfly" className="w-12 h-12 object-contain mix-blend-multiply" />
         </motion.div>
       ))}
 
