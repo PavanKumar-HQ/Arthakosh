@@ -45,12 +45,16 @@ export function Finale_Tree() {
       {phase >= 1 && Array.from({ length: 30 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-3 h-3 bg-pink-300/80 rounded-full blur-[1px] z-20"
-          style={{ left: `${Math.random() * 100}%`, top: "-5%" }}
+          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20"
+          style={{ 
+            left: `${Math.random() * 100}%`, 
+            top: "-5%",
+            borderRadius: "50% 0 50% 50%" 
+          }}
           animate={{ 
             y: ["0vh", "120vh"], 
             x: [0, (Math.random() - 0.5) * 200, (Math.random() - 0.5) * 200],
-            rotate: [0, 360] 
+            rotate: [0, 180, 360, 720] 
           }}
           transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear" }}
         />

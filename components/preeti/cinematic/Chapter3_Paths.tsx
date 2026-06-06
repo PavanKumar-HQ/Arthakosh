@@ -85,23 +85,29 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
-      {/* Falling Petals when path is clicked */}
-      {activePath && Array.from({ length: 50 }).map((_, i) => (
-        <motion.div
-          key={`petal-${i}`}
-          className={`absolute w-3 h-3 rounded-full blur-[1px] z-30 opacity-80 ${PATHS.find(p => p.id === activePath)?.petalColor}`}
-          style={{ left: `${Math.random() * 100}%`, top: "-10%" }}
-          initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
-          animate={{ 
-            y: "120vh", 
-            x: (Math.random() - 0.5) * 300,
-            opacity: [0, 1, 0],
-            scale: [0.5, 1.5, 0.5],
-            rotate: [0, 720] 
-          }}
-          transition={{ duration: 4 + Math.random() * 4, ease: "linear" }}
-        />
-      ))}
+      {activePath && Array.from({ length: 50 }).map((_, i) => {
+        const petalColor = PATHS.find(p => p.id === activePath)?.petalColor || "bg-pink-300";
+        return (
+          <motion.div
+            key={`petal-${i}`}
+            className={`absolute w-4 h-6 opacity-80 drop-shadow-sm ${petalColor}`}
+            style={{ 
+              left: `${Math.random() * 100}%`, 
+              top: "-10%",
+              borderRadius: "50% 0 50% 50%" // Realistic petal/teardrop shape
+            }}
+            initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
+            animate={{ 
+              y: "120vh", 
+              x: (Math.random() - 0.5) * 300,
+              opacity: [0, 1, 0],
+              scale: [0.5, 1.2, 0.5],
+              rotate: [0, 180, 360, 720] // Tumble like a real petal
+            }}
+            transition={{ duration: 4 + Math.random() * 4, ease: "linear" }}
+          />
+        );
+      })}
 
     </div>
   );

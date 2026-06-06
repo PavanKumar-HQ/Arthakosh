@@ -95,15 +95,19 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
       {isBlooming && Array.from({ length: 40 }).map((_, i) => (
         <motion.div
           key={`petal-${i}`}
-          className="absolute w-4 h-4 bg-white/90 rounded-full blur-[1px] z-30 drop-shadow-sm"
-          style={{ left: `${Math.random() * 100}%`, bottom: "10%" }}
+          className="absolute w-4 h-6 bg-white/90 drop-shadow-sm z-30"
+          style={{ 
+            left: `${Math.random() * 100}%`, 
+            bottom: "10%",
+            borderRadius: "50% 0 50% 50%" 
+          }}
           initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
           animate={{ 
             y: "-120vh", 
             x: (Math.random() - 0.5) * 400,
             opacity: [0, 1, 0],
             scale: [0.5, 1.2, 0.5],
-            rotate: [0, 720] 
+            rotate: [0, 180, 360, 720] 
           }}
           transition={{ duration: 5 + Math.random() * 5, ease: "easeOut" }}
         />
