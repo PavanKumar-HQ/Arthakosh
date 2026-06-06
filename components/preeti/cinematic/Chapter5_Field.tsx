@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 
 // Generate a grid of flowers
 const generateFlowers = () => {
@@ -83,7 +84,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
               animate={isBloomed ? { rotate: [0, 5, -5, 0] } : {}}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              <img src="/real-flower.png" alt="Flower" className="w-16 h-16 object-contain mix-blend-multiply drop-shadow-sm" />
+              <SVGFlower isBlooming={isBloomed} color="stroke-rose-400" />
             </motion.div>
           </motion.div>
         );

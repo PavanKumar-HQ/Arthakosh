@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 
 const SCRIPT = [
   "",
@@ -85,28 +86,9 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
             : { duration: 4, repeat: Infinity, ease: "easeInOut" }
         }
       >
-        <AnimatePresence mode="crossfade">
-          {!isBlooming ? (
-            <motion.img 
-              key="closed"
-              src="/real-white-flower-closed.png" 
-              alt="Closed White Flower" 
-              className="w-64 h-64 object-contain mix-blend-multiply opacity-80"
-              exit={{ opacity: 0 }}
-              transition={{ duration: 2 }}
-            />
-          ) : (
-            <motion.img 
-              key="bloomed"
-              src="/real-white-flower-bloomed.png" 
-              alt="Bloomed White Flower" 
-              className="w-96 h-96 object-contain mix-blend-multiply drop-shadow-[0_0_50px_rgba(253,224,71,0.8)]"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 3 }}
-            />
-          )}
-        </AnimatePresence>
+        <div className="scale-[3] drop-shadow-[0_0_50px_rgba(253,224,71,0.5)]">
+          <SVGFlower isBlooming={isBlooming} color="stroke-amber-100" />
+        </div>
       </motion.div>
 
       {/* Falling Petals when blooming */}

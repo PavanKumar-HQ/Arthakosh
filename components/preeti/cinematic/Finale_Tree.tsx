@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
+import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
 
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); // 0: tree growing, 1: butterflies, 2: type 1, 3: type 2, 4: glow, 5: happy birthday
@@ -36,7 +38,7 @@ export function Finale_Tree() {
         animate={{ scale: phase >= 4 ? 1.2 : 1, opacity: 1 }}
         transition={{ duration: 5, ease: "easeOut" }}
       >
-        <img src="/magical-tree.png" alt="Magical Tree" className="w-[800px] h-[800px] object-contain mix-blend-multiply drop-shadow-[0_0_50px_rgba(253,224,71,0.5)]" />
+        <LSystemTree growthPhase={phase >= 4 ? 1 : phase / 4} width={800} height={800} />
       </motion.div>
 
       {/* Falling Petals */}
@@ -71,7 +73,7 @@ export function Finale_Tree() {
             y: { duration: 4 + Math.random() * 2, repeat: Infinity }
           }}
         >
-          <img src="/real-butterfly.png" alt="Butterfly" className="w-8 h-8 object-contain mix-blend-multiply" />
+          <CSSButterfly color="bg-cyan-400" />
         </motion.div>
       ))}
 

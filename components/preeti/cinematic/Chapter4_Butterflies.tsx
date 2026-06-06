@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
 
 const BUTTERFLIES = [
   { id: 1, color: "text-blue-500", x: 10, y: 30, msg: "Thank you for the endless support.", photo: true },
@@ -82,7 +83,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
-          <img src="/real-butterfly.png" alt="Butterfly" className="w-12 h-12 object-contain mix-blend-multiply" />
+          <CSSButterfly color={b.color.includes("blue") ? "bg-blue-400" : b.color.includes("purple") ? "bg-purple-400" : "bg-pink-400"} />
         </motion.div>
       ))}
 
