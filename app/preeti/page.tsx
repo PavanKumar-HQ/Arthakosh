@@ -13,6 +13,7 @@ import { Chapter7_Birds } from "@/components/preeti/cinematic/Chapter7_Birds";
 import { Chapter8_Seasons } from "@/components/preeti/cinematic/Chapter8_Seasons";
 import { Chapter9_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Greenhouse";
 import { Chapter10_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
+import { Chapter_Apology } from "@/components/preeti/cinematic/Chapter_Apology";
 import { Finale_Tree } from "@/components/preeti/cinematic/Finale_Tree";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
 
@@ -167,9 +168,22 @@ export default function PreetiGardenOfGrowth() {
 
         {chapter === 11 && (
           <motion.div
+            key="apology"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter_Apology onComplete={nextChapter} />
+          </motion.div>
+        )}
+
+        {chapter === 12 && (
+          <motion.div
             key="finale"
-            initial={{ opacity: 0, y: -100 }} 
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }} 
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 2, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >

@@ -2,8 +2,14 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
+
+const FireworksBurst = dynamic(
+  () => import("@/components/preeti/generative/FireworksBurst").then(m => ({ default: m.FireworksBurst })),
+  { ssr: false }
+);
 
 function sr(seed: number) {
   const x = Math.sin(seed + 1) * 10000;
@@ -49,6 +55,9 @@ export function Finale_Tree() {
   return (
     <div className="w-full h-full relative overflow-hidden bg-gradient-to-b from-[#e8f5e9] to-[#faf8f5] flex flex-col items-center justify-end">
       
+      {/* Fireworks — full sky burst when finale reached */}
+      <FireworksBurst active={phase >= 3} />
+
       {/* Ambient Empty Space Filler: Dynamic God Rays */}
       <motion.div 
         className="absolute inset-0 bg-gradient-to-t from-transparent via-emerald-100/30 to-amber-100/50 mix-blend-overlay pointer-events-none z-10"
