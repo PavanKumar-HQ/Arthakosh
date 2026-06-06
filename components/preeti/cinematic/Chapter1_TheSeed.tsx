@@ -1,8 +1,23 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { SVGSprout } from "@/components/preeti/generative/SVGSprout";
+
+// Deterministic seed-based random — same value on server and client
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+// Pre-compute stable pollen data (30 particles)
+const POLLEN = Array.from({ length: 30 }, (_, i) => ({
+  left: sr(i * 17) * 100,
+  top: sr(i * 19) * 100,
+  yEnd: -(100 + sr(i * 23) * 50),
+  xEnd: (sr(i * 29) - 0.5) * 50,
+  duration: 5 + sr(i * 31) * 5,
+}));
 
 export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState(0); 
@@ -42,21 +57,18 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        {/* Floating pollen particles */}
-        {Array.from({ length: 30 }).map((_, i) => (
+        {/* Floating pollen particles — stable positions via deterministic seed */}
+        {POLLEN.map((p, i) => (
           <motion.div
             key={`pollen-${i}`}
             className="absolute w-1 h-1 bg-amber-400/40 rounded-full blur-[1px]"
-            style={{ 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 100}%` 
-            }}
+            style={{ left: `${p.left}%`, top: `${p.top}%` }}
             animate={{ 
-              y: [0, -100 - Math.random() * 50],
-              x: [0, (Math.random() - 0.5) * 50],
+              y: [0, p.yEnd],
+              x: [0, p.xEnd],
               opacity: [0, 1, 0]
             }}
-            transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: p.duration, repeat: Infinity, ease: "linear" }}
           />
         ))}
 

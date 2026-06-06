@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { Chapter1_TheSeed } from "@/components/preeti/cinematic/Chapter1_TheSeed";
 import { Chapter2_Roots } from "@/components/preeti/cinematic/Chapter2_Roots";
@@ -14,7 +15,12 @@ import { Chapter9_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Gree
 import { Chapter10_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
 import { Finale_Tree } from "@/components/preeti/cinematic/Finale_Tree";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
-import { GardenAmbient } from "@/components/preeti/generative/GardenAmbient";
+
+// Client-only: avoids SSR hydration mismatch from Math.sin() deterministic values
+const GardenAmbient = dynamic(
+  () => import("@/components/preeti/generative/GardenAmbient").then(m => ({ default: m.GardenAmbient })),
+  { ssr: false }
+);
 
 export default function PreetiGardenOfGrowth() {
   const [chapter, setChapter] = useState(1);

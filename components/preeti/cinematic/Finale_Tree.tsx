@@ -5,6 +5,32 @@ import { useState, useEffect } from "react";
 import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+const ORBS = Array.from({ length: 20 }, (_, i) => ({
+  left: sr(i * 7) * 100,
+  top: sr(i * 11) * 80,
+  duration: 5 + sr(i * 13) * 5,
+}));
+
+const BUTTERFLIES = Array.from({ length: 15 }, (_, i) => ({
+  left: 10 + sr(i * 17) * 80,
+  top: 10 + sr(i * 19) * 80,
+  scale: 0.5 + sr(i * 23) * 0.5,
+  duration: 4 + sr(i * 29) * 2,
+  color: ["bg-cyan-300", "bg-pink-300", "bg-yellow-300", "bg-purple-300"][i % 4],
+}));
+
+const PETALS = Array.from({ length: 60 }, (_, i) => ({
+  left: sr(i * 31) * 100,
+  xMid: (sr(i * 37) - 0.5) * 400,
+  xEnd: (sr(i * 41) - 0.5) * 400,
+  duration: 5 + sr(i * 43) * 5,
+}));
+
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
 
@@ -31,20 +57,13 @@ export function Finale_Tree() {
       />
 
       {/* Floating Ambient Orbs filling the sky */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {ORBS.map((orb, i) => (
         <motion.div
           key={`orb-${i}`}
           className="absolute w-32 h-32 bg-amber-100/20 rounded-full blur-[40px] z-0 pointer-events-none"
-          style={{ 
-            left: `${Math.random() * 100}%`, 
-            top: `${Math.random() * 80}%`
-          }}
-          animate={{ 
-            scale: [1, 1.5, 1], 
-            opacity: [0.2, 0.6, 0.2],
-            y: [-20, 20, -20]
-          }}
-          transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ left: `${orb.left}%`, top: `${orb.top}%` }}
+          animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.6, 0.2], y: [-20, 20, -20] }}
+          transition={{ duration: orb.duration, repeat: Infinity, ease: "easeInOut" }}
         />
       ))}
 
@@ -59,43 +78,27 @@ export function Finale_Tree() {
       </motion.div>
 
       {/* Floating Butterflies */}
-      {phase >= 1 && Array.from({ length: 15 }).map((_, i) => (
+      {phase >= 1 && BUTTERFLIES.map((b, i) => (
         <motion.div
           key={`butterfly-${i}`}
           className="absolute z-30 drop-shadow-2xl pointer-events-none"
-          style={{ 
-            left: `${10 + Math.random() * 80}%`, 
-            top: `${10 + Math.random() * 80}%`,
-            scale: 0.5 + Math.random() * 0.5
-          }}
+          style={{ left: `${b.left}%`, top: `${b.top}%`, scale: b.scale }}
           initial={{ opacity: 0, y: 50 }}
-          animate={{ 
-            opacity: 1, 
-            y: [-20, 20, -20],
-            x: [-30, 30, -30]
-          }}
-          transition={{ duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ opacity: 1, y: [-20, 20, -20], x: [-30, 30, -30] }}
+          transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut" }}
         >
-          <CSSButterfly color={["bg-cyan-300", "bg-pink-300", "bg-yellow-300", "bg-purple-300"][i % 4]} />
+          <CSSButterfly color={b.color} />
         </motion.div>
       ))}
 
       {/* Falling Petals */}
-      {phase >= 1 && Array.from({ length: 60 }).map((_, i) => (
+      {phase >= 1 && PETALS.map((p, i) => (
         <motion.div
           key={`petal-${i}`}
           className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20 pointer-events-none"
-          style={{ 
-            left: `${Math.random() * 100}%`, 
-            top: "-10%",
-            borderRadius: "50% 0 50% 50%" 
-          }}
-          animate={{ 
-            y: ["0vh", "120vh"], 
-            x: [0, (Math.random() - 0.5) * 400, (Math.random() - 0.5) * 400],
-            rotate: [0, 180, 360, 720] 
-          }}
-          transition={{ duration: 5 + Math.random() * 5, repeat: Infinity, ease: "linear" }}
+          style={{ left: `${p.left}%`, top: "-10%", borderRadius: "50% 0 50% 50%" }}
+          animate={{ y: ["0vh", "120vh"], x: [0, p.xMid, p.xEnd], rotate: [0, 180, 360, 720] }}
+          transition={{ duration: p.duration, repeat: Infinity, ease: "linear" }}
         />
       ))}
 
