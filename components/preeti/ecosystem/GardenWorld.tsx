@@ -100,9 +100,9 @@ export function GardenWorld() {
         ref={containerRef}
         drag
         dragConstraints={{
-          left: -(WORLD_WIDTH - typeof window !== "undefined" ? window.innerWidth : 1000),
+          left: -(WORLD_WIDTH - (typeof window !== "undefined" ? window.innerWidth : 1000)),
           right: 0,
-          top: -(WORLD_HEIGHT - typeof window !== "undefined" ? window.innerHeight : 1000),
+          top: -(WORLD_HEIGHT - (typeof window !== "undefined" ? window.innerHeight : 1000)),
           bottom: 0
         }}
         dragElastic={0.1}
