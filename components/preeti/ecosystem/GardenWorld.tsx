@@ -5,6 +5,27 @@ import { useState, useRef, useEffect } from "react";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
 import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
+import { FluidFountain } from "@/components/preeti/ecosystem/FluidFountain";
+import { GreenhouseBackground } from "@/components/preeti/ecosystem/GreenhouseBackground";
+import { AnimatePresence } from "framer-motion";
+
+const APOLOGY_SCRIPT = [
+  "There was always one thing I wanted to say.",
+  "For years I thought I would say it later.",
+  "Then later became months.",
+  "And months became years.",
+  "One of the reasons I came for the farewell was to tell you something.",
+  "I wanted to apologize.",
+  "There was a day when I argued instead of listening.",
+  "At the time I thought I was right.",
+  "Looking back, I understand things differently.",
+  "Some lessons take years to learn.",
+  "And respect is one of them.",
+  "I never found the right moment.",
+  "So I am saying it now.",
+  "I'm sorry.",
+  "And thank you for continuing to teach, guide, and care even when we didn't always make it easy."
+];
 
 // The world is 3x the size of a standard screen to allow panning
 const WORLD_WIDTH = 3000;
@@ -12,6 +33,7 @@ const WORLD_HEIGHT = 2000;
 
 export function GardenWorld() {
   const [discoveryCount, setDiscoveryCount] = useState(0);
+  const [apologyPhase, setApologyPhase] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Spring-based camera coordinates for smooth panning
@@ -39,6 +61,23 @@ export function GardenWorld() {
     setDiscoveryCount(prev => prev + 1);
   };
 
+  useEffect(() => {
+    // Start apology sequence when 3 discoveries are made
+    if (discoveryCount === 3 && apologyPhase === -1) {
+      setApologyPhase(0);
+    }
+  }, [discoveryCount, apologyPhase]);
+
+  useEffect(() => {
+    if (apologyPhase >= 0 && apologyPhase < APOLOGY_SCRIPT.length) {
+      const timer = setTimeout(() => {
+        setApologyPhase(prev => prev + 1);
+      }, 4000); // 4 seconds per line
+      return () => clearTimeout(timer);
+    }
+  }, [apologyPhase]);
+
+  const isApologyComplete = apologyPhase >= APOLOGY_SCRIPT.length;
   const treeGrowth = Math.min(1, 0.2 + (discoveryCount * 0.15));
 
   return (
@@ -71,26 +110,43 @@ export function GardenWorld() {
         className="relative shadow-inner z-10"
       >
         
+        {/* Background Elements */}
+        <div className="absolute left-[20%] top-[20%] opacity-80">
+          <GreenhouseBackground progress={discoveryCount / 10} />
+        </div>
+        <div className="absolute left-[60%] top-[40%]">
+          <FluidFountain />
+        </div>
+
         {/* The Central Tree */}
         <div className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none">
-          {/* We pass width/height to LSystemTree to give it massive scale */}
           <LSystemTree growthPhase={treeGrowth} width={1200} height={1200} />
         </div>
 
-        {/* The White Flower (Apology) - always near the base of the tree */}
-        <div className="absolute left-[52%] top-[65%]">
-          <SVGFlower isBlooming={discoveryCount >= 6} color="stroke-white" delay={1} />
-          {discoveryCount >= 6 && (
-            <motion.p 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3, duration: 2 }}
-              className="absolute top-full left-1/2 -translate-x-1/2 text-slate-800 font-playfair mt-4 whitespace-nowrap"
-            >
-              I am sorry. And thank you.
-            </motion.p>
-          )}
+        {/* The White Flower (Apology Sequence) */}
+        <div className="absolute left-[52%] top-[65%] pointer-events-none">
+          <div className={isApologyComplete ? "scale-[3] drop-shadow-[0_0_50px_rgba(253,224,71,0.5)] transition-transform duration-[3000ms]" : ""}>
+            <SVGFlower isBlooming={isApologyComplete} color="stroke-white" delay={1} />
+          </div>
         </div>
+
+        {/* Cinematic Subtitles overlay for the Apology Sequence */}
+        {apologyPhase >= 0 && !isApologyComplete && (
+          <div className="absolute left-1/2 top-[80%] -translate-x-1/2 w-full max-w-2xl text-center pointer-events-none">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={apologyPhase}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 1 }}
+                className={`font-playfair text-3xl md:text-5xl drop-shadow-md ${apologyPhase === 13 ? 'text-red-500 font-bold text-6xl' : 'text-slate-800'}`}
+              >
+                {APOLOGY_SCRIPT[apologyPhase]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+        )}
 
         {/* Interactive Butterflies (Discoveries) */}
         <InteractiveButterfly x="30%" y="40%" color="bg-blue-400" memory="Thank you for the endless support." onDiscover={handleDiscovery} />
