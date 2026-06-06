@@ -163,6 +163,7 @@ export default function PreetiGardenOfGrowth() {
             <Finale_Tree />
           </motion.div>
         )}
+      </AnimatePresence>
     </main>
   );
 }
