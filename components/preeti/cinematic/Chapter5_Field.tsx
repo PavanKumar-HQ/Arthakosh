@@ -6,112 +6,88 @@ import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 
 // Generate a grid of flowers
 const generateFlowers = () => {
-  return Array.from({ length: 40 }).map((_, i) => ({
-    id: i,
-    x: 10 + Math.random() * 80,
-    y: 30 + Math.random() * 60,
-    scale: 0.5 + Math.random() * 0.8,
-    delay: Math.random() * 2,
-    msg: `Thank you for the memory #${i + 1}`
-  }));
+  const flowers = [];
+  const rows = 4;
+  const cols = 5;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      flowers.push({
+        id: r * cols + c,
+        x: (c / cols) * 100 + (Math.random() * 10 - 5),
+        y: (r / rows) * 100 + (Math.random() * 10 - 5),
+        msg: `Memory from Class ${2018 + Math.floor(Math.random() * 6)}`,
+      });
+    }
+  }
+  return flowers;
 };
 
 const FLOWERS = generateFlowers();
 
 export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
-  const [bloomed, setBloomed] = useState<number[]>([]);
-  const [activeFlower, setActiveFlower] = useState<number | null>(null);
-
-  const colorIntensity = Math.min(bloomed.length * 5, 100); // Max 100% saturation
+  const [bloomedIds, setBloomedIds] = useState<number[]>([]);
+  const [shakingId, setShakingId] = useState<number | null>(null);
 
   const handleBloom = (id: number) => {
-    if (!bloomed.includes(id)) {
-      setBloomed([...bloomed, id]);
+    if (!bloomedIds.includes(id)) {
+      setShakingId(id);
+      setTimeout(() => {
+        setShakingId(null);
+        setBloomedIds((prev) => {
+          const next = [...prev, id];
+          if (next.length === FLOWERS.length) {
+            setTimeout(onComplete, 4000);
+          }
+          return next;
+        });
+      }, 400); // Shake for 400ms before blooming
     }
   };
 
-  const handleClick = (id: number) => {
-    setActiveFlower(id);
-    if (bloomed.length >= 5) {
-      // Allow progression after exploring a bit
-      setTimeout(onComplete, 5000);
-    }
-  };
+  const isFullyBloomed = bloomedIds.length === FLOWERS.length;
 
   return (
-    <div 
-      className="w-full h-full relative transition-colors duration-1000 flex flex-col items-center justify-center overflow-hidden"
-      style={{
-        background: `linear-gradient(to bottom, 
-          hsl(200, ${colorIntensity}%, ${95 - colorIntensity * 0.1}%), 
-          hsl(100, ${colorIntensity}%, ${95 - colorIntensity * 0.1}%))`
-      }}
-    >
-      <div className="text-center absolute top-16 z-20 pointer-events-none">
-        <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-playfair text-emerald-900 mb-2"
-        >
-          The Field of Blooms
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-emerald-700 italic font-serif text-lg"
-        >
-          Every flower you touch brings color to the garden.
-        </motion.p>
+    <div className={`w-full h-full relative transition-colors duration-1000 ${isFullyBloomed ? 'bg-amber-50' : 'bg-[#faf8f5]'}`}>
+      <div className="absolute inset-0 p-8">
+        
+        <div className="text-center mt-12 mb-8 pointer-events-none">
+          <p className="font-playfair text-2xl md:text-4xl text-emerald-900 drop-shadow-[0_2px_10px_rgba(255,255,255,1)]">
+            Thousands of seeds were planted.
+          </p>
+          <p className="font-playfair text-lg text-emerald-700 mt-2 opacity-80">
+            Hover or tap to help them bloom
+          </p>
+        </div>
+
+        <div className="relative w-full h-[60vh] max-w-5xl mx-auto">
+          {FLOWERS.map((f) => {
+            const isBloomed = bloomedIds.includes(f.id);
+            const isShaking = shakingId === f.id;
+            return (
+              <motion.div
+                key={f.id}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                style={{ left: `${f.x}%`, top: `${f.y}%` }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: f.id * 0.05 }}
+                onHoverStart={() => handleBloom(f.id)}
+                onClick={() => handleBloom(f.id)}
+              >
+                <div className="pointer-events-none">
+                  <SVGFlower 
+                    isBlooming={isBloomed} 
+                    isShaking={isShaking}
+                    color="stroke-rose-400" 
+                    text={isBloomed ? f.msg : undefined} 
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
       </div>
-
-      {/* The Flowers */}
-      {FLOWERS.map((f) => {
-        const isBloomed = bloomed.includes(f.id);
-        return (
-          <motion.div
-            key={f.id}
-            className="absolute cursor-pointer flex items-center justify-center"
-            style={{ left: `${f.x}%`, top: `${f.y}%`, scale: f.scale }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: f.delay }}
-            onHoverStart={() => handleBloom(f.id)}
-            onClick={() => handleClick(f.id)}
-          >
-            <motion.div 
-              className={`text-4xl drop-shadow-sm transition-all duration-1000 ${isBloomed ? 'grayscale-0 scale-125' : 'grayscale opacity-50 hover:grayscale-0 hover:opacity-100'}`}
-              animate={isBloomed ? { rotate: [0, 5, -5, 0] } : {}}
-              transition={{ duration: 4, repeat: Infinity }}
-            >
-              <SVGFlower isBlooming={isBloomed} color="stroke-rose-400" />
-            </motion.div>
-          </motion.div>
-        );
-      })}
-
-      {/* Memory Modal */}
-      <AnimatePresence>
-        {activeFlower !== null && (
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="absolute z-30 bottom-10 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-100 max-w-sm w-full text-center"
-          >
-            <p className="font-playfair text-emerald-900 text-lg italic">
-              &quot;{FLOWERS.find(f => f.id === activeFlower)?.msg}&quot;
-            </p>
-            <button 
-              onClick={() => setActiveFlower(null)}
-              className="mt-4 text-emerald-600 text-sm font-sans underline"
-            >
-              Close
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
     </div>
   );
 }
