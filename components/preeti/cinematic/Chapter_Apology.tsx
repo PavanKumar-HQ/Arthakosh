@@ -206,14 +206,7 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
 
       <ChapterControls 
         instruction={!isBlooming ? "Click the flower to let it bloom" : isFinished ? "The storm has passed." : "Click to continue reading..."} 
-        onSkip={() => {
-          if (!isFinished) {
-            setIsBlooming(true);
-            setRevealedIndex(APOLOGIES.length - 1);
-          } else {
-            onComplete();
-          }
-        }} 
+        onSkip={handleClick} 
       />
     </div>
   );
