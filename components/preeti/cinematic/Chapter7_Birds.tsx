@@ -129,7 +129,11 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
       {BIRDS.map((b) => {
         const isCaught = caughtBirds.includes(b.id);
         const isActive = activeBird === b.id;
-        const state = birdStates[b.id] || "flying";
+        
+        // Override random NPC state if the player is interacting with it
+        let state = birdStates[b.id] || "flying";
+        if (isActive) state = "chirping";
+        else if (isCaught) state = "landing";
 
         // Determine physics based on NPC state
         let animateProps = {};

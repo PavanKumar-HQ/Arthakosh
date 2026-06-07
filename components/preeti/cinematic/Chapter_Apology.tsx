@@ -186,28 +186,35 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* UI Instructions */}
+      <div className="absolute bottom-12 w-full text-center z-20 pointer-events-none">
+        <AnimatePresence mode="wait">
+          {!isBlooming ? (
+            <motion.p
+              key="bloom-instruction"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              exit={{ opacity: 0, transition: { duration: 0.5 } }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-slate-400 font-sans tracking-widest text-sm uppercase"
+            >
+              Click the closed flower to let it bloom
+            </motion.p>
+          ) : !isFinished && revealedIndex >= 0 ? (
+            <motion.p
+              key="continue-instruction"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              exit={{ opacity: 0, transition: { duration: 0.5 } }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-white/50 font-sans tracking-widest text-sm uppercase"
+            >
+              Click anywhere to continue reading...
+            </motion.p>
+          ) : null}
+        </AnimatePresence>
+      </div>
+      
       <AnimatePresence>
-        {!isBlooming && (
-          <motion.p
-            exit={{ opacity: 0 }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute bottom-12 text-slate-400 font-sans tracking-widest text-sm uppercase z-20 pointer-events-none"
-          >
-            Click the closed flower to let it bloom
-          </motion.p>
-        )}
-        {isBlooming && !isFinished && revealedIndex >= 0 && (
-          <motion.p
-            key="continue-instruction"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, delay: 3 }}
-            className="absolute bottom-12 text-white/50 font-sans tracking-widest text-sm uppercase z-20 pointer-events-none"
-          >
-            Click anywhere to continue reading...
-          </motion.p>
-        )}
         {isFinished && (
           <motion.button
             initial={{ opacity: 0, y: 20 }}
