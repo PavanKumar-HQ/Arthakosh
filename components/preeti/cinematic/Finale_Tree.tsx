@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
-import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
 const FireworksBurst = dynamic(
@@ -99,8 +98,8 @@ export function Finale_Tree() {
           onLeavesGenerated={(nodes) => setLeaves(nodes)}
         />
         
-        {/* Render beautiful SVG Flowers exactly at the branch tips! Capped at 40 for performance */}
-        {leaves.slice(0, 40).map((leaf, i) => (
+        {/* Render simple glowing leaves at the branch tips for maximum performance! Capped at 150 for lushness */}
+        {leaves.slice(0, 150).map((leaf, i) => (
           <motion.div
             key={`leaf-${leaf.id}`}
             className="absolute z-20"
@@ -115,11 +114,13 @@ export function Finale_Tree() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: sr(i) * 3, duration: 1, type: "spring" }}
           >
-            <SVGFlower 
-              isBlooming={true} 
-              size={50 + sr(leaf.id) * 40} 
-              petalColor={["#fbcfe8", "#fde047", "#86efac", "#93c5fd"][i % 4]}
-              coreColor="#ffffff"
+            <div 
+              className="w-4 h-6 md:w-5 md:h-8 opacity-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+              style={{
+                backgroundColor: ["#fbcfe8", "#fde047", "#86efac", "#93c5fd"][i % 4],
+                borderRadius: "50% 0 50% 50%",
+                transform: `rotate(${sr(leaf.id) * 360}deg)`
+              }}
             />
           </motion.div>
         ))}
