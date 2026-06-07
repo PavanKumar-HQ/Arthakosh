@@ -23,17 +23,6 @@ const GardenAmbient = dynamic(
 
 export default function PreetiGardenOfGrowth() {
   const [chapter, setChapter] = useState(1);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    if (!iframeRef.current || !iframeRef.current.contentWindow) return;
-    
-    if (chapter === 10) {
-      iframeRef.current.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-    } else if (chapter === 11) {
-      iframeRef.current.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    }
-  }, [chapter]);
 
   const nextChapter = () => setChapter((prev) => prev + 1);
 
@@ -43,16 +32,29 @@ export default function PreetiGardenOfGrowth() {
       {/* Global Animated Ambient Background — always visible behind every chapter */}
       <GardenAmbient chapter={chapter} />
 
-      {/* Global Preeti Background Music - Seamlessly pauses on Chapter 10 and resumes on 11 */}
-      <iframe
-        ref={iframeRef}
-        width="1"
-        height="1"
-        src="https://www.youtube.com/embed/YUSfkS2q94o?autoplay=1&start=75&controls=0&showinfo=0&autohide=1&loop=1&playlist=YUSfkS2q94o&enablejsapi=1"
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-        className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
-      />
+      {/* Global Preeti Background Music (Chapters 1-9) */}
+      {chapter < 10 && (
+        <iframe
+          width="1"
+          height="1"
+          src="https://www.youtube.com/embed/YUSfkS2q94o?autoplay=1&start=75&controls=0&showinfo=0&autohide=1&loop=1&playlist=YUSfkS2q94o"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
+        />
+      )}
+
+      {/* Finale Background Music (Chapter 11) */}
+      {chapter === 11 && (
+        <iframe
+          width="1"
+          height="1"
+          src="https://www.youtube.com/embed/isOZo5ONtdg?autoplay=1&start=22&controls=0&showinfo=0&autohide=1&loop=1&playlist=isOZo5ONtdg"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
+        />
+      )}
 
       <AnimatePresence>
         {chapter === 1 && (
