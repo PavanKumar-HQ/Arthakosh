@@ -56,6 +56,16 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
       className="w-full h-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center cursor-pointer transition-colors duration-1000"
       onClick={handleClick}
     >
+      {/* Hidden YouTube Music Player */}
+      <iframe
+        width="0"
+        height="0"
+        src="https://www.youtube.com/embed/gtTjNSeNwDg?autoplay=1&start=53&controls=0&showinfo=0&autohide=1&loop=1&playlist=gtTjNSeNwDg"
+        frameBorder="0"
+        allow="autoplay"
+        className="hidden absolute"
+      />
+
       {/* Background Magic - Lightens slightly when blooming */}
       <motion.div 
         className="absolute inset-0 z-0 pointer-events-none"
