@@ -137,7 +137,7 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
         instruction={isBlooming ? "The flower is in full bloom." : "The garden is waiting..."} 
         onSkip={() => {
           if (!isBlooming) {
-            setIsBlooming(true);
+            setPhase(SCRIPT.length - 1);
           } else {
             onComplete();
           }
