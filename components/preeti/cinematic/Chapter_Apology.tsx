@@ -234,11 +234,11 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
       </div>
       
       <ChapterControls 
-        instruction={progress === 4 ? "The storm has passed." : "Click the dark clouds to clear the storm..."} 
+        instruction={isFinished ? "The storm has passed." : "Click to continue..."} 
         onSkip={() => {
-          if (progress < 4) {
-            setProgress(4);
-            setIsFinished(true);
+          if (!isFinished) {
+            setIsBlooming(true);
+            setRevealedIndex(APOLOGIES.length - 1);
           } else {
             onComplete();
           }
