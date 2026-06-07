@@ -78,9 +78,6 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
       </div>
 
       <div className="absolute top-16 text-center z-20 w-full px-4 pointer-events-none">
-        <motion.h2 
-          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         <h2 className="font-playfair text-3xl md:text-5xl text-blue-100 drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
           The Wishing Fountain
         </h2>
