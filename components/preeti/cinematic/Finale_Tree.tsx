@@ -60,8 +60,8 @@ export function Finale_Tree() {
           onLeavesGenerated={(nodes) => setLeaves(nodes)}
         />
         
-        {/* Render simple glowing leaves at the branch tips for maximum performance! Capped at 50 to prevent overload */}
-        {leaves.slice(0, 50).map((leaf, i) => (
+        {/* Render all simple glowing leaves at the branch tips */}
+        {leaves.map((leaf, i) => (
           <motion.div
             key={`leaf-${leaf.id}`}
             className="absolute z-20"
