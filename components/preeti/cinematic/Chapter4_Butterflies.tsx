@@ -138,7 +138,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
             y: [0, -20, 20, 0],
             rotate: [-10, 10, -10]
           }}
-          transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + sr(b.id * 7) * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
           {/* Using SVG Butterfly - SCALED UP */}

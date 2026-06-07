@@ -6,6 +6,11 @@ interface BackgroundGreenhouseProps {
   chapterProgress: number; // 1 to 10
 }
 
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
 export function BackgroundGreenhouse({ chapterProgress }: BackgroundGreenhouseProps) {
   // Starts fading in at chapter 6, fully visible by chapter 9
   const visibility = Math.min(1, Math.max(0, (chapterProgress - 5) / 4));
@@ -44,13 +49,13 @@ export function BackgroundGreenhouse({ chapterProgress }: BackgroundGreenhousePr
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
-            style={{ left: `${30 + Math.random() * 40}%`, bottom: "20%" }}
+            style={{ left: `${30 + sr(i * 7) * 40}%`, bottom: "20%" }}
             animate={{ 
               y: [-10, -50], 
               opacity: [0, visibility, 0],
-              x: (Math.random() - 0.5) * 20
+              x: (sr(i * 11) - 0.5) * 20
             }}
-            transition={{ duration: 2 + Math.random() * 3, repeat: Infinity }}
+            transition={{ duration: 2 + sr(i * 13) * 3, repeat: Infinity }}
           />
         ))}
       </motion.div>

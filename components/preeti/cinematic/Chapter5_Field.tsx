@@ -142,7 +142,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
             transition={{
               opacity: { duration: 1 },
               scale: { duration: 1, type: "spring" },
-              rotate: { duration: 8 + Math.random() * 4, repeat: Infinity, ease: "easeInOut" }
+              rotate: { duration: 8 + sr(i * 13) * 4, repeat: Infinity, ease: "easeInOut" }
             }}
             onClick={() => handleBloom(f.id)}
           >
