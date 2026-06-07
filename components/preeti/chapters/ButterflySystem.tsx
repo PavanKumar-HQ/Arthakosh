@@ -12,7 +12,7 @@ const BUTTERFLY_MESSAGES = [
 ];
 
 export function ButterflySystem() {
-  const [butterflies, setButterflies] = useState<{ id: number, x: number, y: number, msg: string }[]>([]);
+  const [butterflies, setButterflies] = useState<{ id: number, x: number, y: number, msg: string, pathX: number[], pathY: number[], duration: number }[]>([]);
   const [activeMessage, setActiveMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,7 +24,10 @@ export function ButterflySystem() {
           id: Date.now(),
           x: Math.random() * 80 + 10, // 10% to 90%
           y: Math.random() * 80 + 10,
-          msg: BUTTERFLY_MESSAGES[Math.floor(Math.random() * BUTTERFLY_MESSAGES.length)]
+          msg: BUTTERFLY_MESSAGES[Math.floor(Math.random() * BUTTERFLY_MESSAGES.length)],
+          pathX: [0, Math.random() * 100 - 50, Math.random() * 200 - 100, 0],
+          pathY: [0, Math.random() * -100 - 50, Math.random() * 100 + 50, 0],
+          duration: 2 + Math.random(),
         }];
       });
     }, 5000);
@@ -49,8 +52,8 @@ export function ButterflySystem() {
               animate={{ 
                 opacity: 1, 
                 scale: 1,
-                x: [0, Math.random() * 100 - 50, Math.random() * 200 - 100, 0],
-                y: [0, Math.random() * -100 - 50, Math.random() * 100 + 50, 0],
+                x: b.pathX,
+                y: b.pathY,
               }}
               exit={{ opacity: 0, scale: 2 }}
               transition={{ 
@@ -72,7 +75,7 @@ export function ButterflySystem() {
                   rotate: [-5, 5, -5]
                 }}
                 transition={{
-                  duration: 2 + Math.random(),
+                  duration: b.duration,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}

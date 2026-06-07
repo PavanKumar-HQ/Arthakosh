@@ -3,6 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
+// Deterministic seed
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
 const PATHS = [
   { id: "rose", name: "Rose Path", type: "Funny Memories", color: "from-rose-400 to-rose-600", bg: "from-rose-50 to-[#faf8f5]", petalColor: "bg-rose-300" },
   { id: "sunflower", name: "Sunflower Path", type: "Achievements", color: "from-amber-400 to-yellow-600", bg: "from-amber-50 to-[#faf8f5]", petalColor: "bg-amber-300" },
@@ -100,19 +106,19 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
             key={`petal-${i}`}
             className={`absolute w-4 h-6 opacity-80 drop-shadow-sm ${petalColor}`}
             style={{ 
-              left: `${Math.random() * 100}%`, 
+              left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
               top: "-10%",
               borderRadius: "50% 0 50% 50%" // Realistic petal/teardrop shape
             }}
             initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
             animate={{ 
               y: "120vh", 
-              x: (Math.random() - 0.5) * 300,
+              x: (sr(i * 11) - 0.5) * 300,
               opacity: [0, 1, 0],
               scale: [0.5, 1.2, 0.5],
               rotate: [0, 180, 360, 720] // Tumble like a real petal
             }}
-            transition={{ duration: 4 + Math.random() * 4, ease: "linear" }}
+            transition={{ duration: 4 + sr(i * 13) * 4, ease: "linear" }}
           />
         );
       })}

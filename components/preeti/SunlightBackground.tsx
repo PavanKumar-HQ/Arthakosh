@@ -13,6 +13,8 @@ export function SunlightBackground() {
       left: `${Math.random() * 100}%`,
       delay: Math.random() * 20,
       duration: Math.random() * 10 + 15,
+      xMid: Math.random() * 100 - 50,
+      xEnd: Math.random() * 100 - 50,
     }));
     setPetals(newPetals);
   }, []);
@@ -31,7 +33,7 @@ export function SunlightBackground() {
           style={{ left: petal.left }}
           animate={{
             y: ["0vh", "110vh"],
-            x: [0, Math.random() * 100 - 50, Math.random() * 100 - 50],
+            x: [0, petal.xMid, petal.xEnd],
             rotate: [0, 360],
           }}
           transition={{

@@ -4,6 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 
+// Deterministic seed
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
 const SCRIPT = [
   "",
   "But what about the seed that never bloomed?",
@@ -60,19 +66,18 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
       {isBlooming && Array.from({ length: 60 }).map((_, i) => (
         <motion.div
           key={`firefly-${i}`}
-          className="absolute w-1 h-1 bg-yellow-300 rounded-full blur-[1px] z-20 mix-blend-screen drop-shadow-[0_0_5px_rgba(253,224,71,1)]"
+          className="absolute w-1.5 h-1.5 rounded-full bg-amber-200/60 blur-[1px] pointer-events-none"
           style={{ 
-            left: `${Math.random() * 100}%`, 
-            bottom: `${20 + Math.random() * 40}%`
+            left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
+            bottom: `${(20 + sr(i * 11) * 40).toFixed(2)}%`
           }}
-          initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ 
-            y: -200 - Math.random() * 300, 
-            x: (Math.random() - 0.5) * 150,
-            opacity: [0, 1, 0],
-            scale: [0.5, 2, 0.5]
+            y: -200 - sr(i * 13) * 300, 
+            x: (sr(i * 17) - 0.5) * 150,
+            opacity: [0, 1, 0]
           }}
-          transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 2 }}
+          transition={{ duration: 4 + sr(i * 19) * 4, repeat: Infinity, ease: "easeInOut", delay: sr(i * 23) * 2 }}
         />
       ))}
 

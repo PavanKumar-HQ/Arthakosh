@@ -95,7 +95,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
                 opacity: [0, 1, 0]
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: 3 + (i * 0.4) * 2,
                 repeat: Infinity,
                 delay: i,
                 ease: "linear"

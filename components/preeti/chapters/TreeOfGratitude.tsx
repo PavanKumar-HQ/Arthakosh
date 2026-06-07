@@ -15,7 +15,7 @@ export function TreeOfGratitude() {
   const treeOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 0.9, 1]);
   const glowOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.6]);
 
-  const [sparks, setSparks] = useState<{ id: number, x: number, y: number, delay: number }[]>([]);
+  const [sparks, setSparks] = useState<{ id: number, x: number, y: number, delay: number, duration: number }[]>([]);
 
   useEffect(() => {
     // Generate fireflies/sparks around the tree
@@ -23,7 +23,8 @@ export function TreeOfGratitude() {
       id: i,
       x: (Math.random() - 0.5) * 100, // -50% to 50%
       y: (Math.random() - 0.5) * 100,
-      delay: Math.random() * 5
+      delay: Math.random() * 5,
+      duration: 3 + Math.random() * 2
     }));
     setSparks(newSparks);
   }, []);
@@ -63,7 +64,7 @@ export function TreeOfGratitude() {
               scale: [0.8, 1.2, 0.8]
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: spark.duration,
               repeat: Infinity,
               delay: spark.delay,
               ease: "easeInOut"
