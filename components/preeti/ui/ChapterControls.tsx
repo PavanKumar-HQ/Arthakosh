@@ -9,7 +9,7 @@ interface ChapterControlsProps {
   className?: string;
 }
 
-export function ChapterControls({ instruction, onSkip, skipText = "Skip \u2192", className = "" }: ChapterControlsProps) {
+export function ChapterControls({ instruction, onSkip, skipText = "Next \u2192", className = "" }: ChapterControlsProps) {
   return (
     <div className={`absolute inset-0 pointer-events-none z-50 ${className}`}>
       
