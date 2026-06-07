@@ -112,7 +112,7 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
         )}
       </AnimatePresence>
       <ChapterControls 
-        instruction={progress === 3 ? "The greenhouse is open." : "Click the lock to open the greenhouse..."} 
+        instruction={unlocked ? "The greenhouse is open." : "Click the lock to open the greenhouse..."} 
         onSkip={onComplete} 
       />
     </div>
