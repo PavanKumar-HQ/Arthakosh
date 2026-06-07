@@ -303,7 +303,14 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
       </div>
       <ChapterControls 
         instruction={revealedWishes.length === WISHES.length ? "Your wish has been granted." : "Discover the luminescent memories..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (!wished || revealedWishes.length < WISHES.length) {
+            setWished(true);
+            setRevealedWishes(WISHES.map(w => w.id));
+          } else {
+            onComplete();
+          }
+        }} 
       />
     </div>
   );

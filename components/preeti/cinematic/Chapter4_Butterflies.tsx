@@ -137,7 +137,14 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
 
       <ChapterControls 
         instruction={completed.length === BUTTERFLIES.length ? "They have delivered their messages." : "Click to catch the glowing butterflies..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (completed.length < BUTTERFLIES.length) {
+            setCompleted(BUTTERFLIES.map(b => b.id));
+            setActiveButterfly(null);
+          } else {
+            onComplete();
+          }
+        }} 
       />
     </div>
   );

@@ -154,7 +154,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
 
       <ChapterControls 
         instruction={activePath ? "The path has been chosen..." : "Choose a path to continue."} 
-        onSkip={onComplete} 
+        onSkip={activePath ? onComplete : () => handlePathClick(PATHS[0].id)} 
       />
     </div>
   );

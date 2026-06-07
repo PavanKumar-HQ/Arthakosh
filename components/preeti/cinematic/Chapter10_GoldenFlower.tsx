@@ -135,7 +135,13 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
 
       <ChapterControls 
         instruction={isBlooming ? "The flower is in full bloom." : "The garden is waiting..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (!isBlooming) {
+            setIsBlooming(true);
+          } else {
+            onComplete();
+          }
+        }} 
       />
     </div>
   );

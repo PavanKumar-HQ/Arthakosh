@@ -186,7 +186,13 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
 
       <ChapterControls 
         instruction={bloomedIds.length === FLOWERS.length ? "The field is in full bloom." : "Click the glowing sprouts to water them..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (bloomedIds.length < FLOWERS.length) {
+            setBloomedIds(FLOWERS.map(f => f.id));
+          } else {
+            onComplete();
+          }
+        }} 
       />
     </div>
   );

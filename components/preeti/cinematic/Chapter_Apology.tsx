@@ -235,7 +235,14 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
       
       <ChapterControls 
         instruction={progress === 4 ? "The storm has passed." : "Click the dark clouds to clear the storm..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (progress < 4) {
+            setProgress(4);
+            setIsFinished(true);
+          } else {
+            onComplete();
+          }
+        }} 
       />
     </div>
   );

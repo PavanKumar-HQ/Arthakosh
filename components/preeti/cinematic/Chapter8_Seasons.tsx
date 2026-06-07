@@ -71,7 +71,13 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
 
       <ChapterControls 
         instruction={activeSeason === 3 ? "The cycle is complete." : "Click the background to advance the seasons..."} 
-        onSkip={onComplete} 
+        onSkip={() => {
+          if (activeSeason < 3) {
+            setActiveSeason(3);
+          } else {
+            onComplete();
+          }
+        }} 
       />
       
       {/* Progress Indicator */}
