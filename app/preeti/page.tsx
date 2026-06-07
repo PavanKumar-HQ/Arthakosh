@@ -2,17 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { Chapter1_TheSeed } from "@/components/preeti/cinematic/Chapter1_TheSeed";
-import { Chapter2_Roots } from "@/components/preeti/cinematic/Chapter2_Roots";
-import { Chapter3_Paths } from "@/components/preeti/cinematic/Chapter3_Paths";
-import { Chapter4_Butterflies } from "@/components/preeti/cinematic/Chapter4_Butterflies";
-import { Chapter5_Field } from "@/components/preeti/cinematic/Chapter5_Field";
-import { Chapter6_Fountain } from "@/components/preeti/cinematic/Chapter6_Fountain";
-import { Chapter8_Seasons as Chapter7_Seasons } from "@/components/preeti/cinematic/Chapter8_Seasons";
-import { Chapter9_Greenhouse as Chapter8_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Greenhouse";
-import { Chapter10_GoldenFlower as Chapter9_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
-import { Chapter_Apology as Chapter10_Apology } from "@/components/preeti/cinematic/Chapter_Apology";
-import { Finale_Tree as Chapter11_Finale } from "@/components/preeti/cinematic/Finale_Tree";
+const Chapter1_TheSeed = dynamic(() => import("@/components/preeti/cinematic/Chapter1_TheSeed").then(m => m.Chapter1_TheSeed), { ssr: false });
+const Chapter2_Roots = dynamic(() => import("@/components/preeti/cinematic/Chapter2_Roots").then(m => m.Chapter2_Roots), { ssr: false });
+const Chapter3_Paths = dynamic(() => import("@/components/preeti/cinematic/Chapter3_Paths").then(m => m.Chapter3_Paths), { ssr: false });
+const Chapter4_Butterflies = dynamic(() => import("@/components/preeti/cinematic/Chapter4_Butterflies").then(m => m.Chapter4_Butterflies), { ssr: false });
+const Chapter5_Field = dynamic(() => import("@/components/preeti/cinematic/Chapter5_Field").then(m => m.Chapter5_Field), { ssr: false });
+const Chapter6_Fountain = dynamic(() => import("@/components/preeti/cinematic/Chapter6_Fountain").then(m => m.Chapter6_Fountain), { ssr: false });
+const Chapter7_Seasons = dynamic(() => import("@/components/preeti/cinematic/Chapter8_Seasons").then(m => m.Chapter8_Seasons), { ssr: false });
+const Chapter8_Greenhouse = dynamic(() => import("@/components/preeti/cinematic/Chapter9_Greenhouse").then(m => m.Chapter9_Greenhouse), { ssr: false });
+const Chapter9_GoldenFlower = dynamic(() => import("@/components/preeti/cinematic/Chapter10_GoldenFlower").then(m => m.Chapter10_GoldenFlower), { ssr: false });
+const Chapter10_Apology = dynamic(() => import("@/components/preeti/cinematic/Chapter_Apology").then(m => m.Chapter_Apology), { ssr: false });
+const Chapter11_Finale = dynamic(() => import("@/components/preeti/cinematic/Finale_Tree").then(m => m.Finale_Tree), { ssr: false });
 
 // Client-only: avoids SSR hydration mismatch
 const GardenAmbient = dynamic(
