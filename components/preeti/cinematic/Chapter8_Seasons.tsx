@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { DynamicWeatherSystem } from "@/components/preeti/generative/DynamicWeatherSystem";
 
 const SEASONS = [
   { id: 0, name: "Spring", bg: "from-green-100 to-emerald-50", text: "text-emerald-800", msg: "When you first planted the seeds of knowledge." },
@@ -24,6 +25,9 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div className="w-full h-full relative overflow-hidden">
+      {/* Generative Weather Layer */}
+      <DynamicWeatherSystem season={activeSeason} />
+      
       <AnimatePresence mode="wait">
         <motion.div
           key={activeSeason}

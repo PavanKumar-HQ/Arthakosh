@@ -2,7 +2,13 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { CSSBird } from "@/components/preeti/generative/CSSBird";
+import { SVGBird } from "@/components/preeti/generative/SVGBird";
+
+// Deterministic seed for background flock
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
 
 const BIRDS = [
   { id: 1, type: "wish", text: "A wish for peace", x: 20, y: 30 },
@@ -60,6 +66,49 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
   return (
     <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
       
+      {/* Background Silhouetted Trees */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none opacity-30 mix-blend-multiply">
+        <svg viewBox="0 0 100 50" className="w-full h-full" preserveAspectRatio="none">
+          <path d="M0,50 L0,30 Q5,10 10,35 T20,20 T30,40 T40,15 T50,30 T60,10 T70,35 T80,20 T90,40 T100,25 L100,50 Z" fill="#0f172a" />
+          <path d="M0,50 L0,40 Q10,25 20,45 T40,30 T60,45 T80,30 T100,40 L100,50 Z" fill="#1e293b" opacity="0.7"/>
+        </svg>
+      </div>
+
+      {/* Distant Flocking Birds */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={`flock-${i}`}
+            className="absolute text-slate-800/20 text-xs"
+            style={{ 
+              left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
+              top: `${(10 + sr(i * 11) * 40).toFixed(2)}%` 
+            }}
+            animate={{ 
+              x: [0, -200 - sr(i * 13) * 300],
+              y: [0, (sr(i * 17) - 0.5) * 100],
+              opacity: [0, 1, 1, 0]
+            }}
+            transition={{ 
+              duration: 15 + sr(i * 19) * 10, 
+              repeat: Infinity, 
+              ease: "linear",
+              delay: sr(i * 23) * 10 
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 10 10">
+              <motion.path 
+                d="M 5 5 Q 2 0 0 5 Q 2 3 5 5 Q 8 0 10 5 Q 8 3 5 5" 
+                fill="currentColor"
+                animate={{ scaleY: [1, -0.5, 1] }}
+                transition={{ duration: 0.2 + sr(i) * 0.1, repeat: Infinity }}
+                style={{ transformOrigin: "5px 5px" }}
+              />
+            </svg>
+          </motion.div>
+        ))}
+      </div>
+      
       <div className="absolute top-1/4 text-center z-20 px-4 w-full pointer-events-none">
         <p className="font-playfair text-2xl md:text-4xl text-sky-900 drop-shadow-[0_2px_10px_rgba(255,255,255,1)]">
           Birds of Gratitude
@@ -106,7 +155,11 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
           >
             {/* The Bird Graphic */}
             <div className="relative">
-              <CSSBird isFlying={state === "flying"} />
+              <SVGBird 
+                isFlying={state === "flying"} 
+                color={["#0ea5e9", "#f59e0b", "#ec4899", "#10b981"][b.id % 4]} 
+                delay={b.id * 0.1} 
+              />
               
               {/* Organic glowing text when clicked */}
               <AnimatePresence>

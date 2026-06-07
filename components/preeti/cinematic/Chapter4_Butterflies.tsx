@@ -2,12 +2,18 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
+import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
+
+// Deterministic seed
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
 
 const BUTTERFLIES = [
-  { id: 1, color: "text-blue-500", x: 10, y: 30, msg: "Thank you for the endless support.", photo: true },
-  { id: 2, color: "text-purple-500", x: 70, y: 20, msg: "Your words changed my life.", photo: false },
-  { id: 3, color: "text-pink-500", x: 40, y: 60, msg: "I still remember your smile every morning.", photo: true },
+  { id: 1, color: "#3b82f6", x: 15, y: 30, msg: "Thank you for the endless support.", photo: true },
+  { id: 2, color: "#a855f7", x: 75, y: 25, msg: "Your words changed my life.", photo: false },
+  { id: 3, color: "#ec4899", x: 45, y: 65, msg: "I still remember your smile every morning.", photo: true },
 ];
 
 export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void }) {
@@ -33,10 +39,37 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
       
       {/* Soft God Rays */}
       <motion.div 
-        className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(253,224,71,0.2)_0%,transparent_60%)]"
-        animate={{ opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 6, repeat: Infinity }}
+        className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-[conic-gradient(from_200deg_at_top_right,rgba(253,224,71,0.15)_0deg,transparent_30deg,transparent_330deg,rgba(253,224,71,0.15)_360deg)] pointer-events-none"
+        animate={{ opacity: [0.3, 0.6, 0.3], rotate: [-2, 2, -2] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transformOrigin: "top right" }}
       />
+
+      {/* Floating Dust Particles in the Light */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 40 }).map((_, i) => (
+          <motion.div
+            key={`dust-${i}`}
+            className="absolute w-1 h-1 bg-amber-200/50 rounded-full blur-[1px]"
+            style={{ 
+              left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
+              top: `${(sr(i * 11) * 100).toFixed(2)}%` 
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              y: [-10, 10, -10],
+              x: [-10, 10, -10],
+              opacity: [0.1, 0.5, 0.1]
+            }}
+            transition={{ 
+              duration: 4 + sr(i * 13) * 4, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: sr(i * 17) * 2 
+            }}
+          />
+        ))}
+      </div>
 
       <div className="text-center absolute top-16 z-20 pointer-events-none">
         <motion.h2 
@@ -83,7 +116,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
-          <CSSButterfly color={b.color.includes("blue") ? "bg-blue-400" : b.color.includes("purple") ? "bg-purple-400" : "bg-pink-400"} />
+          <SVGButterfly color={b.color} size={80} delay={b.id * 0.2} />
         </motion.div>
       ))}
 

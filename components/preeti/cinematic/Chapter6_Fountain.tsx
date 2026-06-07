@@ -22,10 +22,10 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Deterministic sets so no hydration mismatch
-  const waterDrops = useMemo(() => Array.from({ length: 22 }, (_, i) => i), []);
+  const waterDrops = useMemo(() => Array.from({ length: 60 }, (_, i) => i), []);
   const coins = useMemo(() => Array.from({ length: 18 }, (_, i) => i), []);
-  const sparkles = useMemo(() => Array.from({ length: 25 }, (_, i) => i), []);
-  const ripples = useMemo(() => Array.from({ length: 5 }, (_, i) => i), []);
+  const sparkles = useMemo(() => Array.from({ length: 30 }, (_, i) => i), []);
+  const ripples = useMemo(() => Array.from({ length: 8 }, (_, i) => i), []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -185,35 +185,55 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
           <rect x="109" y="105" width="4" height="30" rx="1" fill="rgba(139,100,40,0.3)" />
         </svg>
 
-        {/* ── ANIMATED WATER DROPLETS ── */}
+        {/* ── ANIMATED WATER DROPLETS & SPLASHES ── */}
         {waterDrops.map((i) => {
           const angle = s(i * 7) * Math.PI * 2;
           const speed = 1.2 + s(i * 11) * 1.4;
-          const dist = 50 + s(i * 13) * 40;
+          const dist = 40 + s(i * 13) * 50;
           const startX = 260 + Math.cos(angle) * 8;
           const startY = 200;
-          const peakX = 260 + Math.cos(angle) * (dist * 0.4);
-          const peakY = 200 - 60 - s(i * 17) * 40;
+          const peakX = 260 + Math.cos(angle) * (dist * 0.5);
+          const peakY = 200 - 50 - s(i * 17) * 40;
           const endX = 260 + Math.cos(angle) * dist;
           const endY = 290 + s(i * 19) * 20;
+          
           return (
-            <motion.div
-              key={`drop-${i}`}
-              className="absolute w-1.5 h-2 bg-sky-300/80 rounded-full blur-[1px] pointer-events-none"
-              style={{ left: startX, top: startY, borderRadius: "50% 50% 50% 50% / 30% 30% 70% 70%" }}
-              animate={{
-                left: [startX, peakX, endX],
-                top: [startY, peakY, endY],
-                opacity: [0, 0.9, 0],
-                scale: [0.5, 1, 0.3],
-              }}
-              transition={{
-                duration: speed,
-                repeat: Infinity,
-                ease: ["easeOut", "easeIn"],
-                delay: s(i * 23) * speed,
-              }}
-            />
+            <div key={`drop-container-${i}`}>
+              {/* Droplet Arc */}
+              <motion.div
+                className="absolute w-1 h-2 bg-sky-200/80 rounded-full pointer-events-none"
+                style={{ left: startX, top: startY, boxShadow: "0 0 5px rgba(186,230,253,0.8)" }}
+                animate={{
+                  left: [startX, peakX, endX, endX + Math.cos(angle)*10],
+                  top: [startY, peakY, endY, endY - 10], // bounce up slightly
+                  opacity: [0, 1, 1, 0],
+                  scale: [0.5, 1, 0.8, 0],
+                }}
+                transition={{
+                  duration: speed,
+                  repeat: Infinity,
+                  ease: ["easeOut", "easeIn", "easeOut"],
+                  times: [0, 0.4, 0.8, 1], // Bounce at 0.8
+                  delay: s(i * 23) * speed,
+                }}
+              />
+              {/* Impact Ripple */}
+              <motion.div
+                className="absolute w-6 h-2 rounded-[50%] border border-sky-300/40 pointer-events-none"
+                style={{ left: endX - 12, top: endY - 4 }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: [0, 0.8, 0],
+                  scale: [0, 1.5, 2],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                  delay: (s(i * 23) * speed) + (speed * 0.8), // Trigger exactly when drop hits endY
+                }}
+              />
+            </div>
           );
         })}
 
