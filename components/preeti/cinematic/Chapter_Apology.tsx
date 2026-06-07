@@ -64,6 +64,24 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
 
       {/* Dynamic Rain - Slows down and fades out when blooming */}
       <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Lightning Flashes */}
+        {!isBlooming && (
+          <motion.div
+            className="absolute inset-0 bg-white pointer-events-none z-0"
+            animate={{ opacity: [0, 0, 0.8, 0, 0, 0.3, 0] }}
+            transition={{ duration: 10, repeat: Infinity, times: [0, 0.8, 0.82, 0.85, 0.9, 0.92, 1], ease: "linear" }}
+          />
+        )}
+
+        {/* Lightning Glow (ambient) */}
+        {!isBlooming && (
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-blue-200/10 pointer-events-none z-0"
+            animate={{ opacity: [0, 0, 0.5, 0, 0, 0.2, 0] }}
+            transition={{ duration: 10, repeat: Infinity, times: [0, 0.8, 0.82, 0.85, 0.9, 0.92, 1], ease: "linear" }}
+          />
+        )}
+
         {DROPS.map((d, i) => (
           <motion.div
             key={`drop-${i}`}

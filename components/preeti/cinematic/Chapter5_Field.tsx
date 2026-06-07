@@ -14,6 +14,21 @@ const FLOWERS = [
   { id: 6, x: 52, y: 82, msg: "2023 — The garden is complete.", petalColor: "rgba(253,186,116,0.9)", strokeColor: "#ea580c", size: 105 },
 ];
 
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+// Pre-compute falling leaves/petals for the background
+const FALLING_PETALS = Array.from({ length: 25 }, (_, i) => ({
+  left: (sr(i * 13) * 100).toFixed(2),
+  xEnd: (sr(i * 17) - 0.5) * 400,
+  duration: 6 + sr(i * 19) * 8,
+  delay: sr(i * 23) * 5,
+  rotate: sr(i * 29) * 360,
+  color: ["bg-pink-300", "bg-orange-300", "bg-amber-200", "bg-rose-300"][i % 4],
+}));
+
 export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
   const [bloomedIds, setBloomedIds] = useState<number[]>([]);
   const [shakingId, setShakingId] = useState<number | null>(null);
@@ -89,6 +104,26 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
         style={{ x: useTransform(mouseX, (v) => v - 64), y: useTransform(mouseY, (v) => v - 64) }}
       />
 
+      {/* Falling Petals Background System */}
+      {FALLING_PETALS.map((petal, i) => (
+        <motion.div
+          key={`falling-petal-${i}`}
+          className={`absolute w-3 h-4 ${petal.color} opacity-40 rounded-br-full rounded-tl-full z-0 pointer-events-none drop-shadow-sm`}
+          style={{ left: `${petal.left}%`, top: "-10%" }}
+          animate={{ 
+            y: ["0vh", "120vh"], 
+            x: [0, petal.xEnd],
+            rotate: [petal.rotate, petal.rotate + 720]
+          }}
+          transition={{ 
+            duration: petal.duration, 
+            repeat: Infinity, 
+            delay: petal.delay,
+            ease: "linear"
+          }}
+        />
+      ))}
+
       {/* The 6 Flowers */}
       {FLOWERS.map((f) => {
         const isBloomed = bloomedIds.includes(f.id);
@@ -98,9 +133,17 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
             key={f.id}
             className="absolute cursor-pointer z-20"
             style={{ left: `${f.x}%`, top: `${f.y}%`, translateX: "-50%", translateY: "-50%" }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: f.id * 0.15, type: "spring", stiffness: 100 }}
+            initial={{ opacity: 0, scale: 0.8, rotate: 0 }}
+            animate={{ 
+              opacity: 1, 
+              scale: isBloomed ? 1 : 0.8,
+              rotate: [-2, 2, -1, 1.5, -2] // Wind sway
+            }}
+            transition={{
+              opacity: { duration: 1 },
+              scale: { duration: 1, type: "spring" },
+              rotate: { duration: 8 + Math.random() * 4, repeat: Infinity, ease: "easeInOut" }
+            }}
             onClick={() => handleBloom(f.id)}
           >
             {/* Soil mound beneath each flower */}

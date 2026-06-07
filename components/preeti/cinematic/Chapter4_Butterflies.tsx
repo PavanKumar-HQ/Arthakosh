@@ -35,9 +35,30 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
   };
 
   return (
-    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-emerald-900 flex flex-col items-center justify-center overflow-hidden">
       
-      {/* Soft God Rays */}
+      {/* Lush Out-of-Focus Garden Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.4)_0%,rgba(6,78,59,0.9)_100%)]" />
+        {/* Floral color blobs (out of focus) */}
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.2, 1], x: [-30, 30, -30], y: [-20, 20, -20] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+          animate={{ scale: [1.2, 1, 1.2], x: [30, -30, 30], y: [20, -20, 20] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute top-1/2 right-1/3 w-64 h-64 bg-yellow-400/20 rounded-full blur-[80px]"
+          animate={{ opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Volumetric Light Rays (God Rays) */}
       <motion.div 
         className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-[conic-gradient(from_200deg_at_top_right,rgba(253,224,71,0.15)_0deg,transparent_30deg,transparent_330deg,rgba(253,224,71,0.15)_360deg)] pointer-events-none"
         animate={{ opacity: [0.3, 0.6, 0.3], rotate: [-2, 2, -2] }}
@@ -75,7 +96,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-playfair text-amber-900 mb-2"
+          className="text-4xl md:text-5xl font-playfair text-white mb-2 drop-shadow-lg"
         >
           The Butterfly Messengers
         </motion.h2>
@@ -83,7 +104,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-amber-700 italic font-serif text-lg"
+          className="text-amber-100 italic font-serif text-lg"
         >
           Catch a butterfly to unfold a memory.
         </motion.p>
@@ -116,7 +137,10 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + Math.random() * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
-          <SVGButterfly color={b.color} size={80} delay={b.id * 0.2} />
+          {/* Using SVG Butterfly - SCALED UP */}
+          <div className="drop-shadow-xl">
+            <SVGButterfly color={b.color} delay={b.id * 0.1} size={96} />
+          </div>
         </motion.div>
       ))}
 
@@ -130,7 +154,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
             transition={{ delay: 0.8, duration: 0.5 }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-16 z-20 bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-amber-100 max-w-md w-full text-center"
           >
-            <p className="font-playfair text-xl text-amber-900 leading-relaxed italic mb-6">
+            <p className="font-playfair text-xl text-emerald-900 font-bold drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
               &quot;{BUTTERFLIES.find(b => b.id === activeButterfly)?.msg}&quot;
             </p>
             {BUTTERFLIES.find(b => b.id === activeButterfly)?.photo && (

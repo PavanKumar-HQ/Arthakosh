@@ -29,8 +29,29 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className={`w-full h-full relative transition-colors duration-1000 bg-transparent flex flex-col items-center justify-center overflow-hidden`}>
+    <div className="w-full h-full relative bg-[#020617] flex items-center justify-center overflow-hidden">
       
+      {/* Misty Forest Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#1e293b_0%,#020617_80%)]" />
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-t from-emerald-900/10 to-transparent"
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        {/* Soft floating mist clouds */}
+        <motion.div 
+          className="absolute bottom-0 left-0 w-full h-1/2 bg-slate-800/30 blur-[60px]"
+          animate={{ x: [-50, 50, -50] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div 
+          className="absolute bottom-20 left-1/4 w-full h-1/2 bg-cyan-900/20 blur-[80px]"
+          animate={{ x: [50, -50, 50] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
       <div className="text-center z-30 mb-16 px-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}

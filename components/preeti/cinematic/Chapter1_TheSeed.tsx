@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
 import { useState, useEffect, useMemo } from "react";
 import { SVGSprout } from "@/components/preeti/generative/SVGSprout";
 
@@ -41,7 +42,10 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-transparent">
+    <div className="w-full h-full relative bg-transparent flex items-center justify-center overflow-hidden">
+      
+      {/* Dynamic Greenhouse Background */}
+      <BackgroundGreenhouse chapterProgress={1} />
       
       {/* Ambient Generative Background (fills empty space) */}
       <div className="absolute inset-0 pointer-events-none">
@@ -93,6 +97,29 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 4, ease: "easeIn" }}
           />
+        )}
+        
+        {/* Magical Dust Burst on Impact */}
+        {phase === 1 && (
+          <motion.div 
+            key="burst"
+            className="absolute left-1/2 top-[60vh] -translate-x-1/2 -translate-y-1/2 z-20"
+          >
+            {Array.from({ length: 12 }).map((_, i) => (
+              <motion.div
+                key={`burst-${i}`}
+                className="absolute w-1.5 h-1.5 bg-yellow-200 rounded-full"
+                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                animate={{ 
+                  x: Math.cos(i * (Math.PI / 6)) * 60, 
+                  y: Math.sin(i * (Math.PI / 6)) * 60 - 20, 
+                  opacity: 0, 
+                  scale: 0 
+                }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+            ))}
+          </motion.div>
         )}
       </AnimatePresence>
 

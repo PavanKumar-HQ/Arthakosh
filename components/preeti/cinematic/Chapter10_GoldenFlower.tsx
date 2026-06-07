@@ -39,7 +39,21 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
   const isBlooming = phase >= SCRIPT.length - 1;
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center">
+    <div className="w-full h-full relative bg-[#0b0f19] flex flex-col items-center justify-center overflow-hidden">
+      
+      {/* Magical Aura Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+        <motion.div 
+          className="w-[800px] h-[800px] bg-yellow-500/10 rounded-full blur-[100px]"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute w-[600px] h-[600px] bg-rose-500/10 rounded-full blur-[80px]"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
       
       {/* Dynamic Misty Background */}
       <motion.div 

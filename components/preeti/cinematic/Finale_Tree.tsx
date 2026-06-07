@@ -37,6 +37,13 @@ const PETALS = Array.from({ length: 60 }, (_, i) => ({
   duration: 5 + sr(i * 43) * 5,
 }));
 
+const EMBERS = Array.from({ length: 100 }, (_, i) => ({
+  left: (sr(i * 47) * 100).toFixed(2),
+  yStart: 100 + sr(i * 53) * 20,
+  duration: 3 + sr(i * 59) * 4,
+  delay: sr(i * 61) * 5,
+}));
+
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
 
@@ -108,6 +115,23 @@ export function Finale_Tree() {
           style={{ left: `${p.left}%`, top: "-10%", borderRadius: "50% 0 50% 50%" }}
           animate={{ y: ["0vh", "120vh"], x: [0, p.xMid, p.xEnd], rotate: [0, 180, 360, 720] }}
           transition={{ duration: p.duration, repeat: Infinity, ease: "linear" }}
+        />
+      ))}
+
+      {/* Floating Golden Embers */}
+      {phase >= 3 && EMBERS.map((e, i) => (
+        <motion.div
+          key={`ember-${i}`}
+          className="absolute w-1.5 h-1.5 bg-yellow-300 rounded-full drop-shadow-[0_0_5px_rgba(253,224,71,0.8)] z-30 pointer-events-none"
+          style={{ left: `${e.left}%` }}
+          initial={{ y: `${e.yStart}vh`, opacity: 0, scale: 0 }}
+          animate={{ 
+            y: "-20vh", 
+            opacity: [0, 1, 1, 0],
+            scale: [0, 1, 0.5, 0],
+            x: [0, (sr(i) - 0.5) * 100, (sr(i+1) - 0.5) * 200]
+          }}
+          transition={{ duration: e.duration, delay: e.delay, repeat: Infinity, ease: "easeOut" }}
         />
       ))}
 

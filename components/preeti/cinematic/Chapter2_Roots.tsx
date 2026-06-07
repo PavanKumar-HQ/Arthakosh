@@ -11,19 +11,60 @@ const ROOTS = [
   { id: 5, name: "Care", memory: "You noticed when I was having a bad day, every single time.", color: "from-yellow-400 to-orange-400", path: "M 500 0 C 650 100, 600 300, 700 400" },
 ];
 
+function sr(seed: number) {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+}
+
+const MINERALS = Array.from({ length: 40 }, (_, i) => ({
+  left: (sr(i * 7) * 100).toFixed(2),
+  top: (sr(i * 11) * 100).toFixed(2),
+  size: 1 + sr(i * 13) * 3,
+  duration: 4 + sr(i * 17) * 6,
+  color: ["bg-amber-300", "bg-orange-300", "bg-yellow-100", "bg-amber-500"][i % 4],
+}));
+
 export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
   const [activeRoot, setActiveRoot] = useState<number | null>(null);
 
   return (
-    <div className="w-full h-full relative bg-transparent flex items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-[#1c110a] flex items-center justify-center overflow-hidden">
       
-      {/* Background Particles (Soil magic) */}
-      <div className="absolute inset-0 opacity-20">
+      {/* Background Soil Magic Gradient */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#3a2212_0%,#1c110a_70%)]" />
+        
+        {/* Animated Soil Glow */}
         <motion.div 
-          className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(253,224,71,0.2)_0%,transparent_50%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(253,224,71,0.05)_0%,transparent_60%)]"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
+        
+        {/* Floating Minerals in the Soil */}
+        {MINERALS.map((m, i) => (
+          <motion.div
+            key={`mineral-${i}`}
+            className={`absolute rounded-full blur-[1px] ${m.color}`}
+            style={{ 
+              left: `${m.left}%`, 
+              top: `${m.top}%`, 
+              width: m.size, 
+              height: m.size 
+            }}
+            animate={{ 
+              y: [-10, 10, -10], 
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1]
+            }}
+            transition={{ 
+              duration: m.duration, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: sr(i) * 5
+            }}
+          />
+        ))}
       </div>
 
       <div className="text-center absolute top-16 z-20">
@@ -31,8 +72,8 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="text-4xl md:text-5xl font-playfair text-amber-900 tracking-widest mb-2"
-          style={{ textShadow: "0 2px 10px rgba(255,255,255,0.8)" }}
+          className="text-4xl md:text-5xl font-playfair text-amber-200 tracking-widest mb-2"
+          style={{ textShadow: "0 2px 10px rgba(253,224,71,0.3)" }}
         >
           Roots of Kindness
         </motion.h2>
@@ -40,8 +81,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
-          className="text-amber-800/80 font-sans tracking-widest uppercase text-sm font-semibold"
-          style={{ textShadow: "0 1px 5px rgba(255,255,255,0.8)" }}
+          className="text-amber-400/80 font-sans tracking-widest uppercase text-sm font-semibold"
         >
           Hover over each root to reveal memories. Click 'Continue' below when ready.
         </motion.p>

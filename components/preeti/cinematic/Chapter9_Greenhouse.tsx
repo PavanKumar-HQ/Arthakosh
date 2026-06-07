@@ -2,19 +2,48 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
 import { Lock, Unlock } from "lucide-react";
 
 export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) {
   const [unlocked, setUnlocked] = useState(false);
 
   return (
-    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative overflow-hidden bg-transparent">
+      {/* Dynamic Greenhouse Background */}
+      <BackgroundGreenhouse chapterProgress={9} />
       
-      {/* Background abstract greenhouse structure */}
-      <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M 20 100 L 20 40 L 50 10 L 80 40 L 80 100" fill="none" stroke="#065f46" strokeWidth="0.5" />
-        <path d="M 30 100 L 30 40 L 50 20 L 70 40 L 70 100" fill="none" stroke="#065f46" strokeWidth="0.5" />
+      {/* Animated Overgrown Vines */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+        <motion.path
+          d="M 0 0 C 20 20, 10 50, 30 80 S 50 100, 60 100"
+          fill="none"
+          stroke="rgba(16, 185, 129, 0.4)" // emerald-500
+          strokeWidth="1.5"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 6, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 100 0 C 80 30, 90 60, 70 90 S 40 100, 30 100"
+          fill="none"
+          stroke="rgba(52, 211, 153, 0.4)" // emerald-400
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 5, delay: 1, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M 50 0 C 60 40, 40 60, 50 100"
+          fill="none"
+          stroke="rgba(5, 150, 105, 0.3)" // emerald-600
+          strokeWidth="2"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 7, delay: 0.5, ease: "easeInOut" }}
+        />
       </svg>
+      
 
       <AnimatePresence mode="wait">
         {!unlocked ? (

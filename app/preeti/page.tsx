@@ -9,13 +9,11 @@ import { Chapter3_Paths } from "@/components/preeti/cinematic/Chapter3_Paths";
 import { Chapter4_Butterflies } from "@/components/preeti/cinematic/Chapter4_Butterflies";
 import { Chapter5_Field } from "@/components/preeti/cinematic/Chapter5_Field";
 import { Chapter6_Fountain } from "@/components/preeti/cinematic/Chapter6_Fountain";
-import { Chapter7_Birds } from "@/components/preeti/cinematic/Chapter7_Birds";
-import { Chapter8_Seasons } from "@/components/preeti/cinematic/Chapter8_Seasons";
-import { Chapter9_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Greenhouse";
-import { Chapter10_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
-import { Chapter_Apology } from "@/components/preeti/cinematic/Chapter_Apology";
-import { Finale_Tree } from "@/components/preeti/cinematic/Finale_Tree";
-import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
+import { Chapter8_Seasons as Chapter7_Seasons } from "@/components/preeti/cinematic/Chapter8_Seasons";
+import { Chapter9_Greenhouse as Chapter8_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Greenhouse";
+import { Chapter10_GoldenFlower as Chapter9_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
+import { Chapter_Apology as Chapter10_Apology } from "@/components/preeti/cinematic/Chapter_Apology";
+import { Finale_Tree as Chapter11_Finale } from "@/components/preeti/cinematic/Finale_Tree";
 
 // Client-only: avoids SSR hydration mismatch
 const GardenAmbient = dynamic(
@@ -33,7 +31,6 @@ export default function PreetiGardenOfGrowth() {
       
       {/* Global Animated Ambient Background — always visible behind every chapter */}
       <GardenAmbient chapter={chapter} />
-      <BackgroundGreenhouse chapterProgress={chapter} />
 
       <AnimatePresence mode="wait">
         {chapter === 1 && (
@@ -123,7 +120,7 @@ export default function PreetiGardenOfGrowth() {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
-            <Chapter7_Birds onComplete={nextChapter} />
+            <Chapter7_Seasons onComplete={nextChapter} />
           </motion.div>
         )}
 
@@ -136,7 +133,7 @@ export default function PreetiGardenOfGrowth() {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
-            <Chapter8_Seasons onComplete={nextChapter} />
+            <Chapter8_Greenhouse onComplete={nextChapter} />
           </motion.div>
         )}
 
@@ -149,24 +146,11 @@ export default function PreetiGardenOfGrowth() {
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
-            <Chapter9_Greenhouse onComplete={nextChapter} />
+            <Chapter9_GoldenFlower onComplete={nextChapter} />
           </motion.div>
         )}
 
         {chapter === 10 && (
-          <motion.div
-            key="chapter10"
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="w-full h-full absolute inset-0"
-          >
-            <Chapter10_GoldenFlower onComplete={nextChapter} />
-          </motion.div>
-        )}
-
-        {chapter === 11 && (
           <motion.div
             key="apology"
             initial={{ opacity: 0, scale: 0.95 }} 
@@ -175,11 +159,11 @@ export default function PreetiGardenOfGrowth() {
             transition={{ duration: 2, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
-            <Chapter_Apology onComplete={nextChapter} />
+            <Chapter10_Apology onComplete={nextChapter} />
           </motion.div>
         )}
 
-        {chapter === 12 && (
+        {chapter === 11 && (
           <motion.div
             key="finale"
             initial={{ opacity: 0, scale: 0.95 }} 
@@ -187,7 +171,7 @@ export default function PreetiGardenOfGrowth() {
             transition={{ duration: 2, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
-            <Finale_Tree />
+            <Chapter11_Finale />
           </motion.div>
         )}
       </AnimatePresence>
