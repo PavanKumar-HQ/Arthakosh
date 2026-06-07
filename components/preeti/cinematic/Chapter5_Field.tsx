@@ -125,7 +125,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
       ))}
 
       {/* The 6 Flowers */}
-      {FLOWERS.map((f) => {
+      {FLOWERS.map((f, i) => {
         const isBloomed = bloomedIds.includes(f.id);
         const isShaking = shakingId === f.id;
         return (
