@@ -146,7 +146,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
 
       <ChapterControls 
         instruction={!isComplete ? "The roots reach deep..." : "Hover over the glowing seeds of wisdom."} 
-        onSkip={phase < 4 ? () => setFedCount(ROOTS.length) : onComplete} 
+        onSkip={onComplete} 
       />
     </div>
   );
