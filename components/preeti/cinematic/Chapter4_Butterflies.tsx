@@ -73,7 +73,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
       {BUTTERFLIES.map((b) => (
         <motion.div
           key={b.id}
-          className={`absolute cursor-pointer text-5xl drop-shadow-md z-10 ${b.color} ${activeButterfly === b.id ? 'z-30' : ''}`}
+          className={`absolute text-5xl drop-shadow-md z-10 ${b.color} ${activeButterfly === b.id ? 'z-30 pointer-events-none' : 'cursor-pointer'}`}
           style={activeButterfly === b.id ? {
             left: "50%",
             top: "40%",
@@ -115,7 +115,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
             animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-20 z-20 bg-[#1e1b4b]/60 backdrop-blur-2xl p-10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-pink-500/20 max-w-lg w-full text-center"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-20 z-40 bg-[#1e1b4b]/60 backdrop-blur-2xl p-10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-pink-500/20 max-w-lg w-full text-center"
           >
             <p className="font-playfair text-2xl text-pink-100 italic leading-relaxed mb-8 drop-shadow-md">
               &quot;{BUTTERFLIES.find(b => b.id === activeButterfly)?.msg}&quot;
