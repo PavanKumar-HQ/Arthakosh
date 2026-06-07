@@ -15,6 +15,20 @@ function sr(seed: number) {
   return x - Math.floor(x);
 }
 
+const LANTERNS = Array.from({ length: 20 }, (_, i) => ({
+  left: (sr(i * 11) * 100).toFixed(2),
+  delay: sr(i * 13) * 5,
+  duration: 15 + sr(i * 17) * 10,
+  scale: 0.5 + sr(i * 19) * 0.8,
+}));
+
+const CONFETTI = Array.from({ length: 100 }, (_, i) => ({
+  left: (sr(i * 23) * 100).toFixed(2),
+  delay: sr(i * 29) * 2,
+  duration: 4 + sr(i * 31) * 3,
+  color: ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#06b6d4"][i % 7],
+}));
+
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
   const [leaves, setLeaves] = useState<{x: number, y: number, id: number}[]>([]);
@@ -45,6 +59,39 @@ export function Finale_Tree() {
       />
 
 
+
+      {/* Floating Sky Lanterns */}
+      {phase >= 3 && LANTERNS.map((l, i) => (
+        <motion.div
+          key={`lantern-${i}`}
+          className="absolute bottom-[-10%] z-0 flex flex-col items-center justify-center opacity-80"
+          style={{ left: `${l.left}%`, scale: l.scale }}
+          initial={{ y: "10vh", opacity: 0 }}
+          animate={{ y: "-120vh", opacity: [0, 1, 1, 0], x: [0, 50, -50, 0] }}
+          transition={{ duration: l.duration, delay: l.delay, ease: "easeInOut", repeat: Infinity }}
+        >
+          <div className="w-12 h-16 bg-gradient-to-t from-orange-400/80 to-yellow-200/90 rounded-t-xl rounded-b-md shadow-[0_0_25px_rgba(253,186,116,0.9)] flex items-end justify-center pb-1">
+            <div className="w-3 h-4 bg-yellow-100 rounded-full blur-[2px] animate-pulse" />
+          </div>
+        </motion.div>
+      ))}
+
+      {/* Confetti Poppers */}
+      {phase >= 3 && CONFETTI.map((c, i) => (
+        <motion.div
+          key={`confetti-${i}`}
+          className="absolute top-[-10%] w-2 h-5 z-50"
+          style={{ backgroundColor: c.color, left: `${c.left}%`, borderRadius: "2px" }}
+          initial={{ y: "-10vh", rotateX: 0, rotateY: 0 }}
+          animate={{ 
+            y: "110vh", 
+            x: [(sr(i)-0.5)*200, (sr(i+1)-0.5)*200, (sr(i+2)-0.5)*200],
+            rotateX: [0, 360, 720], 
+            rotateY: [0, 720, 1080] 
+          }}
+          transition={{ duration: c.duration, delay: c.delay, ease: "linear", repeat: Infinity }}
+        />
+      ))}
 
       {/* Massive Procedural L-System Tree with SVG Flowers */}
       <motion.div 
