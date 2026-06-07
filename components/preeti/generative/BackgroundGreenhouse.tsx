@@ -7,15 +7,17 @@ interface BackgroundGreenhouseProps {
 }
 
 export function BackgroundGreenhouse({ chapterProgress }: BackgroundGreenhouseProps) {
-  // Glow increases as chapter progresses. Max glow at chapter 9.
-  const glowOpacity = Math.min(1, Math.max(0, (chapterProgress - 1) / 8));
+  // Starts fading in at chapter 6, fully visible by chapter 9
+  const visibility = Math.min(1, Math.max(0, (chapterProgress - 5) / 4));
   
+  if (visibility <= 0) return null;
+
   return (
     <div className="absolute top-[20%] right-[15%] w-64 h-64 pointer-events-none z-0">
       <motion.div
         className="w-full h-full relative"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 + (glowOpacity * 0.7) }}
+        animate={{ opacity: visibility * 0.8 }}
         transition={{ duration: 2 }}
       >
         {/* Greenhouse Silhouette / Structure using SVG */}
@@ -31,8 +33,8 @@ export function BackgroundGreenhouse({ chapterProgress }: BackgroundGreenhousePr
         <motion.div
           className="absolute inset-4 bg-yellow-200 rounded-lg blur-2xl"
           animate={{ 
-            opacity: glowOpacity * 0.8,
-            scale: 1 + (glowOpacity * 0.2)
+            opacity: visibility * 0.8,
+            scale: 1 + (visibility * 0.2)
           }}
           transition={{ duration: 3 }}
         />
@@ -45,7 +47,7 @@ export function BackgroundGreenhouse({ chapterProgress }: BackgroundGreenhousePr
             style={{ left: `${30 + Math.random() * 40}%`, bottom: "20%" }}
             animate={{ 
               y: [-10, -50], 
-              opacity: [0, glowOpacity, 0],
+              opacity: [0, visibility, 0],
               x: (Math.random() - 0.5) * 20
             }}
             transition={{ duration: 2 + Math.random() * 3, repeat: Infinity }}
