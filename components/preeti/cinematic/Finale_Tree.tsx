@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { CSSButterfly } from "@/components/preeti/generative/CSSButterfly";
+import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
 const FireworksBurst = dynamic(
@@ -27,7 +27,7 @@ const BUTTERFLIES = Array.from({ length: 15 }, (_, i) => ({
   top: (10 + sr(i * 19) * 80).toFixed(2),
   scale: (0.5 + sr(i * 23) * 0.5).toFixed(2),
   duration: 4 + sr(i * 29) * 2,
-  color: ["bg-cyan-300", "bg-pink-300", "bg-yellow-300", "bg-purple-300"][i % 4],
+  color: ["#67e8f9", "#f9a8d4", "#fde047", "#d8b4fe"][i % 4],
 }));
 
 const PETALS = Array.from({ length: 60 }, (_, i) => ({
@@ -96,7 +96,7 @@ export function Finale_Tree() {
           animate={{ opacity: 1, y: [-20, 20, -20], x: [-30, 30, -30] }}
           transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut" }}
         >
-          <CSSButterfly color={b.color} />
+          <SVGButterfly color={b.color} delay={sr(i) * 2} size={80} />
         </motion.div>
       ))}
 
@@ -112,7 +112,7 @@ export function Finale_Tree() {
       ))}
 
       {/* Text Sequence */}
-      <div className="absolute top-[15%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-4xl px-4 pointer-events-none">
+      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-3xl px-4 pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === 1 && (
             <motion.div
@@ -148,7 +148,7 @@ export function Finale_Tree() {
               initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 3, delay: 1 }}
-              className="px-12 py-8 bg-white/20 backdrop-blur-lg border border-white/40 rounded-[3rem] mx-auto shadow-[0_0_100px_rgba(253,224,71,0.5)]"
+              className="px-8 py-10 md:py-12 bg-white/40 backdrop-blur-md border border-white/60 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.7)]"
             >
               <h1 className="font-playfair font-bold text-5xl md:text-7xl text-emerald-900 drop-shadow-md">
                 HAPPY BIRTHDAY

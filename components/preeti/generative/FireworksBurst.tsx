@@ -34,9 +34,13 @@ function sr(seed: number) {
 }
 
 const COLORS = [
-  "#ffd700", "#ff6b6b", "#4ecdc4", "#45b7d1",
-  "#96e6a1", "#f7c59f", "#e8a0bf", "#c9b1ff",
-  "#ff9a3c", "#ffffff"
+  "#ef4444", // red-500
+  "#3b82f6", // blue-500
+  "#10b981", // emerald-500
+  "#8b5cf6", // violet-500
+  "#f59e0b", // amber-500
+  "#ec4899", // pink-500
+  "#06b6d4", // cyan-500
 ];
 
 export function FireworksBurst({ active }: FireworksBurstProps) {
@@ -109,8 +113,7 @@ export function FireworksBurst({ active }: FireworksBurstProps) {
 
     const draw = () => {
       frameRef.current++;
-      ctx.fillStyle = "rgba(0,0,0,0.15)"; // Trail effect
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Launch new rockets periodically
       if (frameRef.current % 22 === 0) {
@@ -209,7 +212,6 @@ export function FireworksBurst({ active }: FireworksBurstProps) {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none z-50"
-      style={{ mixBlendMode: "screen" }}
     />
   );
 }
