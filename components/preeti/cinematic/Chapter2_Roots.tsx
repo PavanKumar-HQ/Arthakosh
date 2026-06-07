@@ -45,13 +45,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#3a2212_0%,#1c110a_70%)]" />
         
-        {/* SVG Noise Filter for realistic dirt texture */}
-        <svg className="fixed inset-0 w-full h-full pointer-events-none opacity-20 mix-blend-overlay">
-          <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-        </svg>
+        {/* SVG Noise Filter removed for performance */}
 
         {/* Animated Soil Glow */}
         <motion.div 

@@ -31,7 +31,7 @@ export function LSystemTree({ growthPhase, width, height, onLeavesGenerated }: L
     ctx.clearRect(0, 0, width, height);
     
     // The physics/tree configuration
-    const maxDepth = 9; // High depth
+    const maxDepth = 6; // Reduced depth for performance
     const currentDepthLimit = Math.floor(growthPhase * maxDepth);
     const branchLength = 140;
     const branchAngle = Math.PI / 6.5;

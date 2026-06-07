@@ -11,9 +11,6 @@ function sr(seed: number) {
 
 const PATHS = [
   { id: "rose", name: "Rose Path", type: "Funny Memories", color: "from-rose-400 to-rose-600", bg: "from-rose-50 to-[#faf8f5]", petalColor: "bg-rose-300" },
-  { id: "sunflower", name: "Sunflower Path", type: "Achievements", color: "from-amber-400 to-yellow-600", bg: "from-amber-50 to-[#faf8f5]", petalColor: "bg-amber-300" },
-  { id: "lavender", name: "Lavender Path", type: "Heartfelt Messages", color: "from-purple-400 to-violet-600", bg: "from-purple-50 to-[#faf8f5]", petalColor: "bg-purple-300" },
-  { id: "daisy", name: "Daisy Path", type: "Classroom Moments", color: "from-sky-300 to-blue-500", bg: "from-sky-50 to-[#faf8f5]", petalColor: "bg-sky-300" },
 ];
 
 export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {

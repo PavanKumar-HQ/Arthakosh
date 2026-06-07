@@ -79,13 +79,6 @@ export function SVGFlower({
             <stop offset="50%" stopColor={coreColor} />
             <stop offset="100%" stopColor="#ca8a04" />
           </radialGradient>
-          <filter id="glowFlower">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
         </defs>
 
         {/* Outer Petals */}
@@ -105,7 +98,6 @@ export function SVGFlower({
               fill={`url(#petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')})`}
               stroke={strokeColor}
               strokeWidth="1"
-              filter="url(#glowFlower)"
             />
           </motion.g>
         ))}
@@ -135,7 +127,6 @@ export function SVGFlower({
         <motion.circle
           r="15"
           fill="url(#coreGrad)"
-          filter="url(#glowFlower)"
           initial={{ scale: 0 }}
           animate={{ scale: isBlooming ? 1 : 0 }}
           transition={{ duration: 1, delay: delay + 1.5 }}

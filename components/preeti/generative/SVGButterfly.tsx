@@ -28,13 +28,11 @@ export function SVGButterfly({ color = "#f472b6", size = 64, delay = 0 }: SVGBut
             <stop offset="70%" stopColor={color} stopOpacity="0.9" />
             <stop offset="100%" stopColor={color} stopOpacity="0.4" />
           </radialGradient>
-          <filter id="glowWing">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
+          <radialGradient id={`wingGrad-${color.replace("#", "")}`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff" stopOpacity="0.8" />
+            <stop offset="70%" stopColor={color} stopOpacity="0.9" />
+            <stop offset="100%" stopColor={color} stopOpacity="0.4" />
+          </radialGradient>
         </defs>
 
         {/* Central Body */}
@@ -55,7 +53,6 @@ export function SVGButterfly({ color = "#f472b6", size = 64, delay = 0 }: SVGBut
             fill={`url(#wingGrad-${color.replace("#", "")})`} 
             stroke={color}
             strokeWidth="0.5"
-            filter="url(#glowWing)"
           />
           {/* Bottom Left Wing */}
           <path 
@@ -78,7 +75,6 @@ export function SVGButterfly({ color = "#f472b6", size = 64, delay = 0 }: SVGBut
             fill={`url(#wingGrad-${color.replace("#", "")})`} 
             stroke={color}
             strokeWidth="0.5"
-            filter="url(#glowWing)"
           />
           {/* Bottom Right Wing */}
           <path 

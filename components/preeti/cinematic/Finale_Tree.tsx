@@ -23,7 +23,7 @@ const ORBS = Array.from({ length: 20 }, (_, i) => ({
   duration: 5 + sr(i * 13) * 5,
 }));
 
-const BUTTERFLIES = Array.from({ length: 15 }, (_, i) => ({
+const BUTTERFLIES = Array.from({ length: 5 }, (_, i) => ({
   left: (10 + sr(i * 17) * 80).toFixed(2),
   top: (10 + sr(i * 19) * 80).toFixed(2),
   scale: (0.8 + sr(i * 23) * 0.7).toFixed(2),
@@ -38,7 +38,7 @@ const PETALS = Array.from({ length: 60 }, (_, i) => ({
   duration: 5 + sr(i * 43) * 5,
 }));
 
-const EMBERS = Array.from({ length: 100 }, (_, i) => ({
+const EMBERS = Array.from({ length: 30 }, (_, i) => ({
   left: (sr(i * 47) * 100).toFixed(2),
   yStart: 100 + sr(i * 53) * 20,
   duration: 3 + sr(i * 59) * 4,
@@ -99,8 +99,8 @@ export function Finale_Tree() {
           onLeavesGenerated={(nodes) => setLeaves(nodes)}
         />
         
-        {/* Render beautiful SVG Flowers exactly at the branch tips! */}
-        {leaves.map((leaf, i) => (
+        {/* Render beautiful SVG Flowers exactly at the branch tips! Capped at 40 for performance */}
+        {leaves.slice(0, 40).map((leaf, i) => (
           <motion.div
             key={`leaf-${leaf.id}`}
             className="absolute z-20"
