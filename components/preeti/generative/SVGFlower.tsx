@@ -85,7 +85,7 @@ export function SVGFlower({
         {petals.map((p) => (
           <motion.g
             key={`outer-${p.id}`}
-            style={{ originX: 0, originY: 0 }}
+            style={{ originX: "0px", originY: "0px" }}
             initial={{ rotate: p.angle, scale: 0 }}
             animate={{ 
               rotate: p.angle, 
@@ -106,7 +106,7 @@ export function SVGFlower({
         {innerPetals.map((p) => (
           <motion.g
             key={`inner-${p.id}`}
-            style={{ originX: 0, originY: 0 }}
+            style={{ originX: "0px", originY: "0px" }}
             initial={{ rotate: p.angle, scale: 0 }}
             animate={{ 
               rotate: p.angle, 
