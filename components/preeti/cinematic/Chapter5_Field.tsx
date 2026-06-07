@@ -162,14 +162,16 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
               />
             </div>
 
-            <SVGFlower
-              isBlooming={isBloomed}
-              isShaking={isShaking}
-              petalColor={f.petalColor}
-              strokeColor={f.strokeColor}
-              size={f.size}
-              text={isBloomed ? f.msg : undefined}
-            />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <SVGFlower 
+                isBlooming={isBloomed} 
+                isShaking={isShaking}
+                petalColor={f.petalColor} 
+                strokeColor={f.strokeColor}
+                size={f.size} 
+                text={isBloomed ? f.msg : undefined}
+              />
+            </div>
           </motion.div>
         );
       })}

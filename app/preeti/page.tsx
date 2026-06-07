@@ -32,7 +32,7 @@ export default function PreetiGardenOfGrowth() {
       {/* Global Animated Ambient Background — always visible behind every chapter */}
       <GardenAmbient chapter={chapter} />
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {chapter === 1 && (
           <motion.div
             key="chapter1"

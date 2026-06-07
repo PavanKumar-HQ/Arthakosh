@@ -97,12 +97,12 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
 
       {/* Massive Procedural Golden Flower */}
       <motion.div 
-        className="absolute bottom-[20%] left-1/2 -translate-x-1/2 z-10"
-        initial={{ filter: "brightness(0.5)", scale: 2 }}
-        animate={{ filter: isBlooming ? "brightness(1.5)" : "brightness(0.5)", scale: isBlooming ? 3 : 2 }}
+        className="absolute bottom-[10%] left-1/2 -translate-x-1/2 origin-bottom z-20 pointer-events-none"
+        initial={{ scale: 0 }}
+        animate={{ scale: isBlooming ? 1.5 : 0.8 }}
         transition={{ duration: 4 }}
       >
-        <SVGFlower isBlooming={isBlooming} color="stroke-amber-200" />
+        <SVGFlower isBlooming={isBlooming} petalColor="#fde047" coreColor="#fff" size={200} />
       </motion.div>
 
       {/* Golden Pond Reflection */}

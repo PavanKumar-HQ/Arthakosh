@@ -4,34 +4,42 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface SVGFlowerProps {
   isBlooming: boolean;
-  color?: string;
-  delay?: number;
+  petalColor?: string;
+  coreColor?: string;
+  strokeColor?: string;
+  size?: number;
   text?: string;
   isShaking?: boolean;
-  size?: number; // diameter in px
-  petalColor?: string; // fill color e.g. "#f9a8d4"
-  strokeColor?: string; // stroke e.g. "#e11d48"
+  delay?: number;
 }
 
-export function SVGFlower({
+export function SVGFlower({ 
   isBlooming,
-  delay = 0,
+  petalColor = "#f472b6", 
+  coreColor = "#facc15",  
+  strokeColor = "rgba(255,255,255,0.5)",
+  size = 120,
   text,
   isShaking,
-  size = 96,
-  petalColor = "rgba(251, 207, 232, 0.85)",
-  strokeColor = "#f43f5e",
+  delay = 0
 }: SVGFlowerProps) {
-  // 8 realistic teardrop petals using cubic bezier
-  // Each petal: a smooth leaf-like shape centered at 50,50
-  // viewBox 0 0 100 100
-  const NUM_PETALS = 8;
-  const petalLength = 38;
-  const petalWidth = 12;
+  
+  // Math for procedural petals
+  const numPetals = 12;
+  const petals = Array.from({ length: numPetals }).map((_, i) => {
+    const angle = (i * 360) / numPetals;
+    return { id: i, angle };
+  });
+
+  const numInnerPetals = 8;
+  const innerPetals = Array.from({ length: numInnerPetals }).map((_, i) => {
+    const angle = (i * 360) / numInnerPetals + 22.5; // offset
+    return { id: i, angle };
+  });
 
   return (
-    <div
-      className="relative flex items-center justify-center"
+    <div 
+      className="relative flex items-center justify-center drop-shadow-2xl"
       style={{ width: size, height: size }}
     >
       {/* Organic floating text */}
@@ -50,131 +58,103 @@ export function SVGFlower({
         )}
       </AnimatePresence>
 
-      {/* Radial light burst when blooming */}
-      <motion.div
-        className="absolute rounded-full pointer-events-none z-0 mix-blend-screen"
-        style={{ width: size * 1.8, height: size * 1.8, background: "radial-gradient(circle, rgba(253,240,210,0.8) 0%, rgba(253,240,210,0) 70%)" }}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={isBlooming ? { opacity: [0, 1, 0.6, 0.9], scale: [0, 1.4, 1.2, 1.3] } : { opacity: 0, scale: 0 }}
-        transition={{ duration: 4, delay, ease: "easeOut", scale: { repeat: Infinity, duration: 4, repeatType: "mirror" }, opacity: { repeat: Infinity, duration: 3, repeatType: "mirror" } }}
-      />
-
-      {/* Particle sparks */}
-      {isBlooming && Array.from({ length: 8 }).map((_, i) => {
-        const angle = (i / 8) * 360;
-        return (
-          <motion.div
-            key={`spark-${i}`}
-            className="absolute w-1.5 h-1.5 rounded-full z-30 pointer-events-none"
-            style={{ background: i % 2 === 0 ? "#fde68a" : "#fca5a5" }}
-            initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-            animate={{
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-              x: Math.cos((angle * Math.PI) / 180) * (size * 0.8),
-              y: Math.sin((angle * Math.PI) / 180) * (size * 0.8),
-            }}
-            transition={{ duration: 1.5, delay: delay + 0.4 + i * 0.05, ease: "easeOut" }}
-          />
-        );
-      })}
-
-      {/* The SVG Flower */}
       <motion.svg
-        viewBox="0 0 100 100"
-        style={{ width: size, height: size, overflow: "visible", transformOrigin: "bottom center" }}
-        className="z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+        viewBox="-100 -100 200 200"
+        style={{ width: size, height: size, overflow: "visible" }}
+        initial={{ rotate: -45, scale: 0 }}
         animate={isShaking 
           ? { x: [-3, 3, -3, 3, -2, 2, 0], y: [-1, 1, -1, 1, 0], rotate: 0 } 
-          : isBlooming ? { rotate: [-2, 3, -1, 2, -2] } : { rotate: 0 }
+          : isBlooming ? { rotate: 0, scale: 1 } : { rotate: -45, scale: 0 }
         }
-        transition={isShaking ? { duration: 0.5 } : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        transition={isShaking ? { duration: 0.5 } : { duration: 2, ease: "easeOut" }}
       >
         <defs>
-          <radialGradient id={`petalGrad-${delay}`} cx="50%" cy="70%" r="60%">
-            <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
-            <stop offset="100%" stopColor={petalColor} stopOpacity="1" />
+          <radialGradient id={`petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')}`} cx="50%" cy="100%" r="100%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+            <stop offset="50%" stopColor={petalColor} stopOpacity="0.95" />
+            <stop offset="100%" stopColor={petalColor} stopOpacity="0.7" />
           </radialGradient>
+          <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="50%" stopColor={coreColor} />
+            <stop offset="100%" stopColor="#ca8a04" />
+          </radialGradient>
+          <filter id="glowFlower">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
 
-        {/* Petals using realistic teardrop bezier paths */}
-        {Array.from({ length: NUM_PETALS }).map((_, i) => {
-          const angle = (i / NUM_PETALS) * 360;
-          const rad = (angle * Math.PI) / 180;
-          // Tip of petal
-          const tx = 50 + Math.cos(rad) * petalLength;
-          const ty = 50 + Math.sin(rad) * petalLength;
-          // Left control
-          const lRad = rad - Math.PI / 2;
-          const lx = 50 + Math.cos(rad) * (petalLength * 0.4) + Math.cos(lRad) * petalWidth;
-          const ly = 50 + Math.sin(rad) * (petalLength * 0.4) + Math.sin(lRad) * petalWidth;
-          // Right control
-          const rx2 = 50 + Math.cos(rad) * (petalLength * 0.4) - Math.cos(lRad) * petalWidth;
-          const ry2 = 50 + Math.sin(rad) * (petalLength * 0.4) - Math.sin(lRad) * petalWidth;
-
-          const d = `M 50 50 C ${lx} ${ly}, ${tx} ${ty}, ${tx} ${ty} C ${tx} ${ty}, ${rx2} ${ry2}, 50 50 Z`;
-
-          return (
-            <motion.path
-              key={i}
-              d={d}
-              fill={`url(#petalGrad-${delay})`}
+        {/* Outer Petals */}
+        {petals.map((p) => (
+          <motion.g
+            key={`outer-${p.id}`}
+            style={{ originX: 0, originY: 0 }}
+            initial={{ rotate: p.angle, scale: 0 }}
+            animate={{ 
+              rotate: p.angle, 
+              scale: isBlooming ? 1 : 0 
+            }}
+            transition={{ duration: 1.5, delay: delay + 0.5 + (p.id % 3) * 0.2, type: "spring" }}
+          >
+            <path
+              d="M 0 0 C 30 -50, 70 -50, 0 -90 C -70 -50, -30 -50, 0 0"
+              fill={`url(#petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')})`}
               stroke={strokeColor}
-              strokeWidth="0.8"
-              strokeLinejoin="round"
-              initial={{ scale: 0, opacity: 0, transformOrigin: "50px 50px" }}
-              animate={isBlooming
-                ? { scale: 1, opacity: 1 }
-                : { scale: 0.05, opacity: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 12,
-                delay: delay + i * 0.07,
-              }}
+              strokeWidth="1"
+              filter="url(#glowFlower)"
             />
-          );
-        })}
+          </motion.g>
+        ))}
 
-        {/* Inner stamens (small lines radiating from center) */}
-        {Array.from({ length: 12 }).map((_, i) => {
-          const angle = (i / 12) * 360;
-          const rad = (angle * Math.PI) / 180;
-          const x2 = 50 + Math.cos(rad) * 8;
-          const y2 = 50 + Math.sin(rad) * 8;
-          return (
-            <motion.line
-              key={`stamen-${i}`}
-              x1="50" y1="50" x2={x2} y2={y2}
-              stroke="#fbbf24"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={isBlooming ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-              transition={{ duration: 0.6, delay: delay + 0.8 + i * 0.03 }}
+        {/* Inner Petals */}
+        {innerPetals.map((p) => (
+          <motion.g
+            key={`inner-${p.id}`}
+            style={{ originX: 0, originY: 0 }}
+            initial={{ rotate: p.angle, scale: 0 }}
+            animate={{ 
+              rotate: p.angle, 
+              scale: isBlooming ? 0.7 : 0 
+            }}
+            transition={{ duration: 1.5, delay: delay + 1 + (p.id % 2) * 0.2, type: "spring" }}
+          >
+            <path
+              d="M 0 0 C 20 -40, 50 -40, 0 -70 C -50 -40, -20 -40, 0 0"
+              fill={`url(#petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')})`}
+              stroke={strokeColor}
+              strokeWidth="1"
             />
-          );
-        })}
+          </motion.g>
+        ))}
 
-        {/* Center disk */}
+        {/* Flower Core */}
         <motion.circle
-          cx="50" cy="50" r="7"
-          fill="#fde68a"
-          stroke="#f59e0b"
-          strokeWidth="1"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={isBlooming ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 200, delay: delay + 0.5 }}
-        />
-
-        {/* Center dot */}
-        <motion.circle
-          cx="50" cy="50" r="3"
-          fill="#f59e0b"
+          r="15"
+          fill="url(#coreGrad)"
+          filter="url(#glowFlower)"
           initial={{ scale: 0 }}
-          animate={isBlooming ? { scale: 1 } : { scale: 0 }}
-          transition={{ delay: delay + 1 }}
+          animate={{ scale: isBlooming ? 1 : 0 }}
+          transition={{ duration: 1, delay: delay + 1.5 }}
         />
+        
+        {/* Core details (pistils) */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <motion.circle
+            key={`pistil-${i}`}
+            cx={Math.cos((i * 360) / 12 * (Math.PI/180)) * 8}
+            cy={Math.sin((i * 360) / 12 * (Math.PI/180)) * 8}
+            r="1.5"
+            fill="#fff"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isBlooming ? 1 : 0 }}
+            transition={{ duration: 1, delay: delay + 2 + i * 0.05 }}
+          />
+        ))}
+
       </motion.svg>
     </div>
   );

@@ -1,14 +1,15 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { FractalRoots } from "@/components/preeti/generative/FractalRoots";
+import { useState, useEffect } from "react";
 
 const ROOTS = [
-  { id: 1, name: "Patience", memory: "When I struggled with the basics, you never rushed me.", color: "from-amber-400 to-orange-500", path: "M 500 0 C 450 100, 300 200, 200 400" },
-  { id: 2, name: "Guidance", memory: "You showed me the path when I was completely lost.", color: "from-yellow-300 to-amber-500", path: "M 500 0 C 550 150, 450 300, 500 500" },
-  { id: 3, name: "Encouragement", memory: "Your belief in me made me believe in myself.", color: "from-orange-300 to-red-400", path: "M 500 0 C 600 100, 800 250, 850 450" },
-  { id: 4, name: "Discipline", memory: "You taught me the value of hard work and focus.", color: "from-amber-600 to-orange-700", path: "M 500 0 C 400 150, 450 250, 350 450" },
-  { id: 5, name: "Care", memory: "You noticed when I was having a bad day, every single time.", color: "from-yellow-400 to-orange-400", path: "M 500 0 C 650 100, 600 300, 700 400" },
+  { id: 1, name: "Patience", memory: "When I struggled with the basics, you never rushed me.", x: 20, y: 40 },
+  { id: 2, name: "Guidance", memory: "You showed me the path when I was completely lost.", x: 80, y: 50 },
+  { id: 3, name: "Encouragement", memory: "Your belief in me made me believe in myself.", x: 30, y: 70 },
+  { id: 4, name: "Discipline", memory: "You taught me the value of hard work and focus.", x: 70, y: 80 },
+  { id: 5, name: "Care", memory: "You noticed when I was having a bad day, every single time.", x: 50, y: 90 },
 ];
 
 function sr(seed: number) {
@@ -26,9 +27,19 @@ const MINERALS = Array.from({ length: 40 }, (_, i) => ({
 
 export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
   const [activeRoot, setActiveRoot] = useState<number | null>(null);
+  const [growthProgress, setGrowthProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setGrowthProgress(1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isComplete = growthProgress === 1;
 
   return (
-    <div className="w-full h-full relative bg-[#1c110a] flex items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-[#1c110a] flex flex-col items-center justify-center overflow-hidden">
       
       {/* Background Soil Magic Gradient */}
       <div className="absolute inset-0 z-0">
@@ -67,88 +78,49 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
         ))}
       </div>
 
-      <div className="text-center absolute top-16 z-20">
+      <div className="absolute top-16 text-center z-20 px-4 pointer-events-none">
         <motion.h2 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-          className="text-4xl md:text-5xl font-playfair text-amber-200 tracking-widest mb-2"
-          style={{ textShadow: "0 2px 10px rgba(253,224,71,0.3)" }}
+          transition={{ duration: 1.5 }}
+          className="text-4xl md:text-5xl font-playfair text-amber-100 tracking-widest mb-4 drop-shadow-md"
         >
-          Roots of Kindness
+          Strong Foundations
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="text-amber-400/80 font-sans tracking-widest uppercase text-sm font-semibold"
+          transition={{ delay: 1, duration: 1.5 }}
+          className="text-amber-200/80 font-sans tracking-widest uppercase text-sm font-semibold"
         >
-          Hover over each root to reveal memories. Click 'Continue' below when ready.
+          {isComplete ? "Hover over the glowing nodes to reveal memories." : "The roots reach deep..."}
         </motion.p>
       </div>
 
-      {/* SVG Roots System */}
-      <svg className="absolute inset-0 w-full h-full z-10" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMin slice">
-        <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
+      {/* The Fractal L-System Roots growing downwards */}
+      <div className="absolute top-[20%] w-[800px] h-[800px] z-10 pointer-events-none origin-top flex justify-center">
+        <FractalRoots growthPhase={growthProgress} width={800} height={800} />
+      </div>
 
-        {/* The Base Trunk connection at top */}
-        <motion.path 
-          d="M 480 -50 L 520 -50 L 550 50 L 450 50 Z" 
-          fill="#4a2e1b"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        />
-
-        {/* The Roots */}
-        {ROOTS.map((root, i) => (
-          <motion.g 
-            key={root.id}
-            onHoverStart={() => setActiveRoot(root.id)}
-            onHoverEnd={() => setActiveRoot(null)}
-            className="cursor-pointer"
-          >
-            <motion.path
-              d={root.path}
-              fill="none"
-              stroke={activeRoot === root.id ? "#fde047" : "#8a5232"}
-              strokeWidth={activeRoot === root.id ? "8" : "4"}
-              strokeLinecap="round"
-              filter={activeRoot === root.id ? "url(#glow)" : ""}
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 2, delay: 1 + i * 0.5, ease: "easeOut" }}
-            />
-            {/* Pulsing light traveling down the root */}
-            <motion.circle
-              r="4"
-              fill="#fef08a"
-              filter="url(#glow)"
-              animate={{
-                offsetDistance: ["0%", "100%"],
-                opacity: [0, 1, 0]
-              }}
-              transition={{
-                duration: 3 + (i * 0.4) * 2,
-                repeat: Infinity,
-                delay: i,
-                ease: "linear"
-              }}
-              style={{
-                offsetPath: `path('${root.path}')`,
-              }}
-            />
-          </motion.g>
-        ))}
-      </svg>
+      {/* Interactive Memory Nodes embedded in the roots */}
+      {ROOTS.map((root, i) => (
+        <motion.div
+          key={root.id}
+          className="absolute z-20 cursor-pointer rounded-full bg-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]"
+          style={{ left: `${root.x}%`, top: `${root.y}%`, width: 16, height: 16, translateX: "-50%", translateY: "-50%" }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: activeRoot === root.id ? 1.5 : 1, opacity: growthProgress > 0.8 ? 1 : 0 }}
+          transition={{ delay: growthProgress > 0.8 ? i * 0.2 : 0, duration: 0.5 }}
+          onHoverStart={() => setActiveRoot(root.id)}
+          onHoverEnd={() => setActiveRoot(null)}
+        >
+          <motion.div 
+            className="absolute inset-0 rounded-full bg-amber-200 blur-sm"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+        </motion.div>
+      ))}
 
       {/* Hover Memory Reveal */}
       <AnimatePresence>
@@ -157,7 +129,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="absolute z-30 bottom-32 max-w-lg bg-black/40 backdrop-blur-md border border-amber-500/30 p-8 rounded-2xl text-center shadow-[0_0_50px_rgba(253,224,71,0.1)]"
+            className="absolute z-30 bottom-32 max-w-lg bg-black/40 backdrop-blur-md border border-amber-500/30 p-8 rounded-2xl text-center shadow-[0_0_50px_rgba(253,224,71,0.1)] pointer-events-none"
           >
             <h3 className="text-3xl font-playfair text-amber-300 mb-4 tracking-wider">
               {ROOTS.find(r => r.id === activeRoot)?.name}

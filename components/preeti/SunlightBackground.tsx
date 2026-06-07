@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export function SunlightBackground() {
-  const [petals, setPetals] = useState<{ id: number; left: string; delay: number; duration: number }[]>([]);
+  const [petals, setPetals] = useState<{ id: number; left: string; delay: number; duration: number, xMid: number, xEnd: number }[]>([]);
 
   useEffect(() => {
     // Generate random falling petals
