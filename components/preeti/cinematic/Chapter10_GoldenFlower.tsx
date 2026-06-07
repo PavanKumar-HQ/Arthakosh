@@ -23,24 +23,21 @@ const SCRIPT = [
 
 export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState(0); 
-
-  useEffect(() => {
-    let currentPhase = 0;
-    const interval = setInterval(() => {
-      currentPhase++;
-      setPhase(currentPhase);
-      if (currentPhase >= SCRIPT.length + 1) { 
-        clearInterval(interval);
-        setTimeout(onComplete, 5000); 
-      }
-    }, 5000); 
-    return () => clearInterval(interval);
-  }, [onComplete]);
-
   const isBlooming = phase >= SCRIPT.length - 1;
 
+  const handleClick = () => {
+    if (phase < SCRIPT.length - 1) {
+      setPhase(prev => prev + 1);
+    } else {
+      onComplete();
+    }
+  };
+
   return (
-    <div className="w-full h-full relative bg-[#0b0f19] flex flex-col items-center justify-center overflow-hidden">
+    <div 
+      className="w-full h-full relative bg-[#0b0f19] flex flex-col items-center justify-center overflow-hidden cursor-pointer"
+      onClick={handleClick}
+    >
       
       {/* Magical Aura Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
@@ -134,14 +131,8 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
       </div>
 
       <ChapterControls 
-        instruction={isBlooming ? "The flower is in full bloom." : "The garden is waiting..."} 
-        onSkip={() => {
-          if (!isBlooming) {
-            setPhase(SCRIPT.length - 1);
-          } else {
-            onComplete();
-          }
-        }} 
+        instruction={isBlooming ? "The golden flower has blossomed." : "Click to continue reading..."} 
+        onSkip={handleClick} 
       />
     </div>
   );
