@@ -32,6 +32,18 @@ export default function PreetiGardenOfGrowth() {
       {/* Global Animated Ambient Background — always visible behind every chapter */}
       <GardenAmbient chapter={chapter} />
 
+      {/* Global Preeti Background Music - Stops during Apology chapter (10) */}
+      {chapter !== 10 && (
+        <iframe
+          width="1"
+          height="1"
+          src="https://www.youtube.com/embed/fUffhENQ0Oo?autoplay=1&start=75&controls=0&showinfo=0&autohide=1&loop=1&playlist=fUffhENQ0Oo"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
+        />
+      )}
+
       <AnimatePresence>
         {chapter === 1 && (
           <motion.div
