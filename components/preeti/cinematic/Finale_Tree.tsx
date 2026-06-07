@@ -140,31 +140,32 @@ export function Finale_Tree() {
         </motion.div>
       ))}
 
-      {/* Falling Petals */}
+      {/* Hardware-accelerated Falling Petals */}
       {phase >= 1 && PETALS.map((p, i) => (
-        <motion.div
+        <div
           key={`petal-${i}`}
-          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20 pointer-events-none"
-          style={{ left: `${p.left}%`, top: "-10%", borderRadius: "50% 0 50% 50%" }}
-          animate={{ y: ["0vh", "120vh"], x: [0, p.xMid, p.xEnd], rotate: [0, 180, 360, 720] }}
-          transition={{ duration: p.duration, repeat: Infinity, ease: "linear" }}
+          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20 pointer-events-none animate-fall-down"
+          style={{ 
+            left: `${p.left}%`, 
+            top: "-10%", 
+            borderRadius: "50% 0 50% 50%",
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${sr(i) * 3}s`
+          }}
         />
       ))}
 
-      {/* Floating Golden Embers */}
+      {/* Hardware-accelerated Golden Embers */}
       {phase >= 3 && EMBERS.map((e, i) => (
-        <motion.div
+        <div
           key={`ember-${i}`}
-          className="absolute w-1.5 h-1.5 bg-yellow-300 rounded-full drop-shadow-[0_0_5px_rgba(253,224,71,0.8)] z-30 pointer-events-none"
-          style={{ left: `${e.left}%` }}
-          initial={{ y: `${e.yStart}vh`, opacity: 0, scale: 0 }}
-          animate={{ 
-            y: "-20vh", 
-            opacity: [0, 1, 1, 0],
-            scale: [0, 1, 0.5, 0],
-            x: [0, (sr(i) - 0.5) * 100, (sr(i+1) - 0.5) * 200]
+          className="absolute w-1.5 h-1.5 bg-yellow-300 rounded-full drop-shadow-[0_0_5px_rgba(253,224,71,0.8)] z-30 pointer-events-none animate-float-up"
+          style={{ 
+            left: `${e.left}%`,
+            bottom: "0%",
+            animationDuration: `${e.duration}s`,
+            animationDelay: `${e.delay}s`
           }}
-          transition={{ duration: e.duration, delay: e.delay, repeat: Infinity, ease: "easeOut" }}
         />
       ))}
 

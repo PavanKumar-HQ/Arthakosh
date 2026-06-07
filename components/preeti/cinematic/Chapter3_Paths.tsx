@@ -117,25 +117,20 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
-      {/* Reduced petal count from 50 to 15 to prevent rendering overload and stuttering */}
+      {/* Hardware-accelerated CSS petals to guarantee perfect 60fps without lag */}
       {activePath && Array.from({ length: 15 }).map((_, i) => {
         const petalColor = PATHS.find(p => p.id === activePath)?.petalColor || "bg-pink-300";
         return (
-          <motion.div
+          <div
             key={`petal-${i}`}
-            className={`absolute w-4 h-6 opacity-80 drop-shadow-sm ${petalColor}`}
+            className={`absolute w-4 h-6 opacity-80 drop-shadow-sm animate-fall-down ${petalColor}`}
             style={{ 
               left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
               top: "-10%",
-              borderRadius: "50% 0 50% 50%" 
+              borderRadius: "50% 0 50% 50%",
+              animationDuration: `${3 + sr(i * 13) * 2}s`,
+              animationDelay: `${sr(i * 11) * 2}s`
             }}
-            initial={{ y: 0, opacity: 0 }}
-            animate={{ 
-              y: "120vh", 
-              opacity: [0, 1, 0],
-              rotate: [0, 360] 
-            }}
-            transition={{ duration: 3 + sr(i * 13) * 2, ease: "linear" }}
           />
         );
       })}
