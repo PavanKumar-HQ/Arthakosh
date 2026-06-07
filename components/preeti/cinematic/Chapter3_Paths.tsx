@@ -117,7 +117,8 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
-      {activePath && Array.from({ length: 50 }).map((_, i) => {
+      {/* Reduced petal count from 50 to 15 to prevent rendering overload and stuttering */}
+      {activePath && Array.from({ length: 15 }).map((_, i) => {
         const petalColor = PATHS.find(p => p.id === activePath)?.petalColor || "bg-pink-300";
         return (
           <motion.div
@@ -126,17 +127,15 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
             style={{ 
               left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
               top: "-10%",
-              borderRadius: "50% 0 50% 50%" // Realistic petal/teardrop shape
+              borderRadius: "50% 0 50% 50%" 
             }}
-            initial={{ y: 0, x: 0, opacity: 0, scale: 0 }}
+            initial={{ y: 0, opacity: 0 }}
             animate={{ 
               y: "120vh", 
-              x: (sr(i * 11) - 0.5) * 300,
               opacity: [0, 1, 0],
-              scale: [0.5, 1.2, 0.5],
-              rotate: [0, 180, 360, 720] // Tumble like a real petal
+              rotate: [0, 360] 
             }}
-            transition={{ duration: 4 + sr(i * 13) * 4, ease: "linear" }}
+            transition={{ duration: 3 + sr(i * 13) * 2, ease: "linear" }}
           />
         );
       })}

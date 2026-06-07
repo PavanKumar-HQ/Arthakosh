@@ -16,13 +16,13 @@ function sr(seed: number) {
   return x - Math.floor(x);
 }
 
-const ORBS = Array.from({ length: 20 }, (_, i) => ({
+const ORBS = Array.from({ length: 5 }, (_, i) => ({
   left: (sr(i * 7) * 100).toFixed(2),
   top: (sr(i * 11) * 80).toFixed(2),
   duration: 5 + sr(i * 13) * 5,
 }));
 
-const BUTTERFLIES = Array.from({ length: 5 }, (_, i) => ({
+const BUTTERFLIES = Array.from({ length: 2 }, (_, i) => ({
   left: (10 + sr(i * 17) * 80).toFixed(2),
   top: (10 + sr(i * 19) * 80).toFixed(2),
   scale: (0.8 + sr(i * 23) * 0.7).toFixed(2),
@@ -30,14 +30,14 @@ const BUTTERFLIES = Array.from({ length: 5 }, (_, i) => ({
   color: ["#67e8f9", "#f9a8d4", "#fde047", "#d8b4fe"][i % 4],
 }));
 
-const PETALS = Array.from({ length: 60 }, (_, i) => ({
+const PETALS = Array.from({ length: 15 }, (_, i) => ({
   left: (sr(i * 31) * 100).toFixed(2),
   xMid: ((sr(i * 37) - 0.5) * 400).toFixed(2),
   xEnd: ((sr(i * 41) - 0.5) * 400).toFixed(2),
   duration: 5 + sr(i * 43) * 5,
 }));
 
-const EMBERS = Array.from({ length: 30 }, (_, i) => ({
+const EMBERS = Array.from({ length: 10 }, (_, i) => ({
   left: (sr(i * 47) * 100).toFixed(2),
   yStart: 100 + sr(i * 53) * 20,
   duration: 3 + sr(i * 59) * 4,
@@ -98,8 +98,8 @@ export function Finale_Tree() {
           onLeavesGenerated={(nodes) => setLeaves(nodes)}
         />
         
-        {/* Render simple glowing leaves at the branch tips for maximum performance! Capped at 150 for lushness */}
-        {leaves.slice(0, 150).map((leaf, i) => (
+        {/* Render simple glowing leaves at the branch tips for maximum performance! Capped at 50 to prevent overload */}
+        {leaves.slice(0, 50).map((leaf, i) => (
           <motion.div
             key={`leaf-${leaf.id}`}
             className="absolute z-20"
