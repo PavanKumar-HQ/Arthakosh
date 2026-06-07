@@ -85,7 +85,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.5 }}
-          className="text-4xl md:text-6xl font-playfair text-emerald-100 mb-4 drop-shadow-[0_0_20px_rgba(16,185,129,0.5)] tracking-widest"
+          className="text-4xl md:text-6xl font-playfair text-emerald-800 mb-4 drop-shadow-[0_0_20px_rgba(16,185,129,0.5)] tracking-widest"
         >
           The Field of Memories
         </motion.h2>
@@ -193,6 +193,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
             onComplete();
           }
         }} 
+        darkText={true}
       />
     </div>
   );
