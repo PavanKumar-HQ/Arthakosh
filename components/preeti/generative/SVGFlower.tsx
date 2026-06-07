@@ -80,12 +80,12 @@ export function SVGFlower({
             <stop offset="100%" stopColor="#ca8a04" />
           </radialGradient>
         </defs>
-
+        <g transform="translate(70, 90)">
         {/* Outer Petals */}
         {petals.map((p) => (
           <motion.g
             key={`outer-${p.id}`}
-            style={{ originX: "0px", originY: "0px" }}
+            style={{ originX: 0, originY: 0 }}
             initial={{ rotate: p.angle, scale: 0 }}
             animate={{ 
               rotate: p.angle, 
@@ -106,7 +106,7 @@ export function SVGFlower({
         {innerPetals.map((p) => (
           <motion.g
             key={`inner-${p.id}`}
-            style={{ originX: "0px", originY: "0px" }}
+            style={{ originX: 0, originY: 0 }}
             initial={{ rotate: p.angle, scale: 0 }}
             animate={{ 
               rotate: p.angle, 
@@ -125,6 +125,8 @@ export function SVGFlower({
 
         {/* Flower Core */}
         <motion.circle
+          cx="-70"
+          cy="-90"
           r="15"
           fill="url(#coreGrad)"
           initial={{ scale: 0 }}
@@ -136,8 +138,8 @@ export function SVGFlower({
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.circle
             key={`pistil-${i}`}
-            cx={Math.cos((i * 360) / 12 * (Math.PI/180)) * 8}
-            cy={Math.sin((i * 360) / 12 * (Math.PI/180)) * 8}
+            cx={-70 + Math.cos((i * 360) / 12 * (Math.PI/180)) * 8}
+            cy={-90 + Math.sin((i * 360) / 12 * (Math.PI/180)) * 8}
             r="1.5"
             fill="#fff"
             initial={{ opacity: 0 }}
@@ -145,7 +147,7 @@ export function SVGFlower({
             transition={{ duration: 1, delay: delay + 2 + i * 0.05 }}
           />
         ))}
-
+        </g>
       </motion.svg>
     </div>
   );
