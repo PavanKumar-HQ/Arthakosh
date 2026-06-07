@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
+import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
 const FireworksBurst = dynamic(
@@ -25,7 +26,7 @@ const ORBS = Array.from({ length: 20 }, (_, i) => ({
 const BUTTERFLIES = Array.from({ length: 15 }, (_, i) => ({
   left: (10 + sr(i * 17) * 80).toFixed(2),
   top: (10 + sr(i * 19) * 80).toFixed(2),
-  scale: (0.5 + sr(i * 23) * 0.5).toFixed(2),
+  scale: (0.8 + sr(i * 23) * 0.7).toFixed(2),
   duration: 4 + sr(i * 29) * 2,
   color: ["#67e8f9", "#f9a8d4", "#fde047", "#d8b4fe"][i % 4],
 }));
@@ -46,6 +47,7 @@ const EMBERS = Array.from({ length: 100 }, (_, i) => ({
 
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
+  const [leaves, setLeaves] = useState<{x: number, y: number, id: number}[]>([]);
 
   useEffect(() => {
     const sequence = async () => {
@@ -83,27 +85,57 @@ export function Finale_Tree() {
         />
       ))}
 
-      {/* Massive Procedural L-System Tree */}
+      {/* Massive Procedural L-System Tree with SVG Flowers */}
       <motion.div 
         className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, scale: phase >= 3 ? 1.1 : 1 }}
         transition={{ duration: 5, ease: "easeOut" }}
       >
-        <LSystemTree growthPhase={phase >= 3 ? 1 : (phase * 0.3)} width={1200} height={1000} />
+        <LSystemTree 
+          growthPhase={phase >= 3 ? 1 : (phase * 0.3)} 
+          width={1200} 
+          height={1000} 
+          onLeavesGenerated={(nodes) => setLeaves(nodes)}
+        />
+        
+        {/* Render beautiful SVG Flowers exactly at the branch tips! */}
+        {leaves.map((leaf, i) => (
+          <motion.div
+            key={`leaf-${leaf.id}`}
+            className="absolute z-20"
+            style={{ 
+              left: leaf.x, 
+              top: leaf.y,
+              x: "-50%",
+              y: "-50%",
+              pointerEvents: "none"
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: sr(i) * 3, duration: 1, type: "spring" }}
+          >
+            <SVGFlower 
+              isBlooming={true} 
+              size={50 + sr(leaf.id) * 40} 
+              petalColor={["#fbcfe8", "#fde047", "#86efac", "#93c5fd"][i % 4]}
+              coreColor="#ffffff"
+            />
+          </motion.div>
+        ))}
       </motion.div>
 
       {/* Floating Butterflies */}
       {phase >= 1 && BUTTERFLIES.map((b, i) => (
         <motion.div
           key={`butterfly-${i}`}
-          className="absolute z-30 drop-shadow-2xl pointer-events-none"
+          className="absolute z-30 pointer-events-none"
           style={{ left: `${b.left}%`, top: `${b.top}%`, scale: b.scale }}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: [-20, 20, -20], x: [-30, 30, -30] }}
           transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut" }}
         >
-          <SVGButterfly color={b.color} delay={sr(i) * 2} size={80} />
+          <SVGButterfly color={b.color} delay={sr(i) * 2} size={140} />
         </motion.div>
       ))}
 
@@ -146,7 +178,7 @@ export function Finale_Tree() {
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 2 }}
             >
-              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
+              <p className="font-playfair text-4xl md:text-6xl text-emerald-100 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
                 Every branch, every leaf, every flower...
               </p>
             </motion.div>
@@ -160,7 +192,7 @@ export function Finale_Tree() {
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 2 }}
             >
-              <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
+              <p className="font-playfair text-4xl md:text-6xl text-emerald-100 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
                 Grew because you believed in the seed.
               </p>
             </motion.div>
@@ -172,14 +204,14 @@ export function Finale_Tree() {
               initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 3, delay: 1 }}
-              className="px-8 py-10 md:py-12 bg-white/40 backdrop-blur-md border border-white/60 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.7)]"
+              className="px-8 py-10 md:py-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.2)]"
             >
-              <h1 className="font-playfair font-bold text-5xl md:text-7xl text-emerald-900 drop-shadow-md">
+              <h1 className="font-playfair font-bold text-5xl md:text-7xl text-amber-300 drop-shadow-[0_0_20px_rgba(253,224,71,0.5)]">
                 HAPPY BIRTHDAY
                 <br />
                 PREETI MA'AM
               </h1>
-              <p className="mt-6 font-serif text-xl md:text-2xl text-emerald-700 tracking-widest uppercase font-bold">
+              <p className="mt-6 font-sans text-xl md:text-2xl text-amber-100 tracking-[0.3em] uppercase font-bold drop-shadow-md">
                 From all your students.
               </p>
             </motion.div>

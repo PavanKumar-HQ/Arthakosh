@@ -51,7 +51,7 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             key="locked"
             exit={{ opacity: 0, scale: 1.2, filter: "blur(10px)" }}
             transition={{ duration: 1.5 }}
-            className="flex flex-col items-center text-center z-20 px-4"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4"
           >
             <div className="w-24 h-24 bg-white/80 backdrop-blur-sm rounded-full shadow-2xl flex items-center justify-center mb-8">
               <Lock className="w-10 h-10 text-emerald-800" />
@@ -75,8 +75,9 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5 }}
-            className="w-full max-w-5xl h-[80vh] bg-white/60 backdrop-blur-xl border border-emerald-100 rounded-3xl p-8 md:p-12 shadow-2xl z-20 overflow-y-auto custom-scrollbar flex flex-col items-center"
+            className="absolute inset-0 flex flex-col items-center justify-center z-20 p-4 md:p-8"
           >
+            <div className="w-full max-w-5xl max-h-[90vh] bg-white/60 backdrop-blur-xl border border-emerald-100 rounded-3xl p-8 md:p-12 shadow-2xl overflow-y-auto custom-scrollbar flex flex-col items-center">
             <Unlock className="w-8 h-8 text-emerald-500 mb-6" />
             <h2 className="text-3xl md:text-5xl font-playfair text-emerald-900 mb-12 text-center">
               Happy Birthday, Preeti Ma&apos;am
@@ -103,6 +104,7 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             >
               Leave the Greenhouse
             </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
