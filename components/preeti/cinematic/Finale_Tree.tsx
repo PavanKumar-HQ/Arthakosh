@@ -44,16 +44,7 @@ export function Finale_Tree() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Floating Ambient Orbs filling the sky */}
-      {ORBS.map((orb, i) => (
-        <motion.div
-          key={`orb-${i}`}
-          className="absolute w-32 h-32 bg-amber-100/20 rounded-full blur-[40px] z-0 pointer-events-none"
-          style={{ left: `${orb.left}%`, top: `${orb.top}%` }}
-          animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.6, 0.2], y: [-20, 20, -20] }}
-          transition={{ duration: orb.duration, repeat: Infinity, ease: "easeInOut" }}
-        />
-      ))}
+
 
       {/* Massive Procedural L-System Tree with SVG Flowers */}
       <motion.div 
