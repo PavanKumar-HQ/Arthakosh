@@ -52,11 +52,11 @@ export function SVGFlower({
 
       {/* Radial light burst when blooming */}
       <motion.div
-        className="absolute rounded-full pointer-events-none z-0"
-        style={{ width: size * 1.4, height: size * 1.4, background: "radial-gradient(circle, rgba(253,240,210,0.9) 0%, rgba(253,240,210,0) 70%)" }}
+        className="absolute rounded-full pointer-events-none z-0 mix-blend-screen"
+        style={{ width: size * 1.8, height: size * 1.8, background: "radial-gradient(circle, rgba(253,240,210,0.8) 0%, rgba(253,240,210,0) 70%)" }}
         initial={{ opacity: 0, scale: 0 }}
-        animate={isBlooming ? { opacity: [0, 0.9, 0.5], scale: [0, 1.3, 1] } : { opacity: 0, scale: 0 }}
-        transition={{ duration: 2, delay, ease: "easeOut" }}
+        animate={isBlooming ? { opacity: [0, 1, 0.6, 0.9], scale: [0, 1.4, 1.2, 1.3] } : { opacity: 0, scale: 0 }}
+        transition={{ duration: 4, delay, ease: "easeOut", scale: { repeat: Infinity, duration: 4, repeatType: "mirror" }, opacity: { repeat: Infinity, duration: 3, repeatType: "mirror" } }}
       />
 
       {/* Particle sparks */}
@@ -82,10 +82,13 @@ export function SVGFlower({
       {/* The SVG Flower */}
       <motion.svg
         viewBox="0 0 100 100"
-        style={{ width: size, height: size, overflow: "visible" }}
-        className="z-10 drop-shadow-xl"
-        animate={isShaking ? { x: [-3, 3, -3, 3, -2, 2, 0], y: [-1, 1, -1, 1, 0] } : {}}
-        transition={{ duration: 0.5 }}
+        style={{ width: size, height: size, overflow: "visible", transformOrigin: "bottom center" }}
+        className="z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+        animate={isShaking 
+          ? { x: [-3, 3, -3, 3, -2, 2, 0], y: [-1, 1, -1, 1, 0], rotate: 0 } 
+          : isBlooming ? { rotate: [-2, 3, -1, 2, -2] } : { rotate: 0 }
+        }
+        transition={isShaking ? { duration: 0.5 } : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
       >
         <defs>
           <radialGradient id={`petalGrad-${delay}`} cx="50%" cy="70%" r="60%">

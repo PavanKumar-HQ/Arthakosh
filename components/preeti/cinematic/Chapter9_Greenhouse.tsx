@@ -8,7 +8,7 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
   const [unlocked, setUnlocked] = useState(false);
 
   return (
-    <div className="w-full h-full relative bg-gradient-to-b from-emerald-50 to-teal-100 flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
       
       {/* Background abstract greenhouse structure */}
       <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">

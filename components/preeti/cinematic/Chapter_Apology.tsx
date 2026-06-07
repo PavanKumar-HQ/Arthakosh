@@ -52,7 +52,7 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div
-      className="w-full h-full relative overflow-hidden bg-slate-950 flex flex-col items-center justify-center cursor-pointer transition-colors duration-1000"
+      className="w-full h-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center cursor-pointer transition-colors duration-1000"
       onClick={handleClick}
     >
       {/* Background Magic - Lightens slightly when blooming */}

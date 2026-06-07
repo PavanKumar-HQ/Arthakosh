@@ -33,7 +33,7 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
   const isBlooming = phase >= SCRIPT.length - 1;
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-slate-900 flex flex-col items-center justify-center">
+    <div className="w-full h-full relative overflow-hidden bg-transparent flex flex-col items-center justify-center">
       
       {/* Dynamic Misty Background */}
       <motion.div 

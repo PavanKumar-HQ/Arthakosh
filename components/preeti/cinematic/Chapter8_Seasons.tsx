@@ -31,7 +31,7 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 1 }}
-          className={`absolute inset-0 bg-gradient-to-br ${SEASONS[activeSeason].bg} flex flex-col items-center justify-center px-4 text-center`}
+          className={`absolute inset-0 bg-transparent flex flex-col items-center justify-center px-4 text-center`}
         >
           <motion.h2 
             initial={{ scale: 0.8, opacity: 0 }}

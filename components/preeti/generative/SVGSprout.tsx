@@ -91,11 +91,31 @@ export function SVGSprout({ isGrowing }: { isGrowing: boolean }) {
       
       {/* Magical Glow around the sprout */}
       <motion.div
-        className="absolute bottom-10 w-24 h-24 bg-green-400 rounded-full blur-3xl z-[-1]"
+        className="absolute bottom-10 w-24 h-24 bg-green-400 rounded-full blur-[40px] z-[-1] mix-blend-screen"
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: isGrowing ? 0.4 : 0, scale: isGrowing ? 1.5 : 0 }}
+        animate={{ opacity: isGrowing ? 0.5 : 0, scale: isGrowing ? 1.8 : 0 }}
         transition={{ duration: 3, delay: 1 }}
       />
+
+      {/* Spore particles burst on growth */}
+      {isGrowing && Array.from({ length: 10 }).map((_, i) => {
+        const angle = (i / 10) * 360;
+        return (
+          <motion.div
+            key={`spore-${i}`}
+            className="absolute bottom-16 w-1.5 h-1.5 rounded-full z-30 pointer-events-none"
+            style={{ background: i % 2 === 0 ? "#86efac" : "#fef08a", boxShadow: "0 0 5px currentColor" }}
+            initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0],
+              x: Math.cos((angle * Math.PI) / 180) * 60,
+              y: Math.sin((angle * Math.PI) / 180) * 60,
+            }}
+            transition={{ duration: 2, delay: 2.5 + i * 0.1, ease: "easeOut" }}
+          />
+        );
+      })}
     </div>
   );
 }

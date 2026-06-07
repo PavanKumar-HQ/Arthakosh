@@ -41,7 +41,7 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-[#faf8f5]">
+    <div className="w-full h-full relative overflow-hidden bg-transparent">
       
       {/* Ambient Generative Background (fills empty space) */}
       <div className="absolute inset-0 pointer-events-none">

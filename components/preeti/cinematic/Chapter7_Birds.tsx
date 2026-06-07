@@ -58,7 +58,7 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className="w-full h-full relative bg-gradient-to-b from-sky-100 to-sky-50 flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
       
       <div className="absolute top-1/4 text-center z-20 px-4 w-full pointer-events-none">
         <p className="font-playfair text-2xl md:text-4xl text-sky-900 drop-shadow-[0_2px_10px_rgba(255,255,255,1)]">

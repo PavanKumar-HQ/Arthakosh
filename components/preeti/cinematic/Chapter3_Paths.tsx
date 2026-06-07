@@ -23,7 +23,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className={`w-full h-full relative transition-colors duration-1000 bg-gradient-to-b ${activePath ? PATHS.find(p => p.id === activePath)?.bg : "from-[#e8f5e9] to-[#faf8f5]"} flex flex-col items-center justify-center overflow-hidden`}>
+    <div className={`w-full h-full relative transition-colors duration-1000 bg-transparent flex flex-col items-center justify-center overflow-hidden`}>
       
       <div className="text-center z-30 mb-16 px-4">
         <motion.h2 

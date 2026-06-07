@@ -59,7 +59,7 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full relative overflow-hidden"
+      className="w-full h-full relative bg-transparent overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Chapter header */}

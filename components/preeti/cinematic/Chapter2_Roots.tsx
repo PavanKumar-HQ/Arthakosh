@@ -15,7 +15,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
   const [activeRoot, setActiveRoot] = useState<number | null>(null);
 
   return (
-    <div className="w-full h-full relative bg-gradient-to-b from-[#2d1b11] to-[#1a0f0a] flex items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-transparent flex items-center justify-center overflow-hidden">
       
       {/* Background Particles (Soil magic) */}
       <div className="absolute inset-0 opacity-20">

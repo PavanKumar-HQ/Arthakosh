@@ -53,7 +53,7 @@ export function Finale_Tree() {
   }, []);
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-gradient-to-b from-[#e8f5e9] to-[#faf8f5] flex flex-col items-center justify-end">
+    <div className="w-full h-full relative overflow-hidden bg-transparent flex flex-col items-center justify-end">
       
       {/* Fireworks — full sky burst when finale reached */}
       <FireworksBurst active={phase >= 3} />

@@ -49,7 +49,7 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className="w-full h-full relative flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
 
       {/* Hidden SVG filters */}
       <svg className="absolute w-0 h-0">

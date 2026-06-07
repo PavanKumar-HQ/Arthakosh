@@ -29,7 +29,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
   };
 
   return (
-    <div className="w-full h-full relative bg-gradient-to-b from-sky-50 to-amber-50 flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-transparent flex flex-col items-center justify-center overflow-hidden">
       
       {/* Soft God Rays */}
       <motion.div 

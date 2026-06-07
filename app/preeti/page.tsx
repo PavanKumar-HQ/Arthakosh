@@ -39,9 +39,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 1 && (
           <motion.div
             key="chapter1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -100 }} // Camera pans down (so content moves up)
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }} // Camera moves "forward"
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -52,9 +52,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 2 && (
           <motion.div
             key="chapter2"
-            initial={{ opacity: 0, y: 100 }} 
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100 }} // Camera pans back up
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -65,9 +65,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 3 && (
           <motion.div
             key="chapter3"
-            initial={{ opacity: 0, y: -100 }} 
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.1 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -78,9 +78,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 4 && (
           <motion.div
             key="chapter4"
-            initial={{ opacity: 0, scale: 0.9 }} 
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -91,9 +91,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 5 && (
           <motion.div
             key="chapter5"
-            initial={{ opacity: 0, x: 100 }} 
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, scale: 1.1 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -104,9 +104,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 6 && (
           <motion.div
             key="chapter6"
-            initial={{ opacity: 0, scale: 0.8 }} 
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, y: -100 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -117,9 +117,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 7 && (
           <motion.div
             key="chapter7"
-            initial={{ opacity: 0, y: 100 }} 
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -130,9 +130,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 8 && (
           <motion.div
             key="chapter8"
-            initial={{ opacity: 0, x: -100 }} 
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -143,9 +143,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 9 && (
           <motion.div
             key="chapter9"
-            initial={{ opacity: 0, y: -100 }} 
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.2 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -156,9 +156,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 10 && (
           <motion.div
             key="chapter10"
-            initial={{ opacity: 0, scale: 0.5 }} 
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
@@ -169,9 +169,9 @@ export default function PreetiGardenOfGrowth() {
         {chapter === 11 && (
           <motion.div
             key="apology"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }} 
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             transition={{ duration: 2, ease: "easeInOut" }}
             className="w-full h-full absolute inset-0"
           >
