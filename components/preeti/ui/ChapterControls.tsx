@@ -27,7 +27,10 @@ export function ChapterControls({ instruction, onSkip, skipText = "Next \u2192",
 
       {/* Skip Button in the bottom right */}
       <motion.button
-        onClick={onSkip}
+        onClick={(e) => {
+          e.stopPropagation();
+          onSkip();
+        }}
         className="absolute bottom-6 right-6 md:bottom-10 md:right-10 pointer-events-auto px-6 py-2 rounded-full border border-white/20 bg-black/20 backdrop-blur-md text-white/60 font-sans text-xs uppercase tracking-widest hover:bg-white/10 hover:text-white transition-all drop-shadow-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
