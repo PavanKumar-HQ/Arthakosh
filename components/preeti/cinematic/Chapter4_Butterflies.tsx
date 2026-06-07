@@ -37,29 +37,24 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
   return (
     <div className="w-full h-full relative bg-emerald-800 flex flex-col items-center justify-center overflow-hidden">
       
-      {/* Lush Out-of-Focus Garden Background */}
+      {/* Dreamy Twilight Sky Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(52,211,153,0.4)_0%,rgba(6,78,59,0.9)_100%)]" />
-        {/* Floral color blobs (out of focus) */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#4c1d95_0%,#1e1b4b_100%)]" />
+        {/* Soft magical color blobs */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-pink-500/30 rounded-full blur-[100px]"
+          className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-pink-600/20 rounded-full blur-[100px]"
           animate={{ scale: [1, 1.2, 1], x: [-30, 30, -30], y: [-20, 20, -20] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-purple-500/30 rounded-full blur-[120px]"
+          className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-indigo-500/20 rounded-full blur-[120px]"
           animate={{ scale: [1.2, 1, 1.2], x: [30, -30, 30], y: [20, -20, 20] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute top-1/2 right-1/3 w-[25rem] h-[25rem] bg-yellow-400/30 rounded-full blur-[80px]"
+          className="absolute top-1/2 right-1/3 w-[25rem] h-[25rem] bg-fuchsia-400/20 rounded-full blur-[80px]"
           animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-1/3 left-1/3 w-[20rem] h-[20rem] bg-rose-400/30 rounded-full blur-[90px]"
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.3, 1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -97,21 +92,22 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         ))}
       </div>
 
-      <div className="text-center absolute top-16 z-20 pointer-events-none">
+      <div className="text-center absolute top-16 z-20 pointer-events-none w-full">
         <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-playfair text-white mb-2 drop-shadow-lg"
+          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1.5 }}
+          className="text-4xl md:text-6xl font-playfair text-pink-100 mb-4 drop-shadow-[0_0_20px_rgba(244,114,182,0.5)] tracking-widest"
         >
-          The Butterfly Messengers
+          The Messengers
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-amber-100 italic font-serif text-lg"
+          transition={{ delay: 1, duration: 1.5 }}
+          className="text-pink-200/60 font-sans tracking-[0.3em] uppercase text-xs md:text-sm font-semibold"
         >
-          Catch a butterfly to unfold a memory.
+          Let them land on your finger...
         </motion.p>
       </div>
 
@@ -153,23 +149,23 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
       <AnimatePresence>
         {activeButterfly !== null && (
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-16 z-20 bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-amber-100 max-w-md w-full text-center"
+            initial={{ opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-20 z-20 bg-[#1e1b4b]/60 backdrop-blur-2xl p-10 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-pink-500/20 max-w-lg w-full text-center"
           >
-            <p className="font-playfair text-xl text-emerald-900 font-bold drop-shadow-[0_0_10px_rgba(255,255,255,1)]">
+            <p className="font-playfair text-2xl text-pink-100 italic leading-relaxed mb-8 drop-shadow-md">
               &quot;{BUTTERFLIES.find(b => b.id === activeButterfly)?.msg}&quot;
             </p>
             {BUTTERFLIES.find(b => b.id === activeButterfly)?.photo && (
-              <div className="w-full h-32 bg-amber-100 rounded-lg mb-6 flex items-center justify-center text-amber-600 font-sans text-sm">
+              <div className="w-full h-40 bg-black/30 rounded-xl mb-8 flex items-center justify-center text-pink-200/50 font-sans text-xs tracking-widest border border-white/5">
                 [ Photo Appears ]
               </div>
             )}
             <button 
               onClick={handleClose}
-              className="px-6 py-2 bg-amber-100 text-amber-800 rounded-full font-sans text-sm hover:bg-amber-200 transition-colors"
+              className="px-8 py-3 bg-transparent border border-pink-500/50 text-pink-200 rounded-full font-sans tracking-[0.2em] text-xs hover:bg-pink-900/50 hover:text-white transition-all uppercase"
             >
               Let it fly away
             </button>

@@ -51,47 +51,47 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
   return (
     <div className="w-full h-full relative bg-slate-900 flex flex-col items-center justify-end overflow-hidden">
       
-      {/* Stone Courtyard Background */}
+      {/* Majestic Ocean-Blue Background */}
       <div className="absolute inset-0 z-0">
         {/* Deep stone radial gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#1e293b_0%,#0f172a_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#082f49_0%,#020617_100%)]" />
         
-        {/* Moonlight shafts */}
+        {/* Moonlight shafts / Ocean light rays */}
         <motion.div 
-          className="absolute -top-[10%] left-[20%] w-[100%] h-[150%] bg-[conic-gradient(from_150deg_at_top_right,rgba(226,232,240,0.05)_0deg,transparent_30deg,transparent_330deg,rgba(226,232,240,0.05)_360deg)] pointer-events-none"
-          animate={{ opacity: [0.3, 0.6, 0.3], rotate: [-2, 2, -2] }}
+          className="absolute -top-[10%] left-[20%] w-[100%] h-[150%] bg-[conic-gradient(from_150deg_at_top_right,rgba(56,189,248,0.1)_0deg,transparent_30deg,transparent_330deg,rgba(56,189,248,0.1)_360deg)] pointer-events-none"
+          animate={{ opacity: [0.4, 0.8, 0.4], rotate: [-2, 2, -2] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute -top-[10%] -left-[20%] w-[100%] h-[150%] bg-[conic-gradient(from_210deg_at_top_left,rgba(226,232,240,0.03)_0deg,transparent_30deg,transparent_330deg,rgba(226,232,240,0.03)_360deg)] pointer-events-none"
-          animate={{ opacity: [0.2, 0.5, 0.2], rotate: [2, -2, 2] }}
+          className="absolute -top-[10%] -left-[20%] w-[100%] h-[150%] bg-[conic-gradient(from_210deg_at_top_left,rgba(186,230,253,0.08)_0deg,transparent_30deg,transparent_330deg,rgba(186,230,253,0.08)_360deg)] pointer-events-none"
+          animate={{ opacity: [0.3, 0.7, 0.3], rotate: [2, -2, 2] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         
         {/* Subtle Water Ripples on the ground reflecting from the fountain */}
         <motion.div 
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-cyan-500/10 blur-[80px]"
-          animate={{ opacity: [0.3, 0.6, 0.3], scaleY: [1, 1.1, 1] }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-cyan-400/15 blur-[100px]"
+          animate={{ opacity: [0.4, 0.8, 0.4], scaleY: [1, 1.1, 1] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
       <div className="absolute top-16 text-center z-20 w-full px-4 pointer-events-none">
         <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-4xl md:text-5xl font-playfair text-slate-200 tracking-widest mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ delay: 0.5, duration: 2 }}
+          className="text-4xl md:text-6xl font-playfair text-sky-100 tracking-widest mb-4 drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
         >
-          The Fountain of Knowledge
+          The Well of Knowledge
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="text-cyan-200/80 font-sans tracking-widest uppercase text-sm font-semibold"
+          transition={{ delay: 1.5, duration: 2 }}
+          className="text-sky-200/60 font-sans tracking-[0.3em] uppercase text-xs md:text-sm font-semibold"
         >
-          Click the glowing orbs to reveal memories
+          Discover the luminescent memories
         </motion.p>
       </div>
 
@@ -301,8 +301,8 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
                       animate={{ opacity: 1, y: -60, filter: "blur(0px)" }}
                       exit={{ opacity: 0, y: -100, filter: "blur(6px)" }}
                       transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute -translate-x-1/2 whitespace-nowrap font-playfair text-xl text-sky-200 font-semibold pointer-events-none"
-                      style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5), 0 0 40px rgba(186,230,253,0.5)" }}
+                      className="absolute -translate-x-1/2 whitespace-nowrap font-playfair text-2xl md:text-3xl text-sky-100 font-semibold pointer-events-none"
+                      style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(56,189,248,0.8)" }}
                     >
                       {wish.text}
                     </motion.p>

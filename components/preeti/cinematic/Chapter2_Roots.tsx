@@ -41,9 +41,9 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
   return (
     <div className="w-full h-full relative bg-[#1c110a] flex flex-col items-center justify-center overflow-hidden">
       
-      {/* Background Soil Magic Gradient */}
+      {/* Deep Cinematic Soil Magic Gradient */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#3a2212_0%,#1c110a_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#2a1306_0%,#0a0502_80%)]" />
         
         {/* SVG Noise Filter removed for performance */}
 
@@ -80,22 +80,22 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
         ))}
       </div>
 
-      <div className="absolute top-16 text-center z-20 px-4 pointer-events-none">
+      <div className="absolute top-16 text-center z-20 px-4 pointer-events-none w-full flex flex-col items-center">
         <motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5 }}
-          className="text-4xl md:text-5xl font-playfair text-amber-100 tracking-widest mb-4 drop-shadow-md"
+          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="text-4xl md:text-6xl font-playfair text-amber-100/90 tracking-widest mb-6 drop-shadow-[0_0_20px_rgba(253,224,71,0.3)]"
         >
           Strong Foundations
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1.5 }}
-          className="text-amber-200/80 font-sans tracking-widest uppercase text-sm font-semibold"
+          transition={{ delay: 1.5, duration: 2 }}
+          className="text-amber-200/60 font-sans tracking-[0.3em] uppercase text-xs md:text-sm font-semibold max-w-lg"
         >
-          {isComplete ? "Hover over the glowing nodes to reveal memories." : "The roots reach deep..."}
+          {isComplete ? "Hover over the glowing seeds of wisdom." : "The roots reach deep..."}
         </motion.p>
       </div>
 
@@ -108,18 +108,18 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
       {ROOTS.map((root, i) => (
         <motion.div
           key={root.id}
-          className="absolute z-20 cursor-pointer rounded-full bg-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]"
-          style={{ left: `${root.x}%`, top: `${root.y}%`, width: 16, height: 16, translateX: "-50%", translateY: "-50%" }}
+          className="absolute z-20 cursor-pointer rounded-full bg-yellow-200 drop-shadow-[0_0_15px_rgba(253,224,71,0.9)]"
+          style={{ left: `${root.x}%`, top: `${root.y}%`, width: 12, height: 12, translateX: "-50%", translateY: "-50%" }}
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: activeRoot === root.id ? 1.5 : 1, opacity: growthProgress > 0.8 ? 1 : 0 }}
+          animate={{ scale: activeRoot === root.id ? 2 : 1, opacity: growthProgress > 0.8 ? 1 : 0 }}
           transition={{ delay: growthProgress > 0.8 ? i * 0.2 : 0, duration: 0.5 }}
           onHoverStart={() => setActiveRoot(root.id)}
           onHoverEnd={() => setActiveRoot(null)}
         >
           <motion.div 
-            className="absolute inset-0 rounded-full bg-amber-200 blur-sm"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 rounded-full bg-white blur-[2px]"
+            animate={{ scale: [1, 2, 1], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
       ))}
@@ -128,15 +128,15 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
       <AnimatePresence>
         {activeRoot && (
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="absolute z-30 bottom-32 max-w-lg bg-black/40 backdrop-blur-md border border-amber-500/30 p-8 rounded-2xl text-center shadow-[0_0_50px_rgba(253,224,71,0.1)] pointer-events-none"
+            initial={{ opacity: 0, y: 10, filter: "blur(5px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -10, filter: "blur(5px)" }}
+            className="absolute z-30 bottom-32 max-w-lg bg-[#0a0502]/80 backdrop-blur-xl border border-amber-900/50 p-10 rounded-[2rem] text-center shadow-[0_20px_60px_rgba(0,0,0,0.8)] pointer-events-none"
           >
-            <h3 className="text-3xl font-playfair text-amber-300 mb-4 tracking-wider">
+            <h3 className="text-4xl font-playfair text-amber-200 mb-6 tracking-wider drop-shadow-md">
               {ROOTS.find(r => r.id === activeRoot)?.name}
             </h3>
-            <p className="text-lg font-sans text-amber-100/90 leading-relaxed italic">
+            <p className="text-xl font-playfair text-amber-100/80 leading-relaxed italic">
               &quot;{ROOTS.find(r => r.id === activeRoot)?.memory}&quot;
             </p>
           </motion.div>
@@ -144,11 +144,11 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
       </AnimatePresence>
 
       <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 5 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 5, duration: 1 }}
         onClick={onComplete}
-        className="absolute bottom-10 px-8 py-3 bg-amber-900/50 hover:bg-amber-800 text-amber-200 border border-amber-700/50 rounded-full font-sans tracking-widest text-sm z-30 transition-all hover:scale-105"
+        className="absolute bottom-12 px-10 py-4 bg-transparent hover:bg-amber-900/30 text-amber-200/80 hover:text-amber-100 border border-amber-800/50 hover:border-amber-500/50 rounded-full font-sans tracking-[0.2em] text-xs uppercase z-30 transition-all"
       >
         Continue to the Surface
       </motion.button>

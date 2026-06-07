@@ -38,10 +38,21 @@ class Particle {
   draw(ctx: CanvasRenderingContext2D) {
     const alpha = 1 - this.life / this.maxLife;
     ctx.globalAlpha = alpha;
+    ctx.globalCompositeOperation = 'lighter';
     ctx.fillStyle = this.color;
+    
+    // Core
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
+    
+    // Glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = this.color.replace('0.8)', '0.2)').replace('0.6)', '0.1)'); // fainter glow
+    ctx.fill();
+    
+    ctx.globalCompositeOperation = 'source-over';
     ctx.globalAlpha = 1;
   }
 }
@@ -101,10 +112,13 @@ export function CanvasWaterPhysics({ width = 800, height = 500 }: { width?: numb
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Emit new particles from fountain top
-      if (Math.random() < 0.6) {
-        particles.push(new Particle(sourceX + (Math.random() - 0.5) * 10, sourceY, "rgba(224, 242, 254, 0.8)"));
-        particles.push(new Particle(sourceX + (Math.random() - 0.5) * 10, sourceY, "rgba(186, 230, 253, 0.6)"));
+      // Emit new particles from fountain top (Magic dust)
+      if (Math.random() < 0.8) {
+        particles.push(new Particle(sourceX + (Math.random() - 0.5) * 15, sourceY, "rgba(255, 255, 255, 0.8)"));
+        particles.push(new Particle(sourceX + (Math.random() - 0.5) * 15, sourceY, "rgba(56, 189, 248, 0.6)"));
+        if (Math.random() < 0.3) {
+          particles.push(new Particle(sourceX + (Math.random() - 0.5) * 10, sourceY, "rgba(253, 224, 71, 0.8)")); // gold accents
+        }
       }
 
       // Update and draw ripples

@@ -53,18 +53,18 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             transition={{ duration: 1.5 }}
             className="absolute inset-0 flex flex-col items-center justify-center text-center z-20 px-4"
           >
-            <div className="w-24 h-24 bg-white/80 backdrop-blur-sm rounded-full shadow-2xl flex items-center justify-center mb-8">
-              <Lock className="w-10 h-10 text-emerald-800" />
+            <div className="w-24 h-24 bg-white/20 backdrop-blur-xl border border-white/40 rounded-full shadow-[0_0_40px_rgba(16,185,129,0.3)] flex items-center justify-center mb-8">
+              <Lock className="w-10 h-10 text-emerald-100" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-playfair text-emerald-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-playfair text-emerald-50 mb-4 drop-shadow-[0_0_15px_rgba(16,185,129,0.8)]">
               The Secret Greenhouse
             </h2>
-            <p className="text-emerald-700 italic font-serif text-lg mb-12">
+            <p className="text-emerald-200/80 italic font-serif text-xl md:text-2xl mb-12 tracking-wide drop-shadow-sm">
               The sanctuary of our most precious memories.
             </p>
             <button 
               onClick={() => setUnlocked(true)}
-              className="px-8 py-3 bg-emerald-800 text-white rounded-full font-sans tracking-widest text-sm hover:bg-emerald-700 transition-colors shadow-lg"
+              className="px-10 py-4 bg-emerald-500/20 backdrop-blur-md border border-emerald-400/50 text-emerald-50 rounded-full font-sans tracking-[0.2em] text-sm hover:bg-emerald-500/40 hover:border-emerald-300 transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)]"
             >
               Turn the Key
             </button>
@@ -77,30 +77,32 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             transition={{ duration: 1.5 }}
             className="absolute inset-0 flex flex-col items-center justify-center z-20 p-4 md:p-8"
           >
-            <div className="w-full max-w-5xl max-h-[90vh] bg-white/60 backdrop-blur-xl border border-emerald-100 rounded-3xl p-8 md:p-12 shadow-2xl overflow-y-auto custom-scrollbar flex flex-col items-center">
-            <Unlock className="w-8 h-8 text-emerald-500 mb-6" />
-            <h2 className="text-3xl md:text-5xl font-playfair text-emerald-900 mb-12 text-center">
+            <div className="w-full max-w-5xl max-h-[90vh] bg-[#022c22]/60 backdrop-blur-2xl border border-emerald-500/30 rounded-[2rem] p-8 md:p-14 shadow-[0_30px_100px_rgba(0,0,0,0.8)] overflow-y-auto custom-scrollbar flex flex-col items-center">
+            <Unlock className="w-10 h-10 text-emerald-400 mb-8 drop-shadow-[0_0_15px_rgba(52,211,153,0.8)]" />
+            <h2 className="text-4xl md:text-6xl font-playfair text-emerald-50 mb-12 text-center drop-shadow-md">
               Happy Birthday, Preeti Ma&apos;am
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-12">
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-emerald-50 flex flex-col items-center">
-                <div className="w-full h-48 bg-emerald-50 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-emerald-300">▶ Play Video</span>
+              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group">
+                <div className="w-full h-56 bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
+                   <div className="absolute inset-0 bg-emerald-900/20 group-hover:bg-emerald-500/20 transition-colors" />
+                   <span className="text-emerald-300 font-sans tracking-widest text-sm z-10 drop-shadow-md flex items-center gap-2"><span className="text-xl">▶</span> Play Video</span>
                 </div>
-                <p className="font-playfair text-emerald-800 italic">Our Class Montage</p>
+                <p className="font-playfair text-2xl text-emerald-100 italic">Our Class Montage</p>
               </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-emerald-50 flex flex-col items-center">
-                <div className="w-full h-48 bg-emerald-50 rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-emerald-300">📷 Group Photo</span>
+              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group">
+                <div className="w-full h-56 bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
+                   <div className="absolute inset-0 bg-emerald-900/20 group-hover:bg-emerald-500/20 transition-colors" />
+                   <span className="text-emerald-300 font-sans tracking-widest text-sm z-10 drop-shadow-md flex items-center gap-2"><span className="text-xl">📷</span> Group Photo</span>
                 </div>
-                <p className="font-playfair text-emerald-800 italic">Class of 2023</p>
+                <p className="font-playfair text-2xl text-emerald-100 italic">Class of 2023</p>
               </div>
             </div>
 
             <button 
               onClick={onComplete}
-              className="mt-8 px-8 py-3 bg-emerald-100 text-emerald-800 rounded-full font-sans tracking-widest text-sm hover:bg-emerald-200 transition-colors"
+              className="mt-8 px-10 py-4 bg-transparent border border-emerald-500/50 text-emerald-300 rounded-full font-sans tracking-[0.2em] text-sm hover:bg-emerald-900/50 hover:text-emerald-100 transition-all"
             >
               Leave the Greenhouse
             </button>
