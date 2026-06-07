@@ -3,6 +3,8 @@
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import { useState, useRef, useCallback } from "react";
 import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
+import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 
 // 6 well-spaced positions with unique identities
 const FLOWERS = [
@@ -79,23 +81,14 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
     >
       {/* Chapter header */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+        <motion.h2 
+          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.5 }}
-          className="font-playfair text-3xl md:text-5xl text-emerald-900"
-          style={{ textShadow: "0 2px 20px rgba(255,255,255,0.9)" }}
+          className="text-4xl md:text-6xl font-playfair text-emerald-100 mb-4 drop-shadow-[0_0_20px_rgba(16,185,129,0.5)] tracking-widest"
         >
-          Thousands of seeds were planted.
+          The Field of Memories
         </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="text-emerald-700 font-serif text-lg mt-3 italic"
-        >
-          Move your mouse to help them bloom
-        </motion.p>
       </div>
 
       {/* Mouse glow that follows cursor */}
@@ -190,6 +183,11 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <ChapterControls 
+        instruction={bloomedIds.length === FLOWERS.length ? "The field is in full bloom." : "Click the glowing sprouts to water them..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

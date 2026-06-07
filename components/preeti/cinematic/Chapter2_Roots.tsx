@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { FractalRoots } from "@/components/preeti/generative/FractalRoots";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { useState, useEffect } from "react";
 
 const ROOTS = [
@@ -143,15 +144,10 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 5, duration: 1 }}
-        onClick={onComplete}
-        className="absolute bottom-12 px-10 py-4 bg-transparent hover:bg-amber-900/30 text-amber-200/80 hover:text-amber-100 border border-amber-800/50 hover:border-amber-500/50 rounded-full font-sans tracking-[0.2em] text-xs uppercase z-30 transition-all"
-      >
-        Continue to the Surface
-      </motion.button>
+      <ChapterControls 
+        instruction={!isComplete ? "The roots reach deep..." : "Hover over the glowing seeds of wisdom."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

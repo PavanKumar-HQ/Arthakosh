@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
 import { useState, useEffect, useMemo } from "react";
 import { SVGSprout } from "@/components/preeti/generative/SVGSprout";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 
 // Deterministic seed-based random — same value on server and client
 function sr(seed: number) {
@@ -170,6 +171,10 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
         </AnimatePresence>
       </div>
 
+      <ChapterControls 
+        instruction="Watch the seed take root..." 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

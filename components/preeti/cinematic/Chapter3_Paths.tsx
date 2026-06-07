@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 
 // Deterministic seed
 function sr(seed: number) {
@@ -10,7 +11,7 @@ function sr(seed: number) {
 }
 
 const PATHS = [
-  { id: "rose", name: "Rose Path", type: "Funny Memories", color: "from-rose-400 to-rose-600", bg: "from-rose-50 to-[#faf8f5]", petalColor: "bg-rose-300" },
+  { id: "rose", name: "Rose Path", type: "Funny Memories", desc: "A garden filled with laughter and thorns.", color: "from-rose-400 to-rose-600", bg: "from-rose-50 to-[#faf8f5]", petalColor: "bg-rose-300" },
 ];
 
 export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
@@ -117,6 +118,22 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         )}
       </AnimatePresence>
 
+      {/* The Text Description of the chosen path */}
+      <AnimatePresence>
+        {activePath && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute bottom-32 z-30 w-full text-center px-4 pointer-events-none"
+          >
+            <p className="font-playfair text-2xl md:text-4xl text-white drop-shadow-lg">
+              {PATHS.find(p => p.id === activePath)?.desc}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hardware-accelerated CSS petals to guarantee perfect 60fps without lag */}
       {activePath && Array.from({ length: 15 }).map((_, i) => {
         const petalColor = PATHS.find(p => p.id === activePath)?.petalColor || "bg-pink-300";
@@ -135,6 +152,10 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         );
       })}
 
+      <ChapterControls 
+        instruction={activePath ? "The path has been chosen..." : "Choose a path to continue."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

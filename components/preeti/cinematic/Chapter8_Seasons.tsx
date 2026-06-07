@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { useState } from "react";
 import { DynamicWeatherSystem } from "@/components/preeti/generative/DynamicWeatherSystem";
 
@@ -55,17 +56,23 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
             &quot;{SEASONS[activeSeason].msg}&quot;
           </motion.p>
 
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
-            onClick={nextSeason}
-            className={`mt-16 px-8 py-3 rounded-full border-2 border-current ${SEASONS[activeSeason].buttonText} hover:bg-white/10 transition-colors tracking-widest text-sm uppercase`}
-          >
-            {activeSeason < SEASONS.length - 1 ? "Walk Forward" : "Finish the Walk"}
-          </motion.button>
         </motion.div>
       </AnimatePresence>
+
+      {/* The Central Tree / Element to Anchor the Scene */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="w-1 h-[40vh] bg-gradient-to-t from-[#1a1c1a] to-transparent opacity-80"
+          style={{ transformOrigin: "bottom" }}
+        />
+      </div>
+
+      <ChapterControls 
+        instruction={activeSeason === 3 ? "The cycle is complete." : "Click the background to advance the seasons..."} 
+        onSkip={onComplete} 
+      />
       
       {/* Progress Indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-20">

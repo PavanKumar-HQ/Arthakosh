@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { Lock, Unlock } from "lucide-react";
 
 export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) {
@@ -110,6 +111,10 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
           </motion.div>
         )}
       </AnimatePresence>
+      <ChapterControls 
+        instruction={progress === 3 ? "The greenhouse is open." : "Click the lock to open the greenhouse..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

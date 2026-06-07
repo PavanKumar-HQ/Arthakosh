@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { useState } from "react";
 
 // Deterministic seed for rain
@@ -232,23 +233,10 @@ export function Chapter_Apology({ onComplete }: { onComplete: () => void }) {
         </AnimatePresence>
       </div>
       
-      <AnimatePresence>
-        {isFinished && (
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 1 }}
-            className="absolute bottom-12 px-8 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-sans tracking-widest text-sm z-30 transition-all hover:scale-105"
-            onClick={(e) => {
-              e.stopPropagation();
-              onComplete();
-            }}
-          >
-            Enter the Final Garden
-          </motion.button>
-        )}
-      </AnimatePresence>
-
+      <ChapterControls 
+        instruction={progress === 4 ? "The storm has passed." : "Click the dark clouds to clear the storm..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

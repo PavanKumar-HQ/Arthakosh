@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 
 // Deterministic seed
 function sr(seed: number) {
@@ -66,14 +67,6 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         >
           The Messengers
         </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1.5 }}
-          className="text-pink-200/60 font-sans tracking-[0.3em] uppercase text-xs md:text-sm font-semibold"
-        >
-          Let them land on your finger...
-        </motion.p>
       </div>
 
       {/* The Butterflies */}
@@ -81,29 +74,30 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         <motion.div
           key={b.id}
           className={`absolute cursor-pointer text-5xl drop-shadow-md z-10 ${b.color} ${activeButterfly === b.id ? 'z-30' : ''}`}
-          initial={{ opacity: 0, scale: 0, left: `${b.x}%`, top: `${b.y}%` }}
-          animate={activeButterfly === b.id ? {
+          style={activeButterfly === b.id ? {
             left: "50%",
             top: "40%",
-            x: "-50%",
-            y: "-50%",
-            scale: 1.5,
-            rotate: 0,
-            opacity: 1
-          } : activeButterfly !== null ? {
-            opacity: 0,
-            left: `${b.x}%`,
-            top: `${b.y}%`
+            transform: "translate(-50%, -50%)"
           } : {
             left: `${b.x}%`,
-            top: `${b.y}%`,
+            top: `${b.y}%`
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={activeButterfly === b.id ? {
+            scale: 1.5,
+            rotate: 0,
+            opacity: 1,
+            x: 0, y: 0
+          } : activeButterfly !== null ? {
+            opacity: 0,
+          } : {
             opacity: completed.includes(b.id) ? 0.4 : 1,
             scale: 1,
             x: [0, 20, -20, 0],
             y: [0, -20, 20, 0],
             rotate: [-10, 10, -10]
           }}
-          transition={activeButterfly === b.id ? { duration: 1 } : { duration: 4 + sr(b.id * 7) * 2, repeat: Infinity, ease: "easeInOut" }}
+          transition={activeButterfly === b.id ? { duration: 0.5, ease: "easeOut" } : { duration: 4 + sr(b.id * 7) * 2, repeat: Infinity, ease: "easeInOut" }}
           onClick={() => handleCatch(b.id)}
         >
           {/* Using SVG Butterfly - SCALED UP */}
@@ -141,6 +135,10 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         )}
       </AnimatePresence>
 
+      <ChapterControls 
+        instruction={completed.length === BUTTERFLIES.length ? "They have delivered their messages." : "Click to catch the glowing butterflies..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

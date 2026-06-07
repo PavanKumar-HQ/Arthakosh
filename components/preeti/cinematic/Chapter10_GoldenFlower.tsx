@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { useState, useEffect } from "react";
 import { SVGFlower } from "@/components/preeti/generative/SVGFlower";
 
@@ -132,6 +133,10 @@ export function Chapter10_GoldenFlower({ onComplete }: { onComplete: () => void 
         </AnimatePresence>
       </div>
 
+      <ChapterControls 
+        instruction={isBlooming ? "The flower is in full bloom." : "The garden is waiting..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }

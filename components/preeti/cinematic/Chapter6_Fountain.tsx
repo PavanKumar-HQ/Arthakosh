@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useMemo } from "react";
 import { CanvasWaterPhysics } from "@/components/preeti/generative/CanvasWaterPhysics";
+import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 
 const WISHES = [
   { id: 1, text: "She always believed in us.", cx: 48, cy: 68 },
@@ -80,19 +81,9 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
         <motion.h2 
           initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: 0.5, duration: 2 }}
-          className="text-4xl md:text-6xl font-playfair text-sky-100 tracking-widest mb-4 drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
-        >
-          The Well of Knowledge
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 2 }}
-          className="text-sky-200/60 font-sans tracking-[0.3em] uppercase text-xs md:text-sm font-semibold"
-        >
-          Discover the luminescent memories
-        </motion.p>
+        <h2 className="font-playfair text-3xl md:text-5xl text-blue-100 drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
+          The Wishing Fountain
+        </h2>
       </div>
 
       {/* Hidden SVG filters */}
@@ -313,6 +304,10 @@ export function Chapter6_Fountain({ onComplete }: { onComplete: () => void }) {
           );
         })}
       </div>
+      <ChapterControls 
+        instruction={revealedWishes.length === WISHES.length ? "Your wish has been granted." : "Discover the luminescent memories..."} 
+        onSkip={onComplete} 
+      />
     </div>
   );
 }
