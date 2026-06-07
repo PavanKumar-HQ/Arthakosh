@@ -10,10 +10,10 @@ function sr(seed: number) {
 }
 
 const DROPS = Array.from({ length: 100 }, (_, i) => ({
-  left: sr(i * 7) * 100,
+  left: (sr(i * 7) * 100).toFixed(2),
   delay: sr(i * 11) * 2,
   duration: 0.5 + sr(i * 13) * 0.5,
-  height: 10 + sr(i * 17) * 20,
+  height: (10 + sr(i * 17) * 20).toFixed(2),
   opacity: 0.2 + sr(i * 19) * 0.4,
 }));
 

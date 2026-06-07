@@ -12,8 +12,8 @@ function sr(seed: number) {
 
 // Pre-compute stable pollen data (30 particles)
 const POLLEN = Array.from({ length: 30 }, (_, i) => ({
-  left: sr(i * 17) * 100,
-  top: sr(i * 19) * 100,
+  left: (sr(i * 17) * 100).toFixed(2),
+  top: (sr(i * 19) * 100).toFixed(2),
   yEnd: -(100 + sr(i * 23) * 50),
   xEnd: (sr(i * 29) - 0.5) * 50,
   duration: 5 + sr(i * 31) * 5,
