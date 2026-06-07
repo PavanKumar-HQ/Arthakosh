@@ -60,7 +60,7 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5 }}
             onClick={nextSeason}
-            className={`mt-16 px-8 py-3 rounded-full border-2 border-current ${SEASONS[activeSeason].text} hover:bg-white/30 transition-colors tracking-widest text-sm uppercase`}
+            className={`mt-16 px-8 py-3 rounded-full border-2 border-current ${SEASONS[activeSeason].text.replace('800', '200')} hover:bg-white/10 transition-colors tracking-widest text-sm uppercase`}
           >
             {activeSeason < SEASONS.length - 1 ? "Walk Forward" : "Finish the Walk"}
           </motion.button>
@@ -72,7 +72,7 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
         {SEASONS.map((s, i) => (
           <div 
             key={i} 
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${i === activeSeason ? 'bg-slate-800 scale-125' : 'bg-slate-300'}`} 
+            className={`w-3 h-3 rounded-full transition-all duration-500 ${i === activeSeason ? 'bg-white scale-125 shadow-[0_0_8px_rgba(255,255,255,0.8)]' : 'bg-white/30'}`} 
           />
         ))}
       </div>

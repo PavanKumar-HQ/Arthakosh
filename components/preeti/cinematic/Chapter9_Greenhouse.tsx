@@ -14,7 +14,7 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
       <BackgroundGreenhouse chapterProgress={9} />
       
       {/* Animated Overgrown Vines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+      <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <motion.path
           d="M 0 0 C 20 20, 10 50, 30 80 S 50 100, 60 100"
           fill="none"

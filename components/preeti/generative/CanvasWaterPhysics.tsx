@@ -27,6 +27,11 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
     this.vy += 0.2; // gravity
+    
+    // Air resistance (drag)
+    this.vx *= 0.98;
+    this.vy *= 0.99;
+    
     this.life++;
   }
 

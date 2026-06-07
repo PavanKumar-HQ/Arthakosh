@@ -35,26 +35,31 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
   };
 
   return (
-    <div className="w-full h-full relative bg-emerald-900 flex flex-col items-center justify-center overflow-hidden">
+    <div className="w-full h-full relative bg-emerald-800 flex flex-col items-center justify-center overflow-hidden">
       
       {/* Lush Out-of-Focus Garden Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.4)_0%,rgba(6,78,59,0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(52,211,153,0.4)_0%,rgba(6,78,59,0.9)_100%)]" />
         {/* Floral color blobs (out of focus) */}
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-[100px]"
+          className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-pink-500/30 rounded-full blur-[100px]"
           animate={{ scale: [1, 1.2, 1], x: [-30, 30, -30], y: [-20, 20, -20] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+          className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-purple-500/30 rounded-full blur-[120px]"
           animate={{ scale: [1.2, 1, 1.2], x: [30, -30, 30], y: [20, -20, 20] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute top-1/2 right-1/3 w-64 h-64 bg-yellow-400/20 rounded-full blur-[80px]"
+          className="absolute top-1/2 right-1/3 w-[25rem] h-[25rem] bg-yellow-400/30 rounded-full blur-[80px]"
           animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 left-1/3 w-[20rem] h-[20rem] bg-rose-400/30 rounded-full blur-[90px]"
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.3, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
@@ -138,8 +143,8 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
           onClick={() => handleCatch(b.id)}
         >
           {/* Using SVG Butterfly - SCALED UP */}
-          <div className="drop-shadow-xl">
-            <SVGButterfly color={b.color} delay={b.id * 0.1} size={96} />
+          <div className="drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
+            <SVGButterfly color={b.color} delay={b.id * 0.1} size={220} />
           </div>
         </motion.div>
       ))}

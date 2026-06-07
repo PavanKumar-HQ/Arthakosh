@@ -131,6 +131,25 @@ export function GardenAmbient({ chapter = 1 }: GardenAmbientProps) {
         ))}
       </motion.div>
 
+      {/* Layer 2.5: Cinematic Anamorphic Lens Flare */}
+      <motion.div className="absolute inset-0 flex items-center justify-center mix-blend-screen pointer-events-none" style={{ x: midX, y: midY }}>
+        <motion.div 
+          className="absolute w-[150vw] h-[2px] bg-sky-300/30 blur-[2px]"
+          animate={{ opacity: [0.1, 0.4, 0.1], rotate: [-10, -10, -10] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute w-[80vw] h-[8px] bg-blue-400/20 blur-[6px] rounded-[100%]"
+          animate={{ opacity: [0.2, 0.6, 0.2], rotate: [-10, -10, -10] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute w-[30vw] h-[20px] bg-cyan-300/10 blur-[12px] rounded-[100%]"
+          animate={{ opacity: [0.3, 0.8, 0.3], rotate: [-10, -10, -10], scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </motion.div>
+
       {/* Layer 3: Foreground Fireflies / Pollen (Fast Parallax) */}
       <motion.div className="absolute inset-0" style={{ x: fgX, y: fgY }}>
         {pollenSeeds.map((i) => {
