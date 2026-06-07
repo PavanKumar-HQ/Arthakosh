@@ -116,8 +116,7 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
         <motion.div
           key={b.id}
           className={`absolute cursor-pointer text-5xl drop-shadow-md z-10 ${b.color} ${activeButterfly === b.id ? 'z-30' : ''}`}
-          style={{ left: `${b.x}%`, top: `${b.y}%` }}
-          initial={{ opacity: 0, scale: 0 }}
+          initial={{ opacity: 0, scale: 0, left: `${b.x}%`, top: `${b.y}%` }}
           animate={activeButterfly === b.id ? {
             left: "50%",
             top: "40%",
@@ -127,8 +126,12 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
             rotate: 0,
             opacity: 1
           } : activeButterfly !== null ? {
-            opacity: 0
+            opacity: 0,
+            left: `${b.x}%`,
+            top: `${b.y}%`
           } : {
+            left: `${b.x}%`,
+            top: `${b.y}%`,
             opacity: completed.includes(b.id) ? 0.4 : 1,
             scale: 1,
             x: [0, 20, -20, 0],
