@@ -33,7 +33,6 @@ const FALLING_PETALS = Array.from({ length: 25 }, (_, i) => ({
 
 export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
   const [bloomedIds, setBloomedIds] = useState<number[]>([]);
-  const [shakingId, setShakingId] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -57,14 +56,10 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
 
   const handleBloom = (id: number) => {
     if (!bloomedIds.includes(id)) {
-      setShakingId(id);
-      setTimeout(() => {
-        setShakingId(null);
-        setBloomedIds((prev) => {
-          if (prev.includes(id)) return prev;
-          return [...prev, id];
-        });
-      }, 450);
+      setBloomedIds((prev) => {
+        if (prev.includes(id)) return prev;
+        return [...prev, id];
+      });
     }
   };
 
@@ -117,7 +112,6 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
       {/* The 6 Flowers */}
       {FLOWERS.map((f, i) => {
         const isBloomed = bloomedIds.includes(f.id);
-        const isShaking = shakingId === f.id;
         return (
           <motion.div
             key={f.id}
@@ -155,7 +149,6 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <SVGFlower 
                 isBlooming={isBloomed} 
-                isShaking={isShaking}
                 petalColor={f.petalColor} 
                 strokeColor={f.strokeColor}
                 size={f.size} 

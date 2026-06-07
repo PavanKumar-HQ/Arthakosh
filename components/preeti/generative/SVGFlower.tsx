@@ -9,7 +9,6 @@ interface SVGFlowerProps {
   strokeColor?: string;
   size?: number;
   text?: string;
-  isShaking?: boolean;
   delay?: number;
 }
 
@@ -20,7 +19,6 @@ export function SVGFlower({
   strokeColor = "rgba(255,255,255,0.5)",
   size = 120,
   text,
-  isShaking,
   delay = 0
 }: SVGFlowerProps) {
   
@@ -62,11 +60,8 @@ export function SVGFlower({
         viewBox="-100 -100 200 200"
         style={{ width: size, height: size, overflow: "visible" }}
         initial={{ rotate: -45, scale: 0 }}
-        animate={isShaking 
-          ? { x: [-3, 3, -3, 3, -2, 2, 0], y: [-1, 1, -1, 1, 0], rotate: 0 } 
-          : isBlooming ? { rotate: 0, scale: 1 } : { rotate: -45, scale: 0 }
-        }
-        transition={isShaking ? { duration: 0.5 } : { duration: 2, ease: "easeOut" }}
+        animate={isBlooming ? { rotate: 0, scale: 1 } : { rotate: -45, scale: 0 }}
+        transition={{ duration: 2, ease: "easeOut" }}
       >
         <defs>
           <radialGradient id={`petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')}`} cx="50%" cy="100%" r="100%">

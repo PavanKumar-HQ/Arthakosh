@@ -1,18 +1,19 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
-const Chapter1_TheSeed = dynamic(() => import("@/components/preeti/cinematic/Chapter1_TheSeed").then(m => m.Chapter1_TheSeed), { ssr: false });
-const Chapter2_Roots = dynamic(() => import("@/components/preeti/cinematic/Chapter2_Roots").then(m => m.Chapter2_Roots), { ssr: false });
-const Chapter3_Paths = dynamic(() => import("@/components/preeti/cinematic/Chapter3_Paths").then(m => m.Chapter3_Paths), { ssr: false });
-const Chapter4_Butterflies = dynamic(() => import("@/components/preeti/cinematic/Chapter4_Butterflies").then(m => m.Chapter4_Butterflies), { ssr: false });
-const Chapter5_Field = dynamic(() => import("@/components/preeti/cinematic/Chapter5_Field").then(m => m.Chapter5_Field), { ssr: false });
-const Chapter6_Fountain = dynamic(() => import("@/components/preeti/cinematic/Chapter6_Fountain").then(m => m.Chapter6_Fountain), { ssr: false });
-const Chapter7_Seasons = dynamic(() => import("@/components/preeti/cinematic/Chapter8_Seasons").then(m => m.Chapter8_Seasons), { ssr: false });
-const Chapter8_Greenhouse = dynamic(() => import("@/components/preeti/cinematic/Chapter9_Greenhouse").then(m => m.Chapter9_Greenhouse), { ssr: false });
-const Chapter9_GoldenFlower = dynamic(() => import("@/components/preeti/cinematic/Chapter10_GoldenFlower").then(m => m.Chapter10_GoldenFlower), { ssr: false });
-const Chapter10_Apology = dynamic(() => import("@/components/preeti/cinematic/Chapter_Apology").then(m => m.Chapter_Apology), { ssr: false });
-const Chapter11_Finale = dynamic(() => import("@/components/preeti/cinematic/Finale_Tree").then(m => m.Finale_Tree), { ssr: false });
+import { AnimatePresence, motion } from "framer-motion";
+import { Chapter1_TheSeed } from "@/components/preeti/cinematic/Chapter1_TheSeed";
+import { Chapter2_Roots } from "@/components/preeti/cinematic/Chapter2_Roots";
+import { Chapter3_Paths } from "@/components/preeti/cinematic/Chapter3_Paths";
+import { Chapter4_Butterflies } from "@/components/preeti/cinematic/Chapter4_Butterflies";
+import { Chapter5_Field } from "@/components/preeti/cinematic/Chapter5_Field";
+import { Chapter6_Fountain } from "@/components/preeti/cinematic/Chapter6_Fountain";
+import { Chapter8_Seasons as Chapter7_Seasons } from "@/components/preeti/cinematic/Chapter8_Seasons";
+import { Chapter9_Greenhouse as Chapter8_Greenhouse } from "@/components/preeti/cinematic/Chapter9_Greenhouse";
+import { Chapter10_GoldenFlower as Chapter9_GoldenFlower } from "@/components/preeti/cinematic/Chapter10_GoldenFlower";
+import { Chapter_Apology as Chapter10_Apology } from "@/components/preeti/cinematic/Chapter_Apology";
+import { Finale_Tree as Chapter11_Finale } from "@/components/preeti/cinematic/Finale_Tree";
 
 // Client-only: avoids SSR hydration mismatch
 const GardenAmbient = dynamic(
@@ -21,93 +22,159 @@ const GardenAmbient = dynamic(
 );
 
 export default function PreetiGardenOfGrowth() {
-  const [activeChapter, setActiveChapter] = useState(1);
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const [chapter, setChapter] = useState(1);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute("data-chapter"));
-            if (index) setActiveChapter(index);
-          }
-        });
-      },
-      { threshold: 0.5 } // When 50% of the section is visible
-    );
-
-    sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToNext = (currentIndex: number) => {
-    const nextIndex = currentIndex + 1;
-    if (nextIndex <= 11 && sectionRefs.current[nextIndex - 1]) {
-      sectionRefs.current[nextIndex - 1]?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const setRef = (index: number) => (el: HTMLElement | null) => {
-    sectionRefs.current[index] = el;
-  };
+  const nextChapter = () => setChapter((prev) => prev + 1);
 
   return (
-    <main className="w-screen h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory relative font-sans scroll-smooth">
+    <main className="w-screen h-screen overflow-hidden relative font-sans">
       
-      {/* Global Animated Ambient Background — fixed to viewport */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <GardenAmbient chapter={activeChapter} />
-      </div>
+      {/* Global Animated Ambient Background — always visible behind every chapter */}
+      <GardenAmbient chapter={chapter} />
 
-      <div className="relative z-10">
-        <section ref={setRef(0)} data-chapter="1" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter1_TheSeed onComplete={() => scrollToNext(1)} />
-        </section>
+      <AnimatePresence>
+        {chapter === 1 && (
+          <motion.div
+            key="chapter1"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter1_TheSeed onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(1)} data-chapter="2" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter2_Roots onComplete={() => scrollToNext(2)} />
-        </section>
+        {chapter === 2 && (
+          <motion.div
+            key="chapter2"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter2_Roots onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(2)} data-chapter="3" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter3_Paths onComplete={() => scrollToNext(3)} />
-        </section>
+        {chapter === 3 && (
+          <motion.div
+            key="chapter3"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter3_Paths onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(3)} data-chapter="4" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter4_Butterflies onComplete={() => scrollToNext(4)} />
-        </section>
+        {chapter === 4 && (
+          <motion.div
+            key="chapter4"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter4_Butterflies onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(4)} data-chapter="5" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter5_Field onComplete={() => scrollToNext(5)} />
-        </section>
+        {chapter === 5 && (
+          <motion.div
+            key="chapter5"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter5_Field onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(5)} data-chapter="6" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter6_Fountain onComplete={() => scrollToNext(6)} />
-        </section>
+        {chapter === 6 && (
+          <motion.div
+            key="chapter6"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter6_Fountain onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(6)} data-chapter="7" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter7_Seasons onComplete={() => scrollToNext(7)} />
-        </section>
+        {chapter === 7 && (
+          <motion.div
+            key="chapter7"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter7_Seasons onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(7)} data-chapter="8" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter8_Greenhouse onComplete={() => scrollToNext(8)} />
-        </section>
+        {chapter === 8 && (
+          <motion.div
+            key="chapter8"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter8_Greenhouse onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(8)} data-chapter="9" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter9_GoldenFlower onComplete={() => scrollToNext(9)} />
-        </section>
+        {chapter === 9 && (
+          <motion.div
+            key="chapter9"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter9_GoldenFlower onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(9)} data-chapter="10" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter10_Apology onComplete={() => scrollToNext(10)} />
-        </section>
+        {chapter === 10 && (
+          <motion.div
+            key="apology"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter10_Apology onComplete={nextChapter} />
+          </motion.div>
+        )}
 
-        <section ref={setRef(10)} data-chapter="11" className="w-full h-screen snap-start md:snap-center relative shrink-0">
-          <Chapter11_Finale />
-        </section>
-      </div>
+        {chapter === 11 && (
+          <motion.div
+            key="finale"
+            initial={{ opacity: 0, scale: 0.95 }} 
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+          >
+            <Chapter11_Finale />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
