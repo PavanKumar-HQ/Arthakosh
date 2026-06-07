@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { SVGButterfly } from "@/components/preeti/generative/SVGButterfly";
 import { LSystemTree } from "@/components/preeti/generative/LSystemTree";
 
 const FireworksBurst = dynamic(
@@ -15,34 +14,6 @@ function sr(seed: number) {
   const x = Math.sin(seed + 1) * 10000;
   return x - Math.floor(x);
 }
-
-const ORBS = Array.from({ length: 5 }, (_, i) => ({
-  left: (sr(i * 7) * 100).toFixed(2),
-  top: (sr(i * 11) * 80).toFixed(2),
-  duration: 5 + sr(i * 13) * 5,
-}));
-
-const BUTTERFLIES = Array.from({ length: 2 }, (_, i) => ({
-  left: (10 + sr(i * 17) * 80).toFixed(2),
-  top: (10 + sr(i * 19) * 80).toFixed(2),
-  scale: (0.8 + sr(i * 23) * 0.7).toFixed(2),
-  duration: 4 + sr(i * 29) * 2,
-  color: ["#67e8f9", "#f9a8d4", "#fde047", "#d8b4fe"][i % 4],
-}));
-
-const PETALS = Array.from({ length: 15 }, (_, i) => ({
-  left: (sr(i * 31) * 100).toFixed(2),
-  xMid: ((sr(i * 37) - 0.5) * 400).toFixed(2),
-  xEnd: ((sr(i * 41) - 0.5) * 400).toFixed(2),
-  duration: 5 + sr(i * 43) * 5,
-}));
-
-const EMBERS = Array.from({ length: 10 }, (_, i) => ({
-  left: (sr(i * 47) * 100).toFixed(2),
-  yStart: 100 + sr(i * 53) * 20,
-  duration: 3 + sr(i * 59) * 4,
-  delay: sr(i * 61) * 5,
-}));
 
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
@@ -114,10 +85,10 @@ export function Finale_Tree() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: sr(i) * 3, duration: 1, type: "spring" }}
           >
-            <div 
-              className="w-4 h-6 md:w-5 md:h-8 opacity-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+              <div 
+              className="w-4 h-6 md:w-5 md:h-8 opacity-90 drop-shadow-[0_0_8px_rgba(74,222,128,0.4)]"
               style={{
-                backgroundColor: ["#fbcfe8", "#fde047", "#86efac", "#93c5fd"][i % 4],
+                backgroundColor: ["#86efac", "#4ade80", "#22c55e", "#16a34a"][i % 4],
                 borderRadius: "50% 0 50% 50%",
                 transform: `rotate(${sr(leaf.id) * 360}deg)`
               }}
@@ -126,48 +97,7 @@ export function Finale_Tree() {
         ))}
       </motion.div>
 
-      {/* Floating Butterflies */}
-      {phase >= 1 && BUTTERFLIES.map((b, i) => (
-        <motion.div
-          key={`butterfly-${i}`}
-          className="absolute z-30 pointer-events-none"
-          style={{ left: `${b.left}%`, top: `${b.top}%`, scale: b.scale }}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: [-20, 20, -20], x: [-30, 30, -30] }}
-          transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <SVGButterfly color={b.color} delay={sr(i) * 2} size={140} />
-        </motion.div>
-      ))}
 
-      {/* Hardware-accelerated Falling Petals */}
-      {phase >= 1 && PETALS.map((p, i) => (
-        <div
-          key={`petal-${i}`}
-          className="absolute w-4 h-6 bg-pink-300/80 drop-shadow-sm z-20 pointer-events-none animate-fall-down"
-          style={{ 
-            left: `${p.left}%`, 
-            top: "-10%", 
-            borderRadius: "50% 0 50% 50%",
-            animationDuration: `${p.duration}s`,
-            animationDelay: `${sr(i) * 3}s`
-          }}
-        />
-      ))}
-
-      {/* Hardware-accelerated Golden Embers */}
-      {phase >= 3 && EMBERS.map((e, i) => (
-        <div
-          key={`ember-${i}`}
-          className="absolute w-1.5 h-1.5 bg-yellow-300 rounded-full drop-shadow-[0_0_5px_rgba(253,224,71,0.8)] z-30 pointer-events-none animate-float-up"
-          style={{ 
-            left: `${e.left}%`,
-            bottom: "0%",
-            animationDuration: `${e.duration}s`,
-            animationDelay: `${e.delay}s`
-          }}
-        />
-      ))}
 
       {/* Text Sequence */}
       <div className="absolute top-[10%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-3xl px-4 pointer-events-none">
