@@ -32,24 +32,13 @@ export default function PreetiGardenOfGrowth() {
       {/* Global Animated Ambient Background — always visible behind every chapter */}
       <GardenAmbient chapter={chapter} />
 
-      {/* Global Preeti Background Music (Chapters 1-9) */}
-      {chapter < 10 && (
+      {/* Global Preeti Background Music */}
+      {(chapter < 10 || chapter === 11) && (
         <iframe
+          key={chapter === 11 ? "finale-music" : "main-music"}
           width="1"
           height="1"
-          src="https://www.youtube.com/embed/YUSfkS2q94o?autoplay=1&start=75&controls=0&showinfo=0&autohide=1&loop=1&playlist=YUSfkS2q94o"
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
-        />
-      )}
-
-      {/* Finale Background Music (Chapter 11) */}
-      {chapter === 11 && (
-        <iframe
-          width="1"
-          height="1"
-          src="https://www.youtube.com/embed/YUSfkS2q94o?autoplay=1&start=0&controls=0&showinfo=0&autohide=1&loop=1&playlist=YUSfkS2q94o"
+          src={`https://www.youtube.com/embed/YUSfkS2q94o?autoplay=1&start=${chapter === 11 ? 0 : 75}&controls=0&showinfo=0&autohide=1&loop=1&playlist=YUSfkS2q94o`}
           frameBorder="0"
           allow="autoplay; encrypted-media"
           className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
