@@ -80,7 +80,7 @@ export function SVGFlower({
             <stop offset="100%" stopColor="#ca8a04" />
           </radialGradient>
         </defs>
-        <g transform="translate(70, 90)">
+        <g>
         {/* Outer Petals */}
         {petals.map((p) => (
           <motion.g
@@ -91,13 +91,16 @@ export function SVGFlower({
               rotate: p.angle, 
               scale: isBlooming ? 1 : 0 
             }}
-            transition={{ duration: 1.5, delay: delay + 0.5 + (p.id % 3) * 0.2, type: "spring" }}
+            transition={{ duration: 1.5, delay: delay + 0.5 + (p.id % 3) * 0.2, type: "spring", stiffness: 100 }}
           >
-            <path
-              d="M 0 0 C 30 -50, 70 -50, 0 -90 C -70 -50, -30 -50, 0 0"
+            <ellipse
+              cx="0"
+              cy="-40"
+              rx="15"
+              ry="45"
               fill={`url(#petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')})`}
               stroke={strokeColor}
-              strokeWidth="1"
+              strokeWidth="0.5"
             />
           </motion.g>
         ))}
@@ -110,24 +113,27 @@ export function SVGFlower({
             initial={{ rotate: p.angle, scale: 0 }}
             animate={{ 
               rotate: p.angle, 
-              scale: isBlooming ? 0.7 : 0 
+              scale: isBlooming ? 0.8 : 0 
             }}
-            transition={{ duration: 1.5, delay: delay + 1 + (p.id % 2) * 0.2, type: "spring" }}
+            transition={{ duration: 1.5, delay: delay + 1 + (p.id % 2) * 0.2, type: "spring", stiffness: 100 }}
           >
-            <path
-              d="M 0 0 C 20 -40, 50 -40, 0 -70 C -50 -40, -20 -40, 0 0"
+            <ellipse
+              cx="0"
+              cy="-25"
+              rx="12"
+              ry="30"
               fill={`url(#petalGrad-${petalColor.replace(/[^a-zA-Z0-9]/g, '')})`}
               stroke={strokeColor}
-              strokeWidth="1"
+              strokeWidth="0.5"
             />
           </motion.g>
         ))}
 
         {/* Flower Core */}
         <motion.circle
-          cx="-70"
-          cy="-90"
-          r="15"
+          cx="0"
+          cy="0"
+          r="16"
           fill="url(#coreGrad)"
           initial={{ scale: 0 }}
           animate={{ scale: isBlooming ? 1 : 0 }}
@@ -138,13 +144,25 @@ export function SVGFlower({
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.circle
             key={`pistil-${i}`}
-            cx={-70 + Math.cos((i * 360) / 12 * (Math.PI/180)) * 8}
-            cy={-90 + Math.sin((i * 360) / 12 * (Math.PI/180)) * 8}
+            cx={Math.cos((i * 360) / 12 * (Math.PI/180)) * 10}
+            cy={Math.sin((i * 360) / 12 * (Math.PI/180)) * 10}
             r="1.5"
             fill="#fff"
             initial={{ opacity: 0 }}
             animate={{ opacity: isBlooming ? 1 : 0 }}
             transition={{ duration: 1, delay: delay + 2 + i * 0.05 }}
+          />
+        ))}
+        {Array.from({ length: 6 }).map((_, i) => (
+          <motion.circle
+            key={`inner-pistil-${i}`}
+            cx={Math.cos((i * 360) / 6 * (Math.PI/180)) * 4}
+            cy={Math.sin((i * 360) / 6 * (Math.PI/180)) * 4}
+            r="1"
+            fill="#fff"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isBlooming ? 1 : 0 }}
+            transition={{ duration: 1, delay: delay + 2.5 + i * 0.1 }}
           />
         ))}
         </g>
