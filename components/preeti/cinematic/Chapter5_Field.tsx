@@ -61,11 +61,8 @@ export function Chapter5_Field({ onComplete }: { onComplete: () => void }) {
       setTimeout(() => {
         setShakingId(null);
         setBloomedIds((prev) => {
-          const next = [...prev, id];
-          if (next.length === FLOWERS.length) {
-            setTimeout(onComplete, 5000);
-          }
-          return next;
+          if (prev.includes(id)) return prev;
+          return [...prev, id];
         });
       }, 450);
     }

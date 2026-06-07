@@ -25,7 +25,10 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <div className={`w-full h-full relative overflow-hidden transition-colors duration-2000 bg-gradient-to-br ${SEASONS[activeSeason].color}`}>
+    <div 
+      className={`w-full h-full relative overflow-hidden transition-colors duration-2000 bg-gradient-to-br ${SEASONS[activeSeason].color} cursor-pointer`}
+      onClick={nextSeason}
+    >
       {/* Generative Weather Layer */}
       <DynamicWeatherSystem season={activeSeason} />
       
@@ -70,10 +73,10 @@ export function Chapter8_Seasons({ onComplete }: { onComplete: () => void }) {
       </div>
 
       <ChapterControls 
-        instruction={activeSeason === 3 ? "The cycle is complete." : "Click the background to advance the seasons..."} 
+        instruction={activeSeason === 4 ? "The cycle is complete." : "Click to advance the seasons..."} 
         onSkip={() => {
-          if (activeSeason < 3) {
-            setActiveSeason(3);
+          if (activeSeason < 4) {
+            setActiveSeason(prev => prev + 1);
           } else {
             onComplete();
           }
