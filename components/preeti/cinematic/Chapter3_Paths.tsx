@@ -53,7 +53,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-6xl font-playfair text-emerald-900 mb-4"
+          className="text-4xl md:text-6xl font-playfair text-emerald-50 mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
         >
           {activePath ? `Walking the ${PATHS.find(p => p.id === activePath)?.name}` : "The Path of Memories"}
         </motion.h2>
@@ -61,7 +61,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-emerald-700 italic font-serif text-lg md:text-xl"
+          className="text-emerald-200 italic font-serif text-lg md:text-xl drop-shadow-sm"
         >
           {activePath ? "Let the memories bloom..." : "Choose a path to walk."}
         </motion.p>
@@ -69,7 +69,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="mt-2 font-sans text-sm tracking-widest text-amber-700/70 uppercase"
+          className="mt-2 font-sans text-sm tracking-widest text-amber-200/80 uppercase"
         >
           {activePath ? "Journey Continues..." : "Choose a path to explore"}
         </motion.p>
@@ -90,7 +90,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
             className={`relative group cursor-pointer flex flex-col items-center ${activePath && activePath !== path.id ? 'pointer-events-none' : ''}`}
           >
             {/* The Path Graphic */}
-            <div className="w-32 h-64 relative overflow-hidden rounded-t-full shadow-lg border-2 border-white/50 backdrop-blur-sm bg-white/20 transition-transform group-hover:scale-105">
+            <div className="w-32 h-64 relative overflow-hidden rounded-t-full shadow-lg border-2 border-white/50 backdrop-blur-sm bg-white/20">
               <div className={`absolute inset-0 opacity-40 bg-gradient-to-t ${path.color}`} />
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 200">
                 <path d="M 50 200 Q 20 100 50 0" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="2" strokeDasharray="5,5" />
@@ -98,8 +98,8 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
             </div>
             
             <div className="mt-6 text-center">
-              <h3 className="font-playfair font-bold text-xl text-emerald-900 group-hover:text-emerald-700">{path.name}</h3>
-              <p className="font-sans text-xs uppercase tracking-widest text-emerald-600/80 mt-1">{path.type}</p>
+              <h3 className="font-playfair font-bold text-xl text-emerald-100 group-hover:text-white transition-colors">{path.name}</h3>
+              <p className="font-sans text-xs uppercase tracking-widest text-emerald-300/80 mt-1">{path.type}</p>
             </div>
           </motion.div>
         ))}
