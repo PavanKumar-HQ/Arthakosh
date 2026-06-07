@@ -41,6 +41,14 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
         >
           {activePath ? "Let the memories bloom..." : "Choose a path to walk."}
         </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="mt-2 font-sans text-sm tracking-widest text-amber-700/70 uppercase"
+        >
+          {activePath ? "Journey Continues..." : "Choose a path to explore"}
+        </motion.p>
       </div>
 
       <div className="flex flex-wrap justify-center gap-8 md:gap-16 z-20 px-4">

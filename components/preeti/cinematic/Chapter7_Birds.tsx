@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { CSSBird } from "@/components/preeti/generative/CSSBird";
 
 const BIRDS = [
   { id: 1, type: "wish", text: "A wish for peace", x: 20, y: 30 },
@@ -63,6 +64,17 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
         <p className="font-playfair text-2xl md:text-4xl text-sky-900 drop-shadow-[0_2px_10px_rgba(255,255,255,1)]">
           Birds of Gratitude
         </p>
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="mt-4 font-sans text-sm tracking-widest text-sky-700 uppercase"
+        >
+          {caughtBirds.length === BIRDS.length 
+            ? "Journey Continues..." 
+            : `Click all ${BIRDS.length} birds to hear their messages to continue (${caughtBirds.length}/${BIRDS.length})`
+          }
+        </motion.p>
       </div>
 
       {BIRDS.map((b) => {
@@ -94,11 +106,7 @@ export function Chapter7_Birds({ onComplete }: { onComplete: () => void }) {
           >
             {/* The Bird Graphic */}
             <div className="relative">
-              <img 
-                src="/real-bird.png" 
-                alt="Bird" 
-                className="w-16 h-16 object-contain mix-blend-multiply" 
-              />
+              <CSSBird isFlying={state === "flying"} />
               
               {/* Organic glowing text when clicked */}
               <AnimatePresence>

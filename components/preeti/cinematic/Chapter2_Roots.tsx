@@ -41,7 +41,7 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
           transition={{ delay: 2 }}
           className="text-amber-500/60 font-sans tracking-widest uppercase text-sm"
         >
-          Hover to reveal our memories
+          Hover over each root to reveal memories. Click 'Continue' below when ready.
         </motion.p>
       </div>
 
