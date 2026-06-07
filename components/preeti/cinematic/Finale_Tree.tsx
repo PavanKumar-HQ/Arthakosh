@@ -66,10 +66,10 @@ export function Finale_Tree() {
       {/* Fireworks — full sky burst when finale reached */}
       <FireworksBurst active={phase >= 3} />
 
-      {/* Ambient Empty Space Filler: Dynamic God Rays */}
+      {/* Ambient Empty Space Filler: Static God Rays */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-t from-transparent via-emerald-100/30 to-amber-100/50 mix-blend-overlay pointer-events-none z-10"
-        animate={{ opacity: phase >= 3 ? [0.6, 1, 0.6] : [0.2, 0.5, 0.2], rotate: [-2, 2, -2] }}
+        className="absolute inset-0 bg-gradient-to-t from-transparent via-emerald-100/10 to-amber-100/20 pointer-events-none z-10"
+        animate={{ opacity: phase >= 3 ? [0.6, 1, 0.6] : [0.2, 0.5, 0.2] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -203,8 +203,8 @@ export function Finale_Tree() {
           {phase === 3 && (
             <motion.div
               key="finale"
-              initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 3, delay: 1 }}
               className="px-8 py-10 md:py-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.2)]"
             >

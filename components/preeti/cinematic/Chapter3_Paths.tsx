@@ -111,7 +111,7 @@ export function Chapter3_Paths({ onComplete }: { onComplete: () => void }) {
           <motion.div 
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 10 }}
-            className={`absolute z-10 w-64 h-64 rounded-full blur-3xl bg-gradient-to-r ${PATHS.find(p => p.id === activePath)?.color} opacity-20`}
+            className={`absolute z-10 w-64 h-64 rounded-full bg-gradient-to-r ${PATHS.find(p => p.id === activePath)?.color} opacity-20`}
             transition={{ duration: 3 }}
           />
         )}

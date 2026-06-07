@@ -40,19 +40,11 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
       {/* Dreamy Twilight Sky Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,#4c1d95_0%,#1e1b4b_100%)]" />
-        {/* Soft magical color blobs */}
+        {/* Soft magical color blobs (Static to prevent GPU overdraw lag) */}
+        <div className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-pink-600/10 rounded-full blur-[80px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-indigo-500/10 rounded-full blur-[80px]" />
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-pink-600/20 rounded-full blur-[100px]"
-          animate={{ scale: [1, 1.2, 1], x: [-30, 30, -30], y: [-20, 20, -20] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-indigo-500/20 rounded-full blur-[120px]"
-          animate={{ scale: [1.2, 1, 1.2], x: [30, -30, 30], y: [20, -20, 20] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute top-1/2 right-1/3 w-[25rem] h-[25rem] bg-fuchsia-400/20 rounded-full blur-[80px]"
+          className="absolute top-1/2 right-1/3 w-[25rem] h-[25rem] bg-fuchsia-400/10 rounded-full blur-[60px]"
           animate={{ opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -60,37 +52,10 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
 
       {/* Volumetric Light Rays (God Rays) */}
       <motion.div 
-        className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-[conic-gradient(from_200deg_at_top_right,rgba(253,224,71,0.15)_0deg,transparent_30deg,transparent_330deg,rgba(253,224,71,0.15)_360deg)] pointer-events-none"
-        animate={{ opacity: [0.3, 0.6, 0.3], rotate: [-2, 2, -2] }}
+        className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] bg-[conic-gradient(from_200deg_at_top_right,rgba(253,224,71,0.1)_0deg,transparent_30deg,transparent_330deg,rgba(253,224,71,0.1)_360deg)] pointer-events-none"
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transformOrigin: "top right" }}
       />
-
-      {/* Floating Dust Particles in the Light */}
-      <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <motion.div
-            key={`dust-${i}`}
-            className="absolute w-1 h-1 bg-amber-200/50 rounded-full blur-[1px]"
-            style={{ 
-              left: `${(sr(i * 7) * 100).toFixed(2)}%`, 
-              top: `${(sr(i * 11) * 100).toFixed(2)}%` 
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              y: [-10, 10, -10],
-              x: [-10, 10, -10],
-              opacity: [0.1, 0.5, 0.1]
-            }}
-            transition={{ 
-              duration: 4 + sr(i * 13) * 4, 
-              repeat: Infinity, 
-              ease: "easeInOut",
-              delay: sr(i * 17) * 2 
-            }}
-          />
-        ))}
-      </div>
 
       <div className="text-center absolute top-16 z-20 pointer-events-none w-full">
         <motion.h2 
