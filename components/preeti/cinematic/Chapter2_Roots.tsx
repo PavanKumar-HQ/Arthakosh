@@ -31,7 +31,8 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="text-4xl md:text-5xl font-playfair text-amber-200/80 tracking-widest mb-2"
+          className="text-4xl md:text-5xl font-playfair text-amber-900 tracking-widest mb-2"
+          style={{ textShadow: "0 2px 10px rgba(255,255,255,0.8)" }}
         >
           Roots of Kindness
         </motion.h2>
@@ -39,7 +40,8 @@ export function Chapter2_Roots({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2 }}
-          className="text-amber-500/60 font-sans tracking-widest uppercase text-sm"
+          className="text-amber-800/80 font-sans tracking-widest uppercase text-sm font-semibold"
+          style={{ textShadow: "0 1px 5px rgba(255,255,255,0.8)" }}
         >
           Hover over each root to reveal memories. Click 'Continue' below when ready.
         </motion.p>
