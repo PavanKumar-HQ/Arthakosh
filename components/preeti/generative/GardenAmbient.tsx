@@ -40,8 +40,8 @@ export function GardenAmbient({ chapter = 1 }: GardenAmbientProps) {
 
   // Palette shifts based on chapter
   const palette = useMemo(() => {
-    if (chapter === 11) return { bg: "from-slate-950 to-[#0f172a]", orb1: "bg-blue-900/40", orb2: "bg-indigo-900/40", ray: "from-blue-500/10" }; // Apology
-    if (chapter >= 12) return { bg: "from-amber-100 to-[#fef9c3]", orb1: "bg-yellow-300/40", orb2: "bg-amber-400/40", ray: "from-yellow-400/30" }; // Finale
+    if (chapter === 9) return { bg: "from-slate-950 to-[#0f172a]", orb1: "bg-blue-900/40", orb2: "bg-indigo-900/40", ray: "from-blue-500/10" }; // Apology
+    if (chapter >= 10) return { bg: "from-[#020617] to-[#0f172a]", orb1: "bg-amber-900/20", orb2: "bg-rose-900/20", ray: "from-amber-500/5" }; // Finale (Night Sky)
     if (chapter <= 3) return { bg: "from-[#f0fdf4] to-[#fef9f0]", orb1: "bg-emerald-100", orb2: "bg-amber-100", ray: "from-amber-100/30" };
     if (chapter <= 6) return { bg: "from-[#fdf4ff] to-[#fff7ed]", orb1: "bg-purple-100", orb2: "bg-rose-100", ray: "from-rose-100/30" };
     return { bg: "from-[#eff6ff] to-[#f0fdf4]", orb1: "bg-sky-100", orb2: "bg-emerald-100", ray: "from-sky-100/30" };

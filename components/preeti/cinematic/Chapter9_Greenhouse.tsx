@@ -85,17 +85,15 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-12">
-              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group">
-                <div className="w-full h-56 bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
-                   <div className="absolute inset-0 bg-emerald-900/20 group-hover:bg-emerald-500/20 transition-colors" />
-                   <span className="text-emerald-300 font-sans tracking-widest text-sm z-10 drop-shadow-md flex items-center gap-2"><span className="text-xl">▶</span> Play Video</span>
+              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group w-full overflow-hidden">
+                <div className="w-full h-auto min-h-[14rem] bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
+                   <video src="/preeti/f7oqo5.mp4" controls className="w-full h-full object-contain max-h-64" />
                 </div>
                 <p className="font-playfair text-2xl text-emerald-100 italic">Our Class Montage</p>
               </div>
-              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group">
-                <div className="w-full h-56 bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
-                   <div className="absolute inset-0 bg-emerald-900/20 group-hover:bg-emerald-500/20 transition-colors" />
-                   <span className="text-emerald-300 font-sans tracking-widest text-sm z-10 drop-shadow-md flex items-center gap-2"><span className="text-xl">📷</span> Group Photo</span>
+              <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group w-full overflow-hidden">
+                <div className="w-full h-auto min-h-[14rem] bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
+                   <img src="/preeti/IMG_6441.JPG" alt="Group Photo" className="w-full h-full object-contain max-h-64" />
                 </div>
                 <p className="font-playfair text-2xl text-emerald-100 italic">Class of 2023</p>
               </div>

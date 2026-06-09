@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import { useJourneyStore } from "@/lib/store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import confetti from "canvas-confetti";
 
 // Deterministic falling gold particles
@@ -17,18 +17,91 @@ const PARTICLES = Array.from({ length: 40 }).map((_, i) => ({
   delay: ((i * 0.4) % 5).toFixed(1),
 }));
 
+const BALLOON_COLORS = [
+  '#f43f5e', // rose
+  '#f59e0b', // amber
+  '#3b82f6', // blue
+  '#10b981', // emerald
+  '#a855f7', // purple
+  '#ec4899', // pink
+];
+
+const MEGHANA_PHOTOS = [
+  "/meghana/20260517_031521.jpg",
+  "/meghana/DSC00336.JPG",
+  "/meghana/DSC00340.JPG",
+  "/meghana/DSC00345.JPG",
+  "/meghana/DSC00348.JPG",
+  "/meghana/DSC00388 (1).JPG",
+  "/meghana/IMG_6371.JPG"
+];
+
+const BalloonSVG = ({ color, photoUrl }: { color: string, photoUrl?: string }) => {
+  const gradientId = `grad-${color.replace('#', '')}-${Math.random().toString(36).substr(2, 5)}`;
+  return (
+    <div className="relative flex flex-col items-center">
+      <svg viewBox="0 0 100 250" className="w-24 h-[15rem] drop-shadow-2xl overflow-visible">
+        <defs>
+          <radialGradient id={gradientId} cx="35%" cy="30%" r="60%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+            <stop offset="15%" stopColor={color} stopOpacity="0.9" />
+            <stop offset="80%" stopColor={color} stopOpacity="1" />
+            <stop offset="100%" stopColor="#000000" stopOpacity="0.4" />
+          </radialGradient>
+        </defs>
+        {/* Balloon shape */}
+        <path 
+          d="M50 10 C20 10 10 40 10 70 C10 110 40 130 48 140 C49 141 51 141 52 140 C60 130 90 110 90 70 C90 40 80 10 50 10 Z" 
+          fill={`url(#${gradientId})`} 
+        />
+        {/* Knot */}
+        <path 
+          d="M48 140 L45 145 L55 145 L52 140 Z" 
+          fill={color} 
+          style={{ filter: "brightness(0.7)" }}
+        />
+        {/* String */}
+        <path 
+          d="M50 145 Q 40 170 50 190 T 50 240" 
+          fill="none" 
+          stroke="rgba(255,255,255,0.4)" 
+          strokeWidth="1.5" 
+        />
+      </svg>
+      {/* Hanging Polaroid */}
+      {photoUrl && (
+        <motion.div 
+          className="absolute top-[14.5rem] w-16 h-20 bg-white p-1 pb-4 shadow-xl rounded-sm border border-gray-100"
+          animate={{ rotate: [-5, 5, -5] }}
+          transition={{ duration: 3 + Math.random(), repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-full h-full bg-gray-200 overflow-hidden relative">
+            <img src={photoUrl} className="w-full h-full object-cover" alt="Memory" />
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
 export function FinalReveal() {
   const completeMeghana = useJourneyStore(state => state.completeMeghana);
   const [showBalloons, setShowBalloons] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      completeMeghana();
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [completeMeghana]);
+    if (isInView) {
+      triggerCelebration();
+      const timer = setTimeout(() => {
+        completeMeghana();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, completeMeghana]);
 
   const triggerCelebration = () => {
+    if (showBalloons) return;
     setShowBalloons(true);
     
     // Poppers from corners
@@ -65,7 +138,7 @@ export function FinalReveal() {
 
   return (
     <section 
-      onMouseEnter={triggerCelebration}
+      ref={sectionRef}
       className="min-h-screen w-full flex flex-col items-center justify-center py-32 px-4 relative bg-transparent overflow-hidden"
     >
       
@@ -92,39 +165,31 @@ export function FinalReveal() {
         ))}
       </div>
 
-      {/* Realistic Balloons that float up when triggered */}
+      {/* Premium SVG Balloons floating up */}
       {showBalloons && (
         <div className="absolute inset-0 pointer-events-none z-10">
-          {Array.from({ length: 15 }).map((_, i) => (
+          {Array.from({ length: 25 }).map((_, i) => (
             <motion.div
               key={`balloon-${i}`}
-              className="absolute bottom-[-150px] flex flex-col items-center"
+              className="absolute bottom-[-300px]"
               style={{
-                left: `${10 + (i * 27) % 80}%`,
+                left: `${(i * 17) % 90}%`,
               }}
               animate={{
-                y: ["0vh", "-120vh"],
-                x: ["0px", `${(i % 2 === 0 ? 30 : -30)}px`, "0px"],
+                y: ["0vh", "-150vh"],
+                x: ["0px", `${(i % 2 === 0 ? 50 : -50)}px`, "0px"],
+                rotate: [-5, 5, -5]
               }}
               transition={{
-                duration: 6 + (i % 5),
-                delay: i * 0.2,
-                ease: "easeIn"
+                duration: 10 + (i % 8),
+                delay: (i * 0.4),
+                ease: "easeOut"
               }}
             >
-              {/* Balloon Body */}
-              <div 
-                className={`w-16 h-20 rounded-t-[50%] rounded-b-[40%] shadow-inner relative ${
-                  i % 3 === 0 ? 'bg-rose-500' : i % 3 === 1 ? 'bg-amber-400' : 'bg-indigo-500'
-                }`}
-              >
-                {/* Highlight/Reflection */}
-                <div className="absolute top-2 left-2 w-4 h-8 bg-white/30 rounded-full rotate-[-20deg]" />
-              </div>
-              {/* Balloon Knot */}
-              <div className="w-2 h-2 bg-inherit rounded-full -mt-1" />
-              {/* String */}
-              <div className="w-px h-24 bg-white/40" />
+              <BalloonSVG 
+                color={BALLOON_COLORS[i % BALLOON_COLORS.length]} 
+                photoUrl={i % 3 === 0 ? MEGHANA_PHOTOS[i % MEGHANA_PHOTOS.length] : undefined}
+              />
             </motion.div>
           ))}
         </div>
@@ -192,6 +257,45 @@ export function FinalReveal() {
           </Link>
         </motion.div>
       </motion.div>
+
+      {/* Randomly Popping Final Photos */}
+      {showBalloons && (
+        <div className="absolute inset-0 pointer-events-none z-30">
+          {[
+            { src: "/meghana/20260517_031521.jpg", x: "5%", y: "15%", rotate: -15 },
+            { src: "/meghana/DSC00348.JPG", x: "75%", y: "12%", rotate: 10 },
+            { src: "/meghana/DSC00340.JPG", x: "8%", y: "60%", rotate: -5 },
+            { src: "/meghana/DSC00388 (1).JPG", x: "70%", y: "65%", rotate: 20 },
+            { src: "/meghana/IMG_6371.JPG", x: "80%", y: "35%", rotate: 5 }
+          ].map((photo, i) => (
+            <motion.div
+              key={`final-photo-${i}`}
+              className="absolute shadow-2xl rounded-xl overflow-hidden border-[6px] border-white/20 bg-white/10 backdrop-blur-sm pointer-events-none select-none"
+              style={{
+                width: "220px",
+                height: "auto",
+                left: photo.x,
+                top: photo.y,
+              }}
+              initial={{ scale: 0, opacity: 0, rotate: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1, 
+                rotate: photo.rotate,
+                y: [0, -15, 0] 
+              }}
+              transition={{
+                scale: { type: "spring", bounce: 0.5, duration: 1, delay: 1 + i * 0.8 },
+                opacity: { duration: 0.5, delay: 1 + i * 0.8 },
+                y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 + i * 0.8 },
+                rotate: { type: "spring", duration: 1, delay: 1 + i * 0.8 }
+              }}
+            >
+              <img src={photo.src} alt="Memory" className="w-full h-auto block select-none pointer-events-none" />
+            </motion.div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

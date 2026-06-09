@@ -12,9 +12,10 @@ function sr(seed: number) {
 }
 
 const BUTTERFLIES = [
-  { id: 1, color: "#3b82f6", x: 15, y: 30, msg: "Thank you for the endless support.", photo: true },
-  { id: 2, color: "#a855f7", x: 75, y: 25, msg: "Your words changed my life.", photo: false },
-  { id: 3, color: "#ec4899", x: 45, y: 65, msg: "I still remember your smile every morning.", photo: true },
+  { id: 1, color: "#3b82f6", x: 15, y: 30, msg: "Thank you for the endless support.", image: "/preeti/20260517_063836.jpg" },
+  { id: 2, color: "#a855f7", x: 75, y: 25, msg: "Your words changed my life.", image: "/preeti/DSC00388.JPG" },
+  { id: 3, color: "#ec4899", x: 45, y: 65, msg: "I still remember your smile every morning.", image: "/preeti/IMG_6372.JPG" },
+  { id: 4, color: "#f59e0b", x: 60, y: 70, msg: "We will never forget your inspiring speech.", image: "/preeti/IMG_6460.JPG" },
 ];
 
 export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void }) {
@@ -120,9 +121,9 @@ export function Chapter4_Butterflies({ onComplete }: { onComplete: () => void })
             <p className="font-playfair text-2xl text-pink-100 italic leading-relaxed mb-8 drop-shadow-md">
               &quot;{BUTTERFLIES.find(b => b.id === activeButterfly)?.msg}&quot;
             </p>
-            {BUTTERFLIES.find(b => b.id === activeButterfly)?.photo && (
-              <div className="w-full h-40 bg-black/30 rounded-xl mb-8 flex items-center justify-center text-pink-200/50 font-sans text-xs tracking-widest border border-white/5">
-                [ Photo Appears ]
+            {BUTTERFLIES.find(b => b.id === activeButterfly)?.image && (
+              <div className="w-full h-auto bg-black/30 rounded-xl mb-8 flex items-center justify-center border border-white/5 overflow-hidden">
+                <img src={BUTTERFLIES.find(b => b.id === activeButterfly)?.image} className="w-full h-full object-contain max-h-64" alt="Memory" />
               </div>
             )}
             <button 

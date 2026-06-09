@@ -11,6 +11,7 @@ const TIMELINE = [
     color: "from-amber-500/20 to-amber-500/5",
     glow: "rgba(245,158,11,0.3)",
     label: "Where it started",
+    image: "/meghana/20260517_031521.jpg"
   },
   {
     era: "The Middle",
@@ -18,6 +19,7 @@ const TIMELINE = [
     color: "from-indigo-500/20 to-indigo-500/5",
     glow: "rgba(99,102,241,0.3)",
     label: "Where we grew",
+    image: "/meghana/DSC00336.JPG"
   },
   {
     era: "The Lessons",
@@ -25,6 +27,7 @@ const TIMELINE = [
     color: "from-rose-500/20 to-rose-500/5",
     glow: "rgba(225,29,72,0.3)",
     label: "What we learned",
+    image: "/meghana/DSC00340.JPG"
   },
   {
     era: "Now",
@@ -32,6 +35,7 @@ const TIMELINE = [
     color: "from-emerald-500/20 to-emerald-500/5",
     glow: "rgba(16,185,129,0.3)",
     label: "Where we are",
+    image: "/meghana/DSC00345.JPG"
   },
 ];
 
@@ -216,6 +220,16 @@ export function HorizontalTimeline() {
                   <p className="font-playfair italic text-lg text-gray-400 leading-relaxed">
                     &quot;{item.text}&quot;
                   </p>
+
+                  {item.image && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: activeCard === i ? 1 : 0.4, height: activeCard === i ? "auto" : 0 }}
+                      className="mt-6 overflow-hidden rounded-xl"
+                    >
+                      <img src={item.image} alt={item.era} className="w-full h-auto object-contain max-h-48" />
+                    </motion.div>
+                  )}
 
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}

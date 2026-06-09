@@ -29,6 +29,14 @@ const CONFETTI = Array.from({ length: 100 }, (_, i) => ({
   color: ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#06b6d4"][i % 7],
 }));
 
+const FINAL_PHOTOS = [
+  { src: "/preeti/20260517_063836.jpg", x: "8%", y: "15%", rotate: -15 }, // Top Left
+  { src: "/preeti/DSC00388.JPG", x: "75%", y: "12%", rotate: 10 }, // Top Right
+  { src: "/preeti/IMG_6372.JPG", x: "12%", y: "60%", rotate: -5 }, // Bottom Left
+  { src: "/preeti/IMG_6441.JPG", x: "68%", y: "55%", rotate: 20 }, // Bottom Right
+  { src: "/preeti/IMG_6460.JPG", x: "80%", y: "40%", rotate: 5 }, // Middle Right
+];
+
 export function Finale_Tree() {
   const [phase, setPhase] = useState(0); 
   const [leaves, setLeaves] = useState<{x: number, y: number, id: number}[]>([]);
@@ -80,14 +88,15 @@ export function Finale_Tree() {
       {phase >= 3 && CONFETTI.map((c, i) => (
         <motion.div
           key={`confetti-${i}`}
-          className="absolute top-[-10%] w-2 h-5 z-50"
-          style={{ backgroundColor: c.color, left: `${c.left}%`, borderRadius: "2px" }}
-          initial={{ y: "-10vh", rotateX: 0, rotateY: 0 }}
+          className="absolute top-[-10%] w-3 h-3 z-50"
+          style={{ backgroundColor: c.color, left: `${c.left}%`, borderRadius: i % 2 === 0 ? "2px" : "50%" }}
+          initial={{ y: "-10vh", rotateX: 0, rotateY: 0, rotate: 0 }}
           animate={{ 
             y: "110vh", 
             x: [(sr(i)-0.5)*200, (sr(i+1)-0.5)*200, (sr(i+2)-0.5)*200],
             rotateX: [0, 360, 720], 
-            rotateY: [0, 720, 1080] 
+            rotateY: [0, 720, 1080],
+            rotate: [0, 360, 720]
           }}
           transition={{ duration: c.duration, delay: c.delay, ease: "linear", repeat: Infinity }}
         />
@@ -135,10 +144,39 @@ export function Finale_Tree() {
         ))}
       </motion.div>
 
-
+      {/* Randomly Popping Final Photos */}
+      <AnimatePresence>
+        {phase === 3 && FINAL_PHOTOS.map((photo, i) => (
+          <motion.div
+            key={`final-photo-${i}`}
+            className="absolute z-30 shadow-2xl rounded-xl overflow-hidden border-[6px] border-white/20 bg-white/10 backdrop-blur-sm"
+            style={{
+              width: "220px",
+              height: "auto",
+              left: photo.x,
+              top: photo.y,
+            }}
+            initial={{ scale: 0, opacity: 0, rotate: 0 }}
+            animate={{ 
+              scale: 1, 
+              opacity: 1, 
+              rotate: photo.rotate,
+              y: [0, -15, 0] 
+            }}
+            transition={{
+              scale: { type: "spring", bounce: 0.5, duration: 1, delay: 1 + sr(i) * 3 },
+              opacity: { duration: 0.5, delay: 1 + sr(i) * 3 },
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 + sr(i) * 3 },
+              rotate: { type: "spring", duration: 1, delay: 1 + sr(i) * 3 }
+            }}
+          >
+            <img src={photo.src} alt="Memory" className="w-full h-auto block select-none pointer-events-none" />
+          </motion.div>
+        ))}
+      </AnimatePresence>
 
       {/* Text Sequence */}
-      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-3xl px-4 pointer-events-none">
+      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 z-40 text-center w-full max-w-3xl px-4 pointer-events-none select-none">
         <AnimatePresence mode="wait">
           {phase === 1 && (
             <motion.div
@@ -174,7 +212,7 @@ export function Finale_Tree() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 3, delay: 1 }}
-              className="px-8 py-10 md:py-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.2)]"
+              className="px-8 py-10 md:py-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-[3rem] mx-auto shadow-[0_0_80px_rgba(255,255,255,0.2)] select-none"
             >
               <h1 className="font-playfair font-bold text-5xl md:text-7xl text-amber-300 drop-shadow-[0_0_20px_rgba(253,224,71,0.5)]">
                 HAPPY BIRTHDAY

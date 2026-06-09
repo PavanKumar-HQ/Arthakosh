@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 
 const QUOTES = [
-  { text: "It's not about the grades, it's about the growth.", offset: "md:ml-12" },
-  { text: "Take a deep breath. You are capable of more than you know.", offset: "md:ml-64" },
-  { text: "Don't just read the syllabus, read between the lines.", offset: "md:ml-24" },
+  { text: "Don't overthink about things.", offset: "md:ml-12" },
+  { text: "Don't think about what you can't do.", offset: "md:ml-64" },
+  { text: "Don't waste your energy thinking about unnecessary things.", offset: "md:ml-24" },
+  { text: "Join the energy session.", offset: "md:ml-56" },
 ];
 
 export function ChapterTwo() {

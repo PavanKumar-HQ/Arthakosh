@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
 const GIVERS = [
-  { name: "Batch of '19", message: "Thank you for the endless patience." },
-  { name: "Rahul S.", message: "You saw potential when I didn't." },
-  { name: "Sneha M.", message: "For every after-school doubt cleared." },
-  { name: "The Quiet Ones", message: "You made sure we were heard." },
-  { name: "Aditya", message: "Your energy is contagious." },
-  { name: "Priya", message: "You are the standard we aspire to." },
+  { name: "Batch of '19", message: "Thank you for the endless patience.", image: "/meghana/DSC00348.JPG" },
+  { name: "Rahul S.", message: "You saw potential when I didn't.", image: "/meghana/DSC00336.JPG" },
+  { name: "Sneha M.", message: "For every after-school doubt cleared.", image: "/meghana/DSC00388 (1).JPG" },
+  { name: "The Quiet Ones", message: "You made sure we were heard.", image: "/meghana/DSC00340.JPG" },
+  { name: "Aditya", message: "Your energy is contagious.", image: "/meghana/IMG_6371.JPG" },
+  { name: "Priya", message: "You are the standard we aspire to.", image: "/meghana/DSC00345.JPG" },
 ];
 
 export function EnergyGiversWall() {
@@ -55,23 +55,27 @@ export function EnergyGiversWall() {
             }}
           >
             {/* Top edge highlight */}
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
             
-            {/* Ambient hover glow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#d4af37]/0 via-[#d4af37]/0 to-[#d4af37]/0 group-hover:from-[#d4af37]/10 transition-all duration-700" />
-            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-[#d4af37]/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            
-            <div className="flex flex-col items-center justify-center h-full p-6 relative z-10 text-center">
-              <Sparkles className="w-5 h-5 text-[#d4af37] opacity-0 group-hover:opacity-100 absolute top-4 right-4 transition-opacity duration-500" />
-              
-              <h3 className="font-mono tracking-[0.2em] text-gray-500 group-hover:text-[#d4af37] transition-colors duration-500 mb-3 uppercase text-xs font-semibold">
-                {giver.name}
-              </h3>
-              
-              <p className="font-playfair italic text-white/90 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                &quot;{giver.message}&quot;
-              </p>
-            </div>
+            {giver.image ? (
+              <div className="absolute inset-0 z-20 flex items-center justify-center p-2">
+                <img 
+                  src={giver.image} 
+                  alt={giver.name} 
+                  className="w-full h-full object-contain rounded-xl select-none pointer-events-none"
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-full p-6 relative z-10 text-center">
+                <Sparkles className="w-5 h-5 text-[#d4af37] opacity-0 group-hover:opacity-100 absolute top-4 right-4 transition-opacity duration-500" />
+                <h3 className="font-mono tracking-[0.2em] text-gray-500 group-hover:text-[#d4af37] transition-colors duration-500 mb-3 uppercase text-xs font-semibold">
+                  {giver.name}
+                </h3>
+                <p className="font-playfair italic text-white/90 text-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                  &quot;{giver.message}&quot;
+                </p>
+              </div>
+            )}
           </motion.div>
         ))}
       </div>

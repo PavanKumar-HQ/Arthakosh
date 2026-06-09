@@ -4,9 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 const MEMORIES = [
-  { id: 1, text: "Teachers' Day Celebration 2022", details: "You brought so much joy to our classroom!" },
-  { id: 2, text: "The Science Fair", details: "Thank you for staying late to help us build the volcano." },
-  { id: 3, text: "Farewell Party", details: "We will never forget your inspiring speech." }
+  { id: 1, text: "Teachers' Day Celebration 2022", details: "You brought so much joy to our classroom!", image: "/preeti/20260517_063836.jpg" },
+  { id: 2, text: "The Science Fair", details: "Thank you for staying late to help us build the volcano.", image: "/preeti/IMG_6460.JPG" },
+  { id: 3, text: "Farewell Party", details: "We will never forget your inspiring speech.", image: "/preeti/IMG_6460.JPG" },
+  { id: 4, text: "Morning Assembly", details: "Your daily quotes kept us motivated.", image: "/preeti/DSC00388.JPG" },
+  { id: 5, text: "Sports Day", details: "Cheering for us louder than anyone else.", image: "/preeti/IMG_6372.JPG" },
+  { id: 6, text: "Graduation", details: "A proud moment we shared together.", image: "/preeti/IMG_6441.JPG" }
 ];
 
 export function MemoryBlooms() {
@@ -53,26 +56,35 @@ export function MemoryBlooms() {
             onClick={() => setActiveMemory(null)}
           >
             <motion.div 
-              className="bg-white p-8 rounded-3xl shadow-2xl max-w-lg w-full text-center border border-emerald-100"
+              className="bg-white p-8 rounded-3xl shadow-2xl max-w-lg w-full text-center border border-emerald-100 max-h-[90vh] overflow-y-auto"
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img 
-                src="/real-flower.png" 
-                className="w-32 h-32 mx-auto mix-blend-darken mb-6" 
-                alt="Flower"
-              />
-              <h3 className="text-2xl font-playfair text-emerald-900 mb-4">
-                {MEMORIES.find(m => m.id === activeMemory)?.text}
-              </h3>
-              <p className="text-gray-600 font-sans leading-relaxed text-lg">
-                {MEMORIES.find(m => m.id === activeMemory)?.details}
-              </p>
+              {(() => {
+                const memory = MEMORIES.find(m => m.id === activeMemory);
+                return (
+                  <>
+                    {memory?.video ? (
+                      <video src={memory.video} controls autoPlay muted className="w-full rounded-xl mb-6 max-h-64 object-contain bg-black/5" />
+                    ) : memory?.image ? (
+                      <img src={memory.image} alt={memory.text} className="w-full rounded-xl mb-6 max-h-64 object-contain bg-black/5" />
+                    ) : (
+                      <img src="/real-flower.png" className="w-32 h-32 mx-auto mix-blend-darken mb-6" alt="Flower" />
+                    )}
+                    <h3 className="text-2xl font-playfair text-emerald-900 mb-4">
+                      {memory?.text}
+                    </h3>
+                    <p className="text-gray-600 font-sans leading-relaxed text-lg mb-6">
+                      {memory?.details}
+                    </p>
+                  </>
+                );
+              })()}
               <button 
                 onClick={() => setActiveMemory(null)}
-                className="mt-8 px-6 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-full font-medium transition-colors"
+                className="px-6 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-full font-medium transition-colors"
               >
                 Close Memory
               </button>

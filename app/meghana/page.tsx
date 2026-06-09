@@ -16,7 +16,7 @@ export default function MeghanaJourney() {
       <iframe
         width="1"
         height="1"
-        src="https://www.youtube.com/embed/fUffhENQ0Oo?autoplay=1&start=8&controls=0&showinfo=0&autohide=1&loop=1&playlist=fUffhENQ0Oo"
+        src="https://www.youtube.com/embed/fUffhENQ0Oo?autoplay=1&start=8&end=91&controls=0&showinfo=0&autohide=1&loop=1&playlist=fUffhENQ0Oo"
         frameBorder="0"
         allow="autoplay; encrypted-media"
         className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"

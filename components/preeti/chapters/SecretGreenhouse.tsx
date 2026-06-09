@@ -52,16 +52,16 @@ export function SecretGreenhouse() {
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
-              <div className="w-full h-48 bg-emerald-100 rounded-xl mb-4 flex items-center justify-center text-emerald-600">
-                [ Video Montage Placeholder ]
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 w-full overflow-hidden">
+              <div className="w-full h-auto bg-emerald-100 rounded-xl mb-4 flex items-center justify-center text-emerald-600 overflow-hidden relative">
+                <video src="/preeti/f7oqo5.mp4" controls className="w-full h-full object-contain bg-black/5 max-h-64" />
               </div>
               <p className="text-center font-playfair italic text-emerald-900">A look back at our best times.</p>
             </div>
             
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
-              <div className="w-full h-48 bg-emerald-100 rounded-xl mb-4 flex items-center justify-center text-emerald-600">
-                [ Group Photo Placeholder ]
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 w-full overflow-hidden">
+              <div className="w-full h-auto bg-emerald-100 rounded-xl mb-4 flex items-center justify-center text-emerald-600 overflow-hidden relative">
+                <img src="/preeti/IMG_6441.JPG" alt="Class of 2023 Group Photo" className="w-full h-full object-contain bg-black/5 max-h-64" />
               </div>
               <p className="text-center font-playfair italic text-emerald-900">Class of 2023</p>
             </div>
