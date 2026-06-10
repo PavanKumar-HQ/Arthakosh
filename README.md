@@ -1,6 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ Interactive Birthday Tributes
 
-## Getting Started
+A cinematic, interactive web experience built to celebrate and honor two very special teachers: **Meghana Ma'am** and **Preeti Ma'am**.
+
+This project uses modern web technologies to create emotional, narrative-driven chapters filled with animations, music, and cherished memories.
+
+## 🌟 Features
+
+- **Two Distinct Journeys:** Choose between the elegant Book of Memories for Meghana Ma'am or the cinematic Garden of Growth for Preeti Ma'am.
+- **Cinematic Animations:** Powered by `framer-motion` for smooth, responsive scroll animations, page transitions, and interactive elements.
+- **Dynamic Multimedia:** Includes integrated background music via an invisible YouTube player for zero-delay music, alongside high-quality image galleries.
+- **Interactive Chapters:** Features such as the "Energy Givers Wall" and the "Secret Greenhouse" that unlock as you progress through the story.
+- **Celebratory Effects:** Confetti and custom SVG balloon animations trigger perfectly on scroll for a grand finale.
+
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Effects:** `canvas-confetti`
+- **State Management:** Zustand (for journey progress tracking)
+
+## 💻 Getting Started
 
 First, run the development server:
 
@@ -16,21 +37,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/meghana`: The Book of Memories interactive experience.
+- `app/preeti`: The Garden of Growth cinematic experience.
+- `components/meghana`: Custom components, chapters, and UI elements for Meghana's journey.
+- `components/preeti`: Custom components, cinematic phases, and generative physics (like water and L-System trees) for Preeti's journey.
+- `lib/store.ts`: Zustand store managing unlocked chapters and completed journeys.
 
-## Learn More
+## 🌐 Deployment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project can easily be deployed on [Vercel](https://vercel.com) or GitHub Pages. Note: Very large media files have been hosted externally to ensure smooth deployments and bypass file-size limits.
