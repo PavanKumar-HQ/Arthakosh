@@ -3,7 +3,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const MEMORIES = [
+type Memory = {
+  id: number;
+  text: string;
+  details: string;
+  image?: string;
+  video?: string;
+};
+
+const MEMORIES: Memory[] = [
   { id: 1, text: "Teachers' Day Celebration 2022", details: "You brought so much joy to our classroom!", image: "/preeti/20260517_063836.jpg" },
   { id: 2, text: "The Science Fair", details: "Thank you for staying late to help us build the volcano.", image: "/preeti/IMG_6460.JPG" },
   { id: 3, text: "Farewell Party", details: "We will never forget your inspiring speech.", image: "/preeti/IMG_6460.JPG" },
