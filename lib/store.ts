@@ -14,7 +14,8 @@ type JourneyState = {
   addDiscoveredMemory: (id: string) => void;
   addPlanetVisited: (planet: string) => void;
   collectKey: () => void;
-  resetJourneys: () => void;
+  isMusicMuted: boolean;
+  setMusicMuted: (muted: boolean) => void;
 };
 
 export const useJourneyStore = create<JourneyState>()(
@@ -26,6 +27,7 @@ export const useJourneyStore = create<JourneyState>()(
       discoveredMemories: [],
       planetsVisited: [],
       collectedKeys: 0,
+      isMusicMuted: false,
       completePreeti: () => set({ preetiCompleted: true }),
       completeMeghana: () => set({ meghanaCompleted: true }),
       increaseEnergy: (amount) => set((state) => ({ energyLevel: state.energyLevel + amount })),
@@ -36,13 +38,15 @@ export const useJourneyStore = create<JourneyState>()(
         planetsVisited: state.planetsVisited.includes(planet) ? state.planetsVisited : [...state.planetsVisited, planet]
       })),
       collectKey: () => set((state) => ({ collectedKeys: state.collectedKeys + 1 })),
+      setMusicMuted: (muted) => set({ isMusicMuted: muted }),
       resetJourneys: () => set({ 
         preetiCompleted: false, 
         meghanaCompleted: false, 
         energyLevel: 0,
         discoveredMemories: [],
         planetsVisited: [],
-        collectedKeys: 0
+        collectedKeys: 0,
+        isMusicMuted: false
       }),
     }),
     {

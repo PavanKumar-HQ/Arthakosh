@@ -15,6 +15,8 @@ import { Chapter_Apology as Chapter10_Apology } from "@/components/preeti/cinema
 import { Finale_Tree as Chapter11_Finale } from "@/components/preeti/cinematic/Finale_Tree";
 import { YouTubeAudioPlayer } from "@/components/preeti/generative/YouTubeAudioPlayer";
 
+import { useJourneyStore } from "@/lib/store";
+
 // Client-only: avoids SSR hydration mismatch
 const GardenAmbient = dynamic(
   () => import("@/components/preeti/generative/GardenAmbient").then(m => ({ default: m.GardenAmbient })),
@@ -23,6 +25,7 @@ const GardenAmbient = dynamic(
 
 export default function PreetiGardenOfGrowth() {
   const [chapter, setChapter] = useState(1);
+  const isMusicMuted = useJourneyStore(state => state.isMusicMuted);
 
   const nextChapter = () => setChapter((prev) => prev + 1);
 
@@ -36,7 +39,7 @@ export default function PreetiGardenOfGrowth() {
       <YouTubeAudioPlayer 
         videoId="YUSfkS2q94o" 
         start={75} 
-        play={chapter > 0 && chapter < 9} 
+        play={chapter > 0 && chapter < 9 && !isMusicMuted} 
       />
 
       {/* Preeti Finale Audio Player (Chapter 10) - Preloaded for instant playback */}

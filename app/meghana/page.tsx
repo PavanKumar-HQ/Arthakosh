@@ -9,17 +9,18 @@ import { ThingsWeNeverSaid } from "@/components/meghana/chapters/ThingsWeNeverSa
 import { ImpactVisualization } from "@/components/meghana/chapters/ImpactVisualization";
 import { FinalReveal } from "@/components/meghana/chapters/FinalReveal";
 import { FestiveBackground } from "@/components/FestiveBackground";
+import { YouTubeAudioPlayer } from "@/components/preeti/generative/YouTubeAudioPlayer";
+import { useJourneyStore } from "@/lib/store";
 
 export default function MeghanaJourney() {
+  const isMusicMuted = useJourneyStore(state => state.isMusicMuted);
+
   return (
     <main className="bg-transparent text-white min-h-screen selection:bg-amber-500/30 relative">
-      <iframe
-        width="1"
-        height="1"
-        src="https://www.youtube.com/embed/fUffhENQ0Oo?autoplay=1&start=8&end=91&controls=0&showinfo=0&autohide=1&loop=1&playlist=fUffhENQ0Oo"
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-        className="absolute opacity-0 pointer-events-none w-1 h-1 z-[-1]"
+      <YouTubeAudioPlayer 
+        videoId="fUffhENQ0Oo" 
+        start={8} 
+        play={!isMusicMuted} 
       />
       <FestiveBackground />
       <div className="relative z-10">

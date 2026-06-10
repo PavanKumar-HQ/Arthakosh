@@ -68,6 +68,25 @@ export function YouTubeAudioPlayer({
     }
   }, [play, isReady, start]);
 
+  // Handle browser autoplay policy by resuming audio on any interaction
+  useEffect(() => {
+    const handleInteraction = () => {
+      if (play && isReady && playerRef.current) {
+        // If it's supposed to be playing but isn't (state 1 is playing)
+        if (playerRef.current.getPlayerState() !== 1) {
+          playerRef.current.playVideo();
+        }
+      }
+    };
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+  }, [play, isReady]);
+
   return (
     <div className="absolute opacity-0 pointer-events-none z-[-1]">
       <div id={`yt-player-${videoId}`}></div>

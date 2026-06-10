@@ -1,13 +1,20 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BackgroundGreenhouse } from "@/components/preeti/generative/BackgroundGreenhouse";
 import { ChapterControls } from "@/components/preeti/ui/ChapterControls";
 import { Lock, Unlock } from "lucide-react";
+import { useJourneyStore } from "@/lib/store";
 
 export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) {
   const [unlocked, setUnlocked] = useState(false);
+  const setMusicMuted = useJourneyStore(state => state.setMusicMuted);
+
+  // Ensure music is unmuted when leaving this chapter
+  useEffect(() => {
+    return () => setMusicMuted(false);
+  }, [setMusicMuted]);
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-transparent">
@@ -87,7 +94,17 @@ export function Chapter9_Greenhouse({ onComplete }: { onComplete: () => void }) 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-12">
               <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/10 flex flex-col items-center hover:bg-white/10 transition-all cursor-pointer hover:border-emerald-400/50 group w-full overflow-hidden">
                 <div className="w-full h-auto min-h-[14rem] bg-black/40 rounded-xl flex items-center justify-center mb-6 overflow-hidden relative">
-                   <video src="https://files.catbox.moe/f7oqo5.mp4" autoPlay playsInline muted controls className="w-full h-full object-contain max-h-64" />
+                   <video 
+                     src="https://files.catbox.moe/f7oqo5.mp4" 
+                     autoPlay 
+                     playsInline 
+                     muted={false}
+                     controls 
+                     className="w-full h-full object-contain max-h-64" 
+                     onPlay={() => setMusicMuted(true)}
+                     onPause={() => setMusicMuted(false)}
+                     onEnded={() => setMusicMuted(false)}
+                   />
                 </div>
                 <p className="font-playfair text-2xl text-emerald-100 italic">Our Class Montage</p>
               </div>
