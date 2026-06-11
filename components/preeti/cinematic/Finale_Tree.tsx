@@ -220,7 +220,7 @@ export function Finale_Tree() {
                 PREETI MA'AM
               </h1>
               <p className="mt-6 font-sans text-xl md:text-2xl text-amber-100 tracking-[0.3em] uppercase font-bold drop-shadow-md">
-                From all your students.
+                FROM YOUR GANG.
               </p>
             </motion.div>
           )}
