@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useJourneyStore } from "@/lib/store";
 import { Sparkles, Moon, Users } from "lucide-react";
 
@@ -37,7 +38,9 @@ function useTypewriter(text: string, speed = 60, startDelay = 0, enabled = true)
 export function AnimatedBook() {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<"preeti" | "meghana" | null>(null);
+  const [selectedTeacherForPopup, setSelectedTeacherForPopup] = useState<"preeti" | "meghana" | null>(null);
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
   const preetiCompleted = useJourneyStore((state) => state.preetiCompleted);
   const meghanaCompleted = useJourneyStore((state) => state.meghanaCompleted);
 
@@ -111,7 +114,7 @@ export function AnimatedBook() {
             className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center px-8 w-full max-w-5xl"
           >
             {/* Preeti Card */}
-            <Link href="/preeti" className="w-full md:w-80 block group">
+            <div onClick={() => setSelectedTeacherForPopup("preeti")} className="w-full md:w-80 block group">
               <motion.div
                 onHoverStart={() => setHoveredCard("preeti")}
                 onHoverEnd={() => setHoveredCard(null)}
@@ -165,7 +168,7 @@ export function AnimatedBook() {
                   <div className="absolute top-4 right-4 w-2 h-2 bg-rose-400 rounded-full shadow-[0_0_8px_rgba(225,29,72,0.8)]" />
                 )}
               </motion.div>
-            </Link>
+            </div>
 
             {/* Divider */}
             <div className="hidden md:flex flex-col items-center gap-3 opacity-30">
@@ -175,7 +178,7 @@ export function AnimatedBook() {
             </div>
 
             {/* Meghana Card */}
-            <Link href="/meghana" className="w-full md:w-80 block group">
+            <div onClick={() => setSelectedTeacherForPopup("meghana")} className="w-full md:w-80 block group">
               <motion.div
                 onHoverStart={() => setHoveredCard("meghana")}
                 onHoverEnd={() => setHoveredCard(null)}
@@ -229,11 +232,53 @@ export function AnimatedBook() {
                   <div className="absolute top-4 right-4 w-2 h-2 bg-indigo-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
                 )}
               </motion.div>
-            </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* ── Quote Modal ── */}
+      <AnimatePresence>
+        {selectedTeacherForPopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
+            onClick={() => setSelectedTeacherForPopup(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 20, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="relative w-full max-w-2xl bg-[#0a0a0a] border border-[#d4af37]/30 rounded-2xl p-8 md:p-12 text-center shadow-[0_0_50px_rgba(212,175,55,0.15)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className="font-playfair italic text-2xl md:text-3xl leading-relaxed text-gray-200 mb-8">
+                {selectedTeacherForPopup === "preeti" 
+                  ? "\"You give endless second chances to people, but deep down, you wonder if anyone would ever do the same for you.\""
+                  : "\"You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure.\""
+                }
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={() => setSelectedTeacherForPopup(null)}
+                  className="px-6 py-2 rounded-full border border-gray-500/30 text-gray-400 hover:text-white hover:bg-white/5 transition-colors font-mono uppercase text-xs tracking-widest"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => router.push(`/${selectedTeacherForPopup}`)}
+                  className="px-6 py-2 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/30 hover:text-white transition-all font-mono uppercase text-xs tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+                >
+                  Enter Journey
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

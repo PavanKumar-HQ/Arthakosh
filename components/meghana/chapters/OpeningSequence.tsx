@@ -40,8 +40,10 @@ export function OpeningSequence() {
       setStage(1);
       await new Promise(r => setTimeout(r, 3200));
       setStage(2);
-      await new Promise(r => setTimeout(r, 3000));
+      await new Promise(r => setTimeout(r, 2500));
       setStage(3);
+      await new Promise(r => setTimeout(r, 3000));
+      setStage(4);
     };
     sequence();
   }, []);
@@ -108,7 +110,23 @@ export function OpeningSequence() {
                   Chapters
                 </span>
               </h1>
-              <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-500/70 to-transparent mx-auto" />
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-500/70 to-transparent mx-auto mb-8" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* New Quote */}
+        <AnimatePresence>
+          {stage >= 3 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="max-w-2xl mx-auto"
+            >
+              <p className="font-playfair italic text-lg md:text-xl text-gray-300 leading-relaxed">
+                "You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure."
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -116,7 +134,7 @@ export function OpeningSequence() {
 
       {/* Scroll prompt */}
       <AnimatePresence>
-        {stage >= 3 && (
+        {stage >= 4 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

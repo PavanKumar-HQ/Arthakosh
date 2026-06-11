@@ -35,7 +35,9 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
       await new Promise(r => setTimeout(r, 4000));
       setPhase(4); // Typewriter 2
       await new Promise(r => setTimeout(r, 4000));
-      setPhase(5); // Fade out to next
+      setPhase(5); // The Quote
+      await new Promise(r => setTimeout(r, 5000));
+      setPhase(6); // Fade out to next
       await new Promise(r => setTimeout(r, 2000));
       onComplete();
     };
@@ -126,7 +128,7 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
 
       {/* The Generative SVG Sprout */}
       <AnimatePresence>
-        {phase >= 2 && phase < 5 && (
+        {phase >= 2 && phase < 6 && (
           <motion.div 
             className="absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-full z-20"
             initial={{ opacity: 0 }}
@@ -140,7 +142,7 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
       </AnimatePresence>
 
       {/* The Text (No Glassmorphism needed since background is soft) */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full text-center z-30 pointer-events-none">
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-4xl px-6 text-center z-30 pointer-events-none">
         <AnimatePresence mode="wait">
           {phase === 3 && (
             <motion.div
@@ -165,6 +167,19 @@ export function Chapter1_TheSeed({ onComplete }: { onComplete: () => void }) {
             >
               <p className="font-playfair text-3xl md:text-5xl text-emerald-900 drop-shadow-sm">
                 So does every student.
+              </p>
+            </motion.div>
+          )}
+          {phase === 5 && (
+            <motion.div
+              key="text3"
+              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+              transition={{ duration: 1.5 }}
+            >
+              <p className="font-playfair italic text-xl md:text-3xl text-emerald-900/90 leading-relaxed drop-shadow-sm">
+                "You give endless second chances to people, but deep down, you wonder if anyone would ever do the same for you."
               </p>
             </motion.div>
           )}
