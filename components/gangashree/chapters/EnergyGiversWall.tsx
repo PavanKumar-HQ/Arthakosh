@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
 const GIVERS = [
-  { name: "Batch of '19", message: "Thank you for the endless patience.", image: "/gangashree/DSC00348.JPG" },
-  { name: "Rahul S.", message: "You saw potential when I didn't.", image: "/gangashree/DSC00336.JPG" },
-  { name: "Sneha M.", message: "For every after-school doubt cleared.", image: "/gangashree/DSC00388 (1).JPG" },
-  { name: "The Quiet Ones", message: "You made sure we were heard.", image: "/gangashree/DSC00340.JPG" },
-  { name: "Aditya", message: "Your energy is contagious.", image: "/gangashree/IMG_6371.JPG" },
-  { name: "Priya", message: "You are the standard we aspire to.", image: "/gangashree/DSC00345.JPG" },
+  { name: "Family Roadtrip", message: "Thank you for the endless patience.", image: "/gangashree/photos/photo1.jpeg" },
+  { name: "Secret Mission", message: "You saw potential when I didn't.", image: "/gangashree/photos/photo2.jpeg" },
+  { name: "Late Night Snacks", message: "For every after-bedtime doubt cleared.", image: "/gangashree/photos/photo3.jpeg" },
+  { name: "Movie Marathon", message: "You made sure we were heard.", image: "/gangashree/photos/photo4.jpeg" },
+  { name: "Gaming Together", message: "Your energy is contagious.", image: "/gangashree/photos/photo5.jpeg" },
+  { name: "Graduation Day", message: "You are the standard we aspire to.", image: "/gangashree/photos/photo1.jpeg" },
 ];
 
 export function EnergyGiversWall() {

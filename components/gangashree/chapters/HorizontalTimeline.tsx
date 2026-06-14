@@ -11,7 +11,7 @@ const TIMELINE = [
     color: "from-amber-500/20 to-amber-500/5",
     glow: "rgba(245,158,11,0.3)",
     label: "Where it started",
-    image: "/gangashree/20260517_031521.jpg"
+    image: "/gangashree/photos/photo1.jpeg"
   },
   {
     era: "The Middle",
@@ -19,7 +19,7 @@ const TIMELINE = [
     color: "from-indigo-500/20 to-indigo-500/5",
     glow: "rgba(99,102,241,0.3)",
     label: "Where we grew",
-    image: "/gangashree/DSC00336.JPG"
+    image: "/gangashree/photos/photo2.jpeg"
   },
   {
     era: "The memories",
@@ -27,7 +27,7 @@ const TIMELINE = [
     color: "from-rose-500/20 to-rose-500/5",
     glow: "rgba(225,29,72,0.3)",
     label: "What we learned",
-    image: "/gangashree/DSC00340.JPG"
+    image: "/gangashree/photos/photo3.jpeg"
   },
   {
     era: "Now",
@@ -35,7 +35,7 @@ const TIMELINE = [
     color: "from-emerald-500/20 to-emerald-500/5",
     glow: "rgba(16,185,129,0.3)",
     label: "Where we are",
-    image: "/gangashree/DSC00345.JPG"
+    image: "/gangashree/photos/photo4.jpeg"
   },
 ];
 

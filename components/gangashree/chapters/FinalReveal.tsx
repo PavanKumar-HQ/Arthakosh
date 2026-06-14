@@ -26,14 +26,12 @@ const BALLOON_COLORS = [
   '#ec4899', // pink
 ];
 
-const MEGHANA_PHOTOS = [
-  "/gangashree/20260517_031521.jpg",
-  "/gangashree/DSC00336.JPG",
-  "/gangashree/DSC00340.JPG",
-  "/gangashree/DSC00345.JPG",
-  "/gangashree/DSC00348.JPG",
-  "/gangashree/DSC00388 (1).JPG",
-  "/gangashree/IMG_6371.JPG"
+const GANGASHREE_PHOTOS = [
+  "/gangashree/photos/photo1.jpeg",
+  "/gangashree/photos/photo2.jpeg",
+  "/gangashree/photos/photo3.jpeg",
+  "/gangashree/photos/photo4.jpeg",
+  "/gangashree/photos/photo5.jpeg"
 ];
 
 const BalloonSVG = ({ color, photoUrl }: { color: string, photoUrl?: string }) => {
@@ -188,7 +186,7 @@ export function FinalReveal() {
             >
               <BalloonSVG 
                 color={BALLOON_COLORS[i % BALLOON_COLORS.length]} 
-                photoUrl={i % 3 === 0 ? MEGHANA_PHOTOS[i % MEGHANA_PHOTOS.length] : undefined}
+                photoUrl={i % 3 === 0 ? GANGASHREE_PHOTOS[i % GANGASHREE_PHOTOS.length] : undefined}
               />
             </motion.div>
           ))}
@@ -227,7 +225,7 @@ export function FinalReveal() {
 
         
         <p className="text-3xl md:text-5xl font-playfair text-[#d4af37] tracking-[0.2em] uppercase font-medium mb-20 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-          Gangashree Ma&apos;am
+          Gangashree
         </p>
         
         <p className="font-sans text-xl md:text-2xl text-gray-300 leading-relaxed font-light mb-24 max-w-2xl mx-auto">
@@ -262,11 +260,11 @@ export function FinalReveal() {
       {showBalloons && (
         <div className="absolute inset-0 pointer-events-none z-30">
           {[
-            { src: "/gangashree/20260517_031521.jpg", x: "5%", y: "15%", rotate: -15 },
-            { src: "/gangashree/DSC00348.JPG", x: "75%", y: "12%", rotate: 10 },
-            { src: "/gangashree/DSC00340.JPG", x: "8%", y: "60%", rotate: -5 },
-            { src: "/gangashree/DSC00388 (1).JPG", x: "70%", y: "65%", rotate: 20 },
-            { src: "/gangashree/IMG_6371.JPG", x: "80%", y: "35%", rotate: 5 }
+            { src: "/gangashree/photos/photo1.jpeg", x: "5%", y: "15%", rotate: -15 },
+            { src: "/gangashree/photos/photo2.jpeg", x: "75%", y: "12%", rotate: 10 },
+            { src: "/gangashree/photos/photo3.jpeg", x: "8%", y: "60%", rotate: -5 },
+            { src: "/gangashree/photos/photo4.jpeg", x: "70%", y: "65%", rotate: 20 },
+            { src: "/gangashree/photos/photo5.jpeg", x: "80%", y: "35%", rotate: 5 }
           ].map((photo, i) => (
             <motion.div
               key={`final-photo-${i}`}
