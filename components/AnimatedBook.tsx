@@ -67,7 +67,7 @@ export function AnimatedBook() {
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: isOpen ? 1 : 0, scale: isOpen ? 1 : 0.6 }}
         transition={{ duration: 2.5, ease: "easeOut", delay: 0.4 }}
-        className="absolute left-[22%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(225,29,72,0.18)_0%,transparent_70%)] pointer-events-none z-0 blur-xl"
+        className="absolute left-[22%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[400px] md:h-[600px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(225,29,72,0.18)_0%,transparent_70%)] pointer-events-none z-0 blur-xl"
       />
 
       {/* ── Indigo halo (right) ── */}
@@ -75,7 +75,7 @@ export function AnimatedBook() {
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: isOpen ? 1 : 0, scale: isOpen ? 1 : 0.6 }}
         transition={{ duration: 2.5, ease: "easeOut", delay: 0.6 }}
-        className="absolute right-[22%] top-1/2 translate-x-1/2 -translate-y-1/2 w-[500px] h-[600px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(49,46,129,0.25)_0%,transparent_70%)] pointer-events-none z-0 blur-xl"
+        className="absolute right-[22%] top-1/2 translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[400px] md:h-[600px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(49,46,129,0.25)_0%,transparent_70%)] pointer-events-none z-0 blur-xl"
       />
 
       {/* ── Golden aurora bottom ── */}

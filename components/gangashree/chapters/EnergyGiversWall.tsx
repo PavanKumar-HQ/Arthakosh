@@ -16,7 +16,7 @@ export function EnergyGiversWall() {
   return (
     <section className="min-h-screen w-full py-32 px-4 relative bg-transparent overflow-hidden flex flex-col items-center">
       
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08)_0%,transparent_60%)] rounded-full pointer-events-none blur-3xl z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[800px] h-[350px] md:h-[800px] bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.08)_0%,transparent_60%)] rounded-full pointer-events-none blur-3xl z-0" />
 
       <motion.div
         initial={{ opacity: 0, y: 50 }}

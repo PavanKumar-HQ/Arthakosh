@@ -16,7 +16,7 @@ export function ThingsWeNeverSaid() {
         transition={{ duration: 3, ease: "easeInOut" }}
         className="absolute inset-0 z-0 pointer-events-none"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle_at_center,rgba(49,46,129,0.1)_0%,transparent_60%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[1000px] h-[400px] md:h-[1000px] bg-[radial-gradient(circle_at_center,rgba(49,46,129,0.1)_0%,transparent_60%)]" />
       </motion.div>
 
       <div className="absolute top-32 left-4 md:left-32 z-10 text-left w-full max-w-5xl mx-auto">

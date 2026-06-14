@@ -198,7 +198,7 @@ export function FinalReveal() {
         initial={{ scale: 0.8, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 4, ease: "easeOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15)_0%,transparent_60%)] rounded-full pointer-events-none blur-3xl z-0"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[800px] h-[350px] md:h-[800px] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15)_0%,transparent_60%)] rounded-full pointer-events-none blur-3xl z-0"
       />
 
       <motion.div
@@ -260,21 +260,15 @@ export function FinalReveal() {
       {showBalloons && (
         <div className="absolute inset-0 pointer-events-none z-30">
           {[
-            { src: "/gangashree/photos/photo1.jpeg", x: "5%", y: "15%", rotate: -15 },
-            { src: "/gangashree/photos/photo2.jpeg", x: "75%", y: "12%", rotate: 10 },
-            { src: "/gangashree/photos/photo3.jpeg", x: "8%", y: "60%", rotate: -5 },
-            { src: "/gangashree/photos/photo4.jpeg", x: "70%", y: "65%", rotate: 20 },
-            { src: "/gangashree/photos/photo5.jpeg", x: "80%", y: "35%", rotate: 5 }
+            { src: "/gangashree/photos/photo1.jpeg", className: "left-[5%] top-[10%] md:left-[5%] md:top-[15%]", rotate: -15 },
+            { src: "/gangashree/photos/photo2.jpeg", className: "right-[5%] top-[5%] md:left-[75%] md:top-[12%]", rotate: 10 },
+            { src: "/gangashree/photos/photo3.jpeg", className: "left-[10%] top-[65%] md:left-[8%] md:top-[60%]", rotate: -5 },
+            { src: "/gangashree/photos/photo4.jpeg", className: "right-[10%] top-[70%] md:left-[70%] md:top-[65%]", rotate: 20 },
+            { src: "/gangashree/photos/photo5.jpeg", className: "left-[50%] top-[80%] -translate-x-1/2 md:-translate-x-0 md:left-[80%] md:top-[35%]", rotate: 5 }
           ].map((photo, i) => (
             <motion.div
               key={`final-photo-${i}`}
-              className="absolute shadow-2xl rounded-xl overflow-hidden border-[6px] border-white/20 bg-white/10 backdrop-blur-sm pointer-events-none select-none"
-              style={{
-                width: "220px",
-                height: "auto",
-                left: photo.x,
-                top: photo.y,
-              }}
+              className={`absolute shadow-2xl rounded-xl overflow-hidden border-[4px] md:border-[6px] border-white/20 bg-white/10 backdrop-blur-sm pointer-events-none select-none w-28 md:w-56 h-auto ${photo.className}`}
               initial={{ scale: 0, opacity: 0, rotate: 0 }}
               animate={{ 
                 scale: 1, 
