@@ -260,15 +260,23 @@ export function FinalReveal() {
       {showBalloons && (
         <div className="absolute inset-0 pointer-events-none z-30">
           {[
-            { src: "/gangashree/photos/photo1.jpeg", className: "left-[5%] top-[10%] md:left-[5%] md:top-[15%]", rotate: -15 },
-            { src: "/gangashree/photos/photo2.jpeg", className: "right-[5%] top-[5%] md:left-[75%] md:top-[12%]", rotate: 10 },
-            { src: "/gangashree/photos/photo3.jpeg", className: "left-[10%] top-[65%] md:left-[8%] md:top-[60%]", rotate: -5 },
-            { src: "/gangashree/photos/photo4.jpeg", className: "right-[10%] top-[70%] md:left-[70%] md:top-[65%]", rotate: 20 },
-            { src: "/gangashree/photos/photo5.jpeg", className: "left-[50%] top-[80%] -translate-x-1/2 md:-translate-x-0 md:left-[80%] md:top-[35%]", rotate: 5 }
+            { src: "/gangashree/photos/photo1.jpeg", left: "5%", top: "10%", rotate: -15 },
+            { src: "/gangashree/photos/photo2.jpeg", right: "5%", top: "5%", rotate: 10 },
+            { src: "/gangashree/photos/photo3.jpeg", left: "8%", top: "65%", rotate: -5 },
+            { src: "/gangashree/photos/photo4.jpeg", right: "8%", top: "70%", rotate: 20 },
+            { src: "/gangashree/photos/photo5.jpeg", left: "50%", top: "75%", transform: "translateX(-50%)", rotate: 5 }
           ].map((photo, i) => (
             <motion.div
               key={`final-photo-${i}`}
-              className={`absolute shadow-2xl rounded-xl overflow-hidden border-[4px] md:border-[6px] border-white/20 bg-white/10 backdrop-blur-sm pointer-events-none select-none w-28 md:w-56 h-auto ${photo.className}`}
+              className="absolute shadow-2xl rounded-xl overflow-hidden border-[4px] md:border-[6px] border-white/20 bg-white/10 backdrop-blur-sm pointer-events-none select-none"
+              style={{
+                width: "clamp(100px, 28vw, 220px)",
+                height: "auto",
+                left: photo.left,
+                right: photo.right,
+                top: photo.top,
+                transform: photo.transform,
+              }}
               initial={{ scale: 0, opacity: 0, rotate: 0 }}
               animate={{ 
                 scale: 1, 
