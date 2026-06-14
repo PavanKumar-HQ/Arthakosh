@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 const files = [
-  'components/meghana/ChamberOfUnsaidWords.tsx',
-  'components/meghana/MemoryComets.tsx',
-  'components/meghana/TheSealedArtifact.tsx',
-  'components/meghana/YearbookGallery.tsx',
-  'components/meghana/HorizontalTimeline.tsx',
-  'components/meghana/VoiceGalaxy.tsx'
+  'components/gangashree/ChamberOfUnsaidWords.tsx',
+  'components/gangashree/MemoryComets.tsx',
+  'components/gangashree/TheSealedArtifact.tsx',
+  'components/gangashree/YearbookGallery.tsx',
+  'components/gangashree/HorizontalTimeline.tsx',
+  'components/gangashree/VoiceGalaxy.tsx'
 ];
 
 for (const file of files) {

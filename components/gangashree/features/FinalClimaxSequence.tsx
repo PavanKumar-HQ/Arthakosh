@@ -8,11 +8,11 @@ import { useJourneyStore } from "@/lib/store";
 import { useEffect } from "react";
 
 export function FinalClimaxSequence() {
-  const completeMeghana = useJourneyStore(state => state.completeMeghana);
+  const completeGangashree = useJourneyStore(state => state.completeGangashree);
 
   useEffect(() => {
-    completeMeghana();
-  }, [completeMeghana]);
+    completeGangashree();
+  }, [completeGangashree]);
   return (
     <Html position={[0, 0, -230]} center zIndexRange={[100, 0]}>
       <motion.div
@@ -37,7 +37,7 @@ export function FinalClimaxSequence() {
             transition={{ delay: 2, duration: 2 }}
             className="text-2xl md:text-4xl font-sans text-cyan-400 tracking-[0.4em] uppercase font-light"
           >
-            Meghana Ma'am
+            Gangashree 
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -45,7 +45,7 @@ export function FinalClimaxSequence() {
             transition={{ delay: 4, duration: 2 }}
             className="mt-12 text-gray-400 font-playfair italic text-xl"
           >
-            "You may remember lessons. We remember the person who taught them."
+            "You may remember memories. We remember the person who guided them."
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}

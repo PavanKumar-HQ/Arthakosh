@@ -7,7 +7,7 @@ export function ParallelUniverse() {
   const achievements = [
     { title: "Most Feared 'Complete Your Homework'", level: "Legendary" },
     { title: "Fastest Assignment Detection", level: "God Tier" },
-    { title: "Student Mind Reader", level: "Max Level" },
+    { title: "sibling Mind Reader", level: "Max Level" },
     { title: "Deadline Guardian", level: "Unbeatable" },
     { title: "Energy Supplier", level: "Level 9999" }
   ];
@@ -115,7 +115,7 @@ export function ParallelUniverse() {
               </div>
             ) : (
               <p className="text-xs font-sans text-gray-500 uppercase tracking-widest leading-relaxed">
-                {spinning ? "Scanning cosmic stress waves..." : "Click below to scan teacher stress levels..."}
+                {spinning ? "Scanning cosmic stress waves..." : "Click below to scan sister stress levels..."}
               </p>
             )}
           </div>

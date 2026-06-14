@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useJourneyStore } from "@/lib/store";
 
 const lines = [
-  "You thought you were teaching lessons.",
+  "You thought you were guiding memories.",
   "But you were creating energy.",
   "Energy that still exists.",
   "Energy that still guides.",
@@ -105,7 +105,7 @@ export function FinalBossClimax({
               </h1>
               <div className="w-px h-32 bg-gradient-to-b from-transparent via-white/50 to-transparent mx-auto mb-8" />
               <p className="text-2xl md:text-4xl font-sans text-gray-400 tracking-[0.5em] uppercase font-light">
-                Meghana Ma'am
+                Gangashree 
               </p>
             </motion.div>
           )}

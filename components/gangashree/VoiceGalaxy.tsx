@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useJourneyStore } from "@/lib/store";
-import { meghanaData } from "@/lib/data";
+import { gangashreeData } from "@/lib/data";
 
 export function VoiceGalaxy() {
   const [activeVoice, setActiveVoice] = useState<number | null>(null);
@@ -37,7 +37,7 @@ export function VoiceGalaxy() {
       </div>
 
       <div className="flex items-center justify-center gap-16 md:gap-32 w-full h-[400px]">
-        {meghanaData.voiceNotes?.map((note: any, i: number) => {
+        {gangashreeData.voiceNotes?.map((note: any, i: number) => {
           const isPlayed = playedVoices.has(note.id);
           const isActive = activeVoice === note.id;
 

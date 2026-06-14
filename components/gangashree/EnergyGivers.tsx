@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useJourneyStore } from "@/lib/store";
-import { meghanaData } from "@/lib/data";
+import { gangashreeData } from "@/lib/data";
 
 export function EnergyGivers() {
   const increaseEnergy = useJourneyStore(state => state.increaseEnergy);
@@ -30,7 +30,7 @@ export function EnergyGivers() {
 
       <div className="w-screen relative h-full flex items-center justify-center shrink-0">
         
-        {meghanaData.memories.map((memory: any, i: number) => {
+        {gangashreeData.memories.map((memory: any, i: number) => {
           // Deterministic layout positions based on index to prevent jumps on updates
           const seedTop = 20 + ((i * 17) % 55);
           const seedLeft = 10 + ((i * 29) % 75);

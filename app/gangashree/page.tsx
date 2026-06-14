@@ -1,18 +1,18 @@
 "use client";
 
-import { OpeningSequence } from "@/components/meghana/chapters/OpeningSequence";
-import { ChapterOne } from "@/components/meghana/chapters/ChapterOne";
-import { ChapterTwo } from "@/components/meghana/chapters/ChapterTwo";
-import { EnergyGiversWall } from "@/components/meghana/chapters/EnergyGiversWall";
-import { HorizontalTimeline } from "@/components/meghana/chapters/HorizontalTimeline";
-import { ThingsWeNeverSaid } from "@/components/meghana/chapters/ThingsWeNeverSaid";
-import { ImpactVisualization } from "@/components/meghana/chapters/ImpactVisualization";
-import { FinalReveal } from "@/components/meghana/chapters/FinalReveal";
+import { OpeningSequence } from "@/components/gangashree/chapters/OpeningSequence";
+import { ChapterOne } from "@/components/gangashree/chapters/ChapterOne";
+import { ChapterTwo } from "@/components/gangashree/chapters/ChapterTwo";
+import { EnergyGiversWall } from "@/components/gangashree/chapters/EnergyGiversWall";
+import { HorizontalTimeline } from "@/components/gangashree/chapters/HorizontalTimeline";
+import { ThingsWeNeverSaid } from "@/components/gangashree/chapters/ThingsWeNeverSaid";
+import { ImpactVisualization } from "@/components/gangashree/chapters/ImpactVisualization";
+import { FinalReveal } from "@/components/gangashree/chapters/FinalReveal";
 import { FestiveBackground } from "@/components/FestiveBackground";
 import { YouTubeAudioPlayer } from "@/components/shared/YouTubeAudioPlayer";
 import { useJourneyStore } from "@/lib/store";
 
-export default function MeghanaJourney() {
+export default function GangashreeJourney() {
   const isMusicMuted = useJourneyStore(state => state.isMusicMuted);
 
   return (

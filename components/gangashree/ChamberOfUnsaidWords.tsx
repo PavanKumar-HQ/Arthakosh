@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { meghanaData } from "@/lib/data";
+import { gangashreeData } from "@/lib/data";
 import { useJourneyStore } from "@/lib/store";
 
 export function ChamberOfUnsaidWords() {
@@ -19,7 +19,7 @@ export function ChamberOfUnsaidWords() {
     }
   };
 
-  const messages = meghanaData.secretMessages?.slice(0, 10) || [];
+  const messages = gangashreeData.secretMessages?.slice(0, 10) || [];
 
   const handleNext = () => {
     if (currentIndex < messages.length - 1) {

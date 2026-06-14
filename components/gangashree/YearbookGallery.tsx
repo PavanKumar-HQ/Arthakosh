@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { meghanaData } from "@/lib/data";
+import { gangashreeData } from "@/lib/data";
 
 export function YearbookGallery() {
   return (
@@ -17,7 +17,7 @@ export function YearbookGallery() {
       </div>
 
       <div className="flex gap-12 max-w-7xl mx-auto w-full overflow-visible justify-center items-stretch py-4 z-10">
-        {meghanaData.yearbook.map((card: any, i: number) => (
+        {gangashreeData.yearbook.map((card: any, i: number) => (
           <motion.div
             key={card.id}
             initial={{ opacity: 0, y: 50, scale: 0.95 }}

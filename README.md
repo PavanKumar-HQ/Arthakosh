@@ -1,12 +1,12 @@
 # ✨ Interactive Birthday Tributes
 
-A cinematic, interactive web experience built to celebrate and honor two very special teachers: **Meghana Ma'am** and **Preeti Ma'am**.
+A cinematic, interactive web experience built to celebrate and honor my wonderful sister: **Gangashree**.
 
 This project uses modern web technologies to create emotional, narrative-driven chapters filled with animations, music, and cherished memories.
 
 ## 🌟 Features
 
-- **Two Distinct Journeys:** Choose between the elegant Book of Memories for Meghana Ma'am or the cinematic Garden of Growth for Preeti Ma'am.
+- **Distinct Journey:** An elegant Book of Memories for Gangashree.
 - **Cinematic Animations:** Powered by `framer-motion` for smooth, responsive scroll animations, page transitions, and interactive elements.
 - **Dynamic Multimedia:** Includes integrated background music via an invisible YouTube player for zero-delay music, alongside high-quality image galleries.
 - **Interactive Chapters:** Features such as the "Energy Givers Wall" and the "Secret Greenhouse" that unlock as you progress through the story.
@@ -39,9 +39,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 📁 Project Structure
 
-- `app/meghana`: The Book of Memories interactive experience.
+- `app/gangashree`: The Book of Memories interactive experience.
 
-- `components/meghana`: Custom components, chapters, and UI elements for Meghana's journey.
+- `components/gangashree`: Custom components, chapters, and UI elements for Gangashree's journey.
 
 - `lib/store.ts`: Zustand store managing unlocked chapters and completed journeys.
 

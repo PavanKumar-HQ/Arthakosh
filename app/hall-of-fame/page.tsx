@@ -25,7 +25,7 @@ export default function HallOfFame() {
       >
         <PartyPopper className="w-20 h-20 text-yellow-400 mx-auto mb-8" />
         <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 drop-shadow-md">
-          The Teachers' Hall of Fame
+          The Sisters' Hall of Fame
         </h1>
         
         <div className="flex flex-col md:flex-row items-center justify-center gap-12 my-16">
@@ -39,7 +39,7 @@ export default function HallOfFame() {
             <div className="w-48 h-48 rounded-full border-4 border-pink-400 shadow-[0_0_50px_rgba(244,114,182,0.5)] bg-gradient-to-br from-pink-300 to-rose-500 flex items-center justify-center mb-6">
               <span className="font-playfair text-4xl font-bold">P</span>
             </div>
-            <h2 className="font-playfair text-3xl text-pink-200">Preeti Ma'am</h2>
+            <h2 className="font-playfair text-3xl text-pink-200">Preeti </h2>
             <p className="font-caveat text-xl text-pink-300 mt-2">Wonderland of Memories</p>
           </motion.div>
 
@@ -54,7 +54,7 @@ export default function HallOfFame() {
             <div className="w-48 h-48 rounded-full border-4 border-indigo-400 shadow-[0_0_50px_rgba(99,102,241,0.5)] bg-gradient-to-br from-indigo-300 to-blue-500 flex items-center justify-center mb-6">
               <span className="font-playfair text-4xl font-bold">M</span>
             </div>
-            <h2 className="font-playfair text-3xl text-indigo-200">Meghana Ma'am</h2>
+            <h2 className="font-playfair text-3xl text-indigo-200">Gangashree </h2>
             <p className="font-caveat text-xl text-indigo-300 mt-2">Legacy Among The Stars</p>
           </motion.div>
 

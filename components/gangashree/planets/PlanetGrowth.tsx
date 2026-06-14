@@ -62,7 +62,7 @@ export function PlanetGrowth({ position = [0, 0, 0] }: { position?: [number, num
             <h3 className="font-playfair text-3xl text-amber-200 mb-4 tracking-[0.2em] uppercase">Planet of Growth</h3>
             <p className="font-sans text-sm text-amber-400/80 font-light tracking-wider leading-relaxed">
               An elegant strand of evolving stardust, <br/>
-              built from the quiet development of students.
+              built from the quiet development of siblings.
             </p>
           </div>
         </Html>

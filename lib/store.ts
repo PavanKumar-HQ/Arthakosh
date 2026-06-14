@@ -2,12 +2,12 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type JourneyState = {
-  meghanaCompleted: boolean;
+  gangashreeCompleted: boolean;
   energyLevel: number;
   discoveredMemories: string[];
   planetsVisited: string[];
   collectedKeys: number;
-  completeMeghana: () => void;
+  completeGangashree: () => void;
   increaseEnergy: (amount: number) => void;
   addDiscoveredMemory: (id: string) => void;
   addPlanetVisited: (planet: string) => void;
@@ -19,13 +19,13 @@ type JourneyState = {
 export const useJourneyStore = create<JourneyState>()(
   persist(
     (set) => ({
-      meghanaCompleted: false,
+      gangashreeCompleted: false,
       energyLevel: 0,
       discoveredMemories: [],
       planetsVisited: [],
       collectedKeys: 0,
       isMusicMuted: false,
-      completeMeghana: () => set({ meghanaCompleted: true }),
+      completeGangashree: () => set({ gangashreeCompleted: true }),
       increaseEnergy: (amount) => set((state) => ({ energyLevel: state.energyLevel + amount })),
       addDiscoveredMemory: (id) => set((state) => ({ 
         discoveredMemories: state.discoveredMemories.includes(id) ? state.discoveredMemories : [...state.discoveredMemories, id] 
@@ -36,7 +36,7 @@ export const useJourneyStore = create<JourneyState>()(
       collectKey: () => set((state) => ({ collectedKeys: state.collectedKeys + 1 })),
       setMusicMuted: (muted) => set({ isMusicMuted: muted }),
       resetJourneys: () => set({ 
-        meghanaCompleted: false, 
+        gangashreeCompleted: false, 
         energyLevel: 0,
         discoveredMemories: [],
         planetsVisited: [],

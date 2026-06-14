@@ -83,7 +83,7 @@ export function ImpactVisualization() {
           style={{ opacity }}
           className="absolute bottom-32 font-sans text-gray-500 uppercase tracking-widest text-sm"
         >
-          One lesson. Infinite ripples.
+          One memory. Infinite ripples.
         </motion.p>
       </div>
     </section>

@@ -53,7 +53,7 @@ export function PlanetLaughter({ position = [0, 0, 0] }: { position?: [number, n
             <h3 className="font-playfair text-3xl text-slate-200 mb-4 tracking-[0.2em] uppercase">Planet of Laughter</h3>
             <p className="font-sans text-sm text-slate-400 font-light tracking-wider leading-relaxed">
               A chaotic nebula of infinite jokes, <br/>
-              classroom disruptions, and silver linings.
+              home disruptions, and silver linings.
             </p>
           </div>
         </Html>

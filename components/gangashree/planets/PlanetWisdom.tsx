@@ -48,7 +48,7 @@ export function PlanetWisdom({ position = [0, 0, 0] }: { position?: [number, num
           <div className="flex flex-col items-center justify-center text-center opacity-0 hover:opacity-100 transition-opacity duration-1000 w-96">
             <h3 className="font-playfair text-3xl text-blue-200 mb-4 tracking-[0.2em] uppercase">Planet of Wisdom</h3>
             <p className="font-sans text-sm text-blue-400 font-light tracking-wider leading-relaxed">
-              A serene archive of life lessons, <br/>
+              A serene archive of life memories, <br/>
               quiet guidance, and the Oracle system.
             </p>
           </div>

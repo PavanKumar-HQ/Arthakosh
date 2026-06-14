@@ -2,17 +2,17 @@
 
 import { motion } from "framer-motion";
 import { useJourneyStore } from "@/lib/store";
-import { meghanaData } from "@/lib/data";
+import { gangashreeData } from "@/lib/data";
 
 export function HorizontalTimeline() {
   const increaseEnergy = useJourneyStore(state => state.increaseEnergy);
   
   // Group memories by year
-  const memoriesByYear = meghanaData.memories.reduce((acc, curr) => {
+  const memoriesByYear = gangashreeData.memories.reduce((acc, curr) => {
     if (!acc[curr.year]) acc[curr.year] = [];
     acc[curr.year].push(curr);
     return acc;
-  }, {} as Record<string, typeof meghanaData.memories>);
+  }, {} as Record<string, typeof gangashreeData.memories>);
   
   const years = Object.keys(memoriesByYear).sort();
 

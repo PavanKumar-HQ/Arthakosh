@@ -10,9 +10,9 @@ export function Introductions() {
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 justify-center items-center">
           
-          {/* Meghana's Card */}
+          {/* Gangashree's Card */}
           <motion.div
-            onClick={() => router.push('/meghana')}
+            onClick={() => router.push('/gangashree')}
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -23,9 +23,9 @@ export function Introductions() {
             <div className="w-32 h-32 mx-auto bg-indigo-950 rounded-full mb-6 flex items-center justify-center overflow-hidden border-4 border-indigo-500/50 group-hover:border-indigo-400 transition-colors">
                <span className="text-indigo-300 font-mono text-sm">Photo</span>
             </div>
-            <h3 className="text-3xl font-medium text-center text-indigo-100 mb-2">Meghana</h3>
+            <h3 className="text-3xl font-medium text-center text-indigo-100 mb-2">Gangashree</h3>
             <p className="text-indigo-200/70 text-center italic">
-              "The meticulous planner."
+              "The best sister."
             </p>
           </motion.div>
 

@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 
 const typewriterLines = [
-  "Good teachers create students.",
-  "Great teachers create stories.",
+  "Good sisters create siblings.",
+  "Great sisters create stories.",
   "This is one of those stories...",
 ];
 

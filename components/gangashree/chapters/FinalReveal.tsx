@@ -27,13 +27,13 @@ const BALLOON_COLORS = [
 ];
 
 const MEGHANA_PHOTOS = [
-  "/meghana/20260517_031521.jpg",
-  "/meghana/DSC00336.JPG",
-  "/meghana/DSC00340.JPG",
-  "/meghana/DSC00345.JPG",
-  "/meghana/DSC00348.JPG",
-  "/meghana/DSC00388 (1).JPG",
-  "/meghana/IMG_6371.JPG"
+  "/gangashree/20260517_031521.jpg",
+  "/gangashree/DSC00336.JPG",
+  "/gangashree/DSC00340.JPG",
+  "/gangashree/DSC00345.JPG",
+  "/gangashree/DSC00348.JPG",
+  "/gangashree/DSC00388 (1).JPG",
+  "/gangashree/IMG_6371.JPG"
 ];
 
 const BalloonSVG = ({ color, photoUrl }: { color: string, photoUrl?: string }) => {
@@ -85,7 +85,7 @@ const BalloonSVG = ({ color, photoUrl }: { color: string, photoUrl?: string }) =
 };
 
 export function FinalReveal() {
-  const completeMeghana = useJourneyStore(state => state.completeMeghana);
+  const completeGangashree = useJourneyStore(state => state.completeGangashree);
   const [showBalloons, setShowBalloons] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
@@ -94,11 +94,11 @@ export function FinalReveal() {
     if (isInView) {
       triggerCelebration();
       const timer = setTimeout(() => {
-        completeMeghana();
+        completeGangashree();
       }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [isInView, completeMeghana]);
+  }, [isInView, completeGangashree]);
 
   const triggerCelebration = () => {
     if (showBalloons) return;
@@ -227,7 +227,7 @@ export function FinalReveal() {
 
         
         <p className="text-3xl md:text-5xl font-playfair text-[#d4af37] tracking-[0.2em] uppercase font-medium mb-20 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-          Meghana Ma&apos;am
+          Gangashree Ma&apos;am
         </p>
         
         <p className="font-sans text-xl md:text-2xl text-gray-300 leading-relaxed font-light mb-24 max-w-2xl mx-auto">
@@ -262,11 +262,11 @@ export function FinalReveal() {
       {showBalloons && (
         <div className="absolute inset-0 pointer-events-none z-30">
           {[
-            { src: "/meghana/20260517_031521.jpg", x: "5%", y: "15%", rotate: -15 },
-            { src: "/meghana/DSC00348.JPG", x: "75%", y: "12%", rotate: 10 },
-            { src: "/meghana/DSC00340.JPG", x: "8%", y: "60%", rotate: -5 },
-            { src: "/meghana/DSC00388 (1).JPG", x: "70%", y: "65%", rotate: 20 },
-            { src: "/meghana/IMG_6371.JPG", x: "80%", y: "35%", rotate: 5 }
+            { src: "/gangashree/20260517_031521.jpg", x: "5%", y: "15%", rotate: -15 },
+            { src: "/gangashree/DSC00348.JPG", x: "75%", y: "12%", rotate: 10 },
+            { src: "/gangashree/DSC00340.JPG", x: "8%", y: "60%", rotate: -5 },
+            { src: "/gangashree/DSC00388 (1).JPG", x: "70%", y: "65%", rotate: 20 },
+            { src: "/gangashree/IMG_6371.JPG", x: "80%", y: "35%", rotate: 5 }
           ].map((photo, i) => (
             <motion.div
               key={`final-photo-${i}`}

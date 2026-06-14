@@ -7,27 +7,27 @@ import { useRef, useState, useMemo } from "react";
 const TIMELINE = [
   {
     era: "The Beginning",
-    text: "When we first realized this class was different.",
+    text: "When we first realized this room was different.",
     color: "from-amber-500/20 to-amber-500/5",
     glow: "rgba(245,158,11,0.3)",
     label: "Where it started",
-    image: "/meghana/20260517_031521.jpg"
+    image: "/gangashree/20260517_031521.jpg"
   },
   {
     era: "The Middle",
-    text: "When the syllabus ended but the learning continued.",
+    text: "When the rules ended but the learning continued.",
     color: "from-indigo-500/20 to-indigo-500/5",
     glow: "rgba(99,102,241,0.3)",
     label: "Where we grew",
-    image: "/meghana/DSC00336.JPG"
+    image: "/gangashree/DSC00336.JPG"
   },
   {
-    era: "The Lessons",
+    era: "The memories",
     text: "When we realized every correction was an act of care.",
     color: "from-rose-500/20 to-rose-500/5",
     glow: "rgba(225,29,72,0.3)",
     label: "What we learned",
-    image: "/meghana/DSC00340.JPG"
+    image: "/gangashree/DSC00340.JPG"
   },
   {
     era: "Now",
@@ -35,7 +35,7 @@ const TIMELINE = [
     color: "from-emerald-500/20 to-emerald-500/5",
     glow: "rgba(16,185,129,0.3)",
     label: "Where we are",
-    image: "/meghana/DSC00345.JPG"
+    image: "/gangashree/DSC00345.JPG"
   },
 ];
 

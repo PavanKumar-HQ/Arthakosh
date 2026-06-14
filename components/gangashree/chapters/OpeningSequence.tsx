@@ -49,7 +49,7 @@ export function OpeningSequence() {
   }, []);
 
   const line1 = useTypewriter("There are textbooks,", 55, 0, stage >= 1);
-  const line2 = useTypewriter("and then there are teachers.", 55, line1.done ? 400 : 99999, stage >= 1);
+  const line2 = useTypewriter("and then there are sisters.", 55, line1.done ? 400 : 99999, stage >= 1);
 
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center relative bg-transparent text-white overflow-hidden">

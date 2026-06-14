@@ -13,7 +13,7 @@ const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken" })
 
 export const metadata: Metadata = {
   title: "A Story of Impact",
-  description: "A digital experience celebrating an amazing teacher.",
+  description: "A digital experience celebrating an amazing sister.",
 };
 
 export default function RootLayout({

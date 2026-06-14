@@ -55,7 +55,7 @@ export function VoiceCrystalGalaxy({ position = [0, 0, 0] }: { position?: [numbe
         <div className="flex flex-col items-center justify-center text-center opacity-0 hover:opacity-100 transition-opacity duration-1000 w-[600px]">
           <h3 className="font-playfair text-4xl text-slate-200 mb-4 tracking-[0.3em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">Voice Crystal Galaxy</h3>
           <p className="font-sans text-sm text-slate-400 font-light tracking-[0.2em] leading-relaxed uppercase">
-            Echoes of students suspended in crystalized time.
+            Echoes of siblings suspended in crystalized time.
           </p>
         </div>
       </Html>

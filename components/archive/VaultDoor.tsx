@@ -32,7 +32,7 @@ export function VaultDoor() {
       if (camera.position.z < -5) {
         // Route when camera passes through
 
-        if (transitioning === 'meghana') router.push('/meghana');
+        if (transitioning === 'gangashree') router.push('/gangashree');
         setTransitioning(null);
       }
     }
@@ -62,22 +62,22 @@ export function VaultDoor() {
 
 
 
-      {/* Meghana's Seal (Right) */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5} position={[2, 0, 0]}>
+      {/* Gangashree's Seal (Centered) */}
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5} position={[0, 0, 0]}>
         <mesh 
-          onPointerOver={() => setHovered('meghana')} 
+          onPointerOver={() => setHovered('gangashree')} 
           onPointerOut={() => setHovered(null)}
-          onClick={() => handleSelect('meghana')}
+          onClick={() => handleSelect('gangashree')}
         >
           <icosahedronGeometry args={[0.8, 1]} />
           <meshStandardMaterial 
-            color={hovered === 'meghana' || transitioning === 'meghana' ? "#818cf8" : "#4f46e5"} 
-            wireframe={hovered === 'meghana' ? false : true} 
+            color={hovered === 'gangashree' || transitioning === 'gangashree' ? "#818cf8" : "#4f46e5"} 
+            wireframe={hovered === 'gangashree' ? false : true} 
             metalness={0.8} 
             roughness={0.2} 
           />
         </mesh>
-        {hovered === 'meghana' && (
+        {hovered === 'gangashree' && (
           <mesh>
             <icosahedronGeometry args={[0.78, 2]} />
             <meshStandardMaterial color="#c7d2fe" emissive="#4f46e5" emissiveIntensity={2} />
@@ -86,7 +86,7 @@ export function VaultDoor() {
         <Text position={[0, -1.2, 0]} fontSize={0.3} color="#818cf8" font="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtM.woff">
           Celestial Hall
         </Text>
-        {(hovered === 'meghana' || transitioning === 'meghana') && (
+        {(hovered === 'gangashree' || transitioning === 'gangashree') && (
           <pointLight color="#818cf8" intensity={10} distance={10} />
         )}
       </Float>

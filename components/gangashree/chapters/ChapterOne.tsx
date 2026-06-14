@@ -46,7 +46,7 @@ export function ChapterOne() {
             
             <Sparkles className="w-6 h-6 text-indigo-400 mb-6 opacity-60" />
             <p className="text-gray-300 font-sans text-lg md:text-xl leading-relaxed font-light relative z-10">
-              You didn&apos;t just walk into the classroom; you changed the atmosphere. There was a quiet authority, wrapped in an undeniable warmth.
+              You didn&apos;t just walk into the home; you changed the atmosphere. There was a quiet authority, wrapped in an undeniable warmth.
             </p>
           </motion.div>
 

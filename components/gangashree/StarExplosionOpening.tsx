@@ -79,10 +79,10 @@ export function StarExplosionOpening({ onComplete }: { onComplete: () => void })
             className="z-20 text-center px-4"
           >
             <p className="font-playfair text-2xl md:text-4xl text-gray-300 tracking-[0.1em] mb-4">
-              Every student carries a little light.
+              Every sibling carries a little light.
             </p>
             <p className="font-playfair text-3xl md:text-5xl text-white tracking-[0.2em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
-              Some teachers create it.
+              Some sisters create it.
             </p>
           </motion.div>
         )}

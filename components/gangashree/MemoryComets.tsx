@@ -70,7 +70,7 @@ export function MemoryComets() {
               Memory Comet Caught!
             </h3>
             <p className="font-playfair text-white text-xl italic leading-relaxed">
-              &quot;Remember that time the projector broke and you taught the entire complex topic using just a piece of chalk and a napkin? Legend.&quot;
+              &quot;Remember that time the projector broke and you guided the entire complex topic using just a piece of chalk and a napkin? Legend.&quot;
             </p>
           </motion.div>
         )}

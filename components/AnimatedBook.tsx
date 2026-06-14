@@ -37,11 +37,11 @@ function useTypewriter(text: string, speed = 60, startDelay = 0, enabled = true)
 
 export function AnimatedBook() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<"meghana" | null>(null);
-  const [selectedTeacherForPopup, setSelectedTeacherForPopup] = useState<"meghana" | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<"gangashree" | null>(null);
+  const [selectedSisterForPopup, setSelectedSisterForPopup] = useState<"gangashree" | null>(null);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  const meghanaCompleted = useJourneyStore((state) => state.meghanaCompleted);
+  const gangashreeCompleted = useJourneyStore((state) => state.gangashreeCompleted);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,7 +55,7 @@ export function AnimatedBook() {
 
   const title = useTypewriter("A Journey of Gratitude.", 65, 800, mounted);
 
-  const allCompleted = mounted && meghanaCompleted;
+  const allCompleted = mounted && gangashreeCompleted;
 
   return (
     <div className="relative w-full h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden">
@@ -114,10 +114,10 @@ export function AnimatedBook() {
           >
 
 
-            {/* Meghana Card */}
-            <div onClick={() => setSelectedTeacherForPopup("meghana")} className="w-full md:w-80 block group">
+            {/* Gangashree Card */}
+            <div onClick={() => setSelectedSisterForPopup("gangashree")} className="w-full md:w-80 block group">
               <motion.div
-                onHoverStart={() => setHoveredCard("meghana")}
+                onHoverStart={() => setHoveredCard("gangashree")}
                 onHoverEnd={() => setHoveredCard(null)}
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
@@ -125,8 +125,8 @@ export function AnimatedBook() {
                 style={{
                   background: "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%)",
                   backdropFilter: "blur(20px)",
-                  border: hoveredCard === "meghana" ? "1px solid rgba(212,175,55,0.8)" : "1px solid rgba(212,175,55,0.2)",
-                  boxShadow: hoveredCard === "meghana"
+                  border: hoveredCard === "gangashree" ? "1px solid rgba(212,175,55,0.8)" : "1px solid rgba(212,175,55,0.2)",
+                  boxShadow: hoveredCard === "gangashree"
                     ? "0 0 60px rgba(212,175,55,0.2), inset 0 0 40px rgba(99,102,241,0.15), inset 0 1px 0 rgba(255,255,255,0.2)"
                     : "0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)",
                 }}
@@ -144,15 +144,15 @@ export function AnimatedBook() {
                   >
                     <div className="absolute inset-2 rounded-full border border-[#d4af37]/30 border-dashed animate-[spin_30s_linear_infinite]" />
                     <span className="font-playfair text-6xl text-transparent bg-clip-text bg-gradient-to-b from-[#fff3cc] to-[#d4af37] font-semibold drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]">
-                      M
+                      G
                     </span>
                   </motion.div>
                   <h2 className="font-playfair text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fff3cc] to-[#d4af37] font-bold tracking-widest uppercase mb-3 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)]">
-                    Meghana Ma&apos;am
+                    Gangashree
                   </h2>
                   <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#d4af37]/80 to-transparent mb-6" />
                   <AnimatePresence>
-                    {hoveredCard === "meghana" && (
+                    {hoveredCard === "gangashree" && (
                       <motion.p
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -160,12 +160,12 @@ export function AnimatedBook() {
                         transition={{ duration: 0.4 }}
                         className="font-playfair italic text-base text-indigo-200/80 leading-relaxed"
                       >
-                        &quot;The one who taught beyond the syllabus.&quot;
+                        &quot;The one who always had my back.&quot;
                       </motion.p>
                     )}
                   </AnimatePresence>
                 </div>
-                {mounted && meghanaCompleted && (
+                {mounted && gangashreeCompleted && (
                   <div className="absolute top-4 right-4 w-2 h-2 bg-indigo-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
                 )}
               </motion.div>
@@ -176,13 +176,13 @@ export function AnimatedBook() {
 
       {/* ── Quote Modal ── */}
       <AnimatePresence>
-        {selectedTeacherForPopup && (
+        {selectedSisterForPopup && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
-            onClick={() => setSelectedTeacherForPopup(null)}
+            onClick={() => setSelectedSisterForPopup(null)}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20, opacity: 0 }}
@@ -193,17 +193,17 @@ export function AnimatedBook() {
               onClick={(e) => e.stopPropagation()}
             >
               <p className="font-playfair italic text-2xl md:text-3xl leading-relaxed text-gray-200 mb-8">
-                {selectedTeacherForPopup === "meghana" && "\"You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure.\""}
+                {selectedSisterForPopup === "gangashree" && "\"You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure.\""}
               </p>
               <div className="flex justify-center gap-4">
                 <button
-                  onClick={() => setSelectedTeacherForPopup(null)}
+                  onClick={() => setSelectedSisterForPopup(null)}
                   className="px-6 py-2 rounded-full border border-gray-500/30 text-gray-400 hover:text-white hover:bg-white/5 transition-colors font-mono uppercase text-xs tracking-widest"
                 >
                   Cancel
                 </button>
                 <button
-                  onClick={() => router.push(`/${selectedTeacherForPopup}`)}
+                  onClick={() => router.push(`/${selectedSisterForPopup}`)}
                   className="px-6 py-2 rounded-full bg-[#d4af37]/20 border border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/30 hover:text-white transition-all font-mono uppercase text-xs tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.2)]"
                 >
                   Enter Journey
