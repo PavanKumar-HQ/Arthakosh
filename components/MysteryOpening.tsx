@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 
 const typewriterLines = [
-  "Good sisters create siblings.",
-  "Great sisters create stories.",
-  "This is one of those stories...",
+  "To the one who has always been there.",
+  "Through every laugh and every tear.",
+  "This is your story...",
 ];
 
 export function MysteryOpening({ onEnter }: { onEnter: () => void }) {
