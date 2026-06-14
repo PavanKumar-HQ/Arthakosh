@@ -37,11 +37,10 @@ function useTypewriter(text: string, speed = 60, startDelay = 0, enabled = true)
 
 export function AnimatedBook() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<"preeti" | "meghana" | null>(null);
-  const [selectedTeacherForPopup, setSelectedTeacherForPopup] = useState<"preeti" | "meghana" | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<"meghana" | null>(null);
+  const [selectedTeacherForPopup, setSelectedTeacherForPopup] = useState<"meghana" | null>(null);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  const preetiCompleted = useJourneyStore((state) => state.preetiCompleted);
   const meghanaCompleted = useJourneyStore((state) => state.meghanaCompleted);
 
   useEffect(() => {
@@ -54,9 +53,9 @@ export function AnimatedBook() {
     return () => clearTimeout(timer);
   }, []);
 
-  const title = useTypewriter("Two Teachers. Two Stories. One Gratitude.", 65, 800, mounted);
+  const title = useTypewriter("A Journey of Gratitude.", 65, 800, mounted);
 
-  const allCompleted = mounted && preetiCompleted && meghanaCompleted;
+  const allCompleted = mounted && meghanaCompleted;
 
   return (
     <div className="relative w-full h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden">
@@ -113,69 +112,7 @@ export function AnimatedBook() {
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center px-8 w-full max-w-5xl"
           >
-            {/* Preeti Card */}
-            <div onClick={() => setSelectedTeacherForPopup("preeti")} className="w-full md:w-80 block group">
-              <motion.div
-                onHoverStart={() => setHoveredCard("preeti")}
-                onHoverEnd={() => setHoveredCard(null)}
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="relative h-[340px] md:h-[420px] rounded-2xl overflow-hidden cursor-pointer"
-                style={{
-                  background: "linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.6) 100%)",
-                  backdropFilter: "blur(20px)",
-                  border: hoveredCard === "preeti" ? "1px solid rgba(212,175,55,0.8)" : "1px solid rgba(212,175,55,0.2)",
-                  boxShadow: hoveredCard === "preeti"
-                    ? "0 0 60px rgba(212,175,55,0.2), inset 0 0 40px rgba(225,29,72,0.15), inset 0 1px 0 rgba(255,255,255,0.2)"
-                    : "0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)",
-                }}
-              >
-                {/* Inner top glow */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/40 to-transparent" />
-                {/* Rose aura in corner */}
-                <div className="absolute bottom-0 right-0 w-40 h-40 bg-[radial-gradient(ellipse_at_bottom_right,rgba(225,29,72,0.2)_0%,transparent_70%)]" />
 
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                  <motion.div
-                    animate={{ rotate: [0, 2, -2, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="relative mb-8 flex items-center justify-center w-28 h-28 rounded-full border border-[#d4af37]/30 bg-gradient-to-br from-[#d4af37]/10 to-transparent shadow-[0_0_30px_rgba(212,175,55,0.15),inset_0_0_20px_rgba(212,175,55,0.1)]"
-                  >
-                    <div className="absolute inset-2 rounded-full border border-[#d4af37]/30 border-dashed animate-[spin_30s_linear_infinite]" />
-                    <span className="font-playfair text-6xl text-transparent bg-clip-text bg-gradient-to-b from-[#fff3cc] to-[#d4af37] font-semibold drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]">
-                      P
-                    </span>
-                  </motion.div>
-                  <h2 className="font-playfair text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] via-[#fff3cc] to-[#d4af37] font-bold tracking-widest uppercase mb-3 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)]">
-                    Preeti Ma&apos;am
-                  </h2>
-                  <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#d4af37]/80 to-transparent mb-6" />
-                  <AnimatePresence>
-                    {hoveredCard === "preeti" && (
-                      <motion.p
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 4 }}
-                        transition={{ duration: 0.4 }}
-                        className="font-playfair italic text-base text-rose-200/80 leading-relaxed"
-                      >
-                        &quot;The one who turned lessons into memories.&quot;
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-                {mounted && preetiCompleted && (
-                  <div className="absolute top-4 right-4 w-2 h-2 bg-rose-400 rounded-full shadow-[0_0_8px_rgba(225,29,72,0.8)]" />
-                )}
-              </motion.div>
-            </div>
-
-            {/* Divider */}
-            <div className="hidden md:flex flex-col items-center gap-3 opacity-30">
-              <div className="w-px h-20 bg-gradient-to-b from-transparent via-white to-transparent" />
-              <div className="w-1 h-1 bg-[#d4af37] rounded-full" />
-              <div className="w-px h-20 bg-gradient-to-b from-white via-white to-transparent" />
-            </div>
 
             {/* Meghana Card */}
             <div onClick={() => setSelectedTeacherForPopup("meghana")} className="w-full md:w-80 block group">
@@ -256,10 +193,7 @@ export function AnimatedBook() {
               onClick={(e) => e.stopPropagation()}
             >
               <p className="font-playfair italic text-2xl md:text-3xl leading-relaxed text-gray-200 mb-8">
-                {selectedTeacherForPopup === "preeti" 
-                  ? "\"You give endless second chances to people, but deep down, you wonder if anyone would ever do the same for you.\""
-                  : "\"You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure.\""
-                }
+                {selectedTeacherForPopup === "meghana" && "\"You forgive far more than you should, but that capacity for grace is exactly what makes your heart so rare and pure.\""}
               </p>
               <div className="flex justify-center gap-4">
                 <button

@@ -29,24 +29,6 @@ export function Introductions() {
             </p>
           </motion.div>
 
-          {/* Preeti's Card */}
-          <motion.div
-            onClick={() => router.push('/preeti')}
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.4, delay: 0.2 }}
-            whileHover={{ scale: 1.05, y: -10 }}
-            className="w-full max-w-sm bg-gradient-to-bl from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 p-8 rounded-3xl shadow-2xl backdrop-blur-sm cursor-pointer group"
-          >
-            <div className="w-32 h-32 mx-auto bg-emerald-950 rounded-full mb-6 flex items-center justify-center overflow-hidden border-4 border-emerald-500/50 group-hover:border-emerald-400 transition-colors">
-               <span className="text-emerald-300 font-mono text-sm">Photo</span>
-            </div>
-            <h3 className="text-3xl font-medium text-center text-emerald-100 mb-2">Preeti</h3>
-            <p className="text-emerald-200/70 text-center italic">
-              "The creative soul."
-            </p>
-          </motion.div>
 
         </div>
       </div>

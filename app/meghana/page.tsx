@@ -9,7 +9,7 @@ import { ThingsWeNeverSaid } from "@/components/meghana/chapters/ThingsWeNeverSa
 import { ImpactVisualization } from "@/components/meghana/chapters/ImpactVisualization";
 import { FinalReveal } from "@/components/meghana/chapters/FinalReveal";
 import { FestiveBackground } from "@/components/FestiveBackground";
-import { YouTubeAudioPlayer } from "@/components/preeti/generative/YouTubeAudioPlayer";
+import { YouTubeAudioPlayer } from "@/components/shared/YouTubeAudioPlayer";
 import { useJourneyStore } from "@/lib/store";
 
 export default function MeghanaJourney() {

@@ -2,13 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type JourneyState = {
-  preetiCompleted: boolean;
   meghanaCompleted: boolean;
   energyLevel: number;
   discoveredMemories: string[];
   planetsVisited: string[];
   collectedKeys: number;
-  completePreeti: () => void;
   completeMeghana: () => void;
   increaseEnergy: (amount: number) => void;
   addDiscoveredMemory: (id: string) => void;
@@ -21,14 +19,12 @@ type JourneyState = {
 export const useJourneyStore = create<JourneyState>()(
   persist(
     (set) => ({
-      preetiCompleted: false,
       meghanaCompleted: false,
       energyLevel: 0,
       discoveredMemories: [],
       planetsVisited: [],
       collectedKeys: 0,
       isMusicMuted: false,
-      completePreeti: () => set({ preetiCompleted: true }),
       completeMeghana: () => set({ meghanaCompleted: true }),
       increaseEnergy: (amount) => set((state) => ({ energyLevel: state.energyLevel + amount })),
       addDiscoveredMemory: (id) => set((state) => ({ 
@@ -40,7 +36,6 @@ export const useJourneyStore = create<JourneyState>()(
       collectKey: () => set((state) => ({ collectedKeys: state.collectedKeys + 1 })),
       setMusicMuted: (muted) => set({ isMusicMuted: muted }),
       resetJourneys: () => set({ 
-        preetiCompleted: false, 
         meghanaCompleted: false, 
         energyLevel: 0,
         discoveredMemories: [],

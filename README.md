@@ -40,9 +40,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## 📁 Project Structure
 
 - `app/meghana`: The Book of Memories interactive experience.
-- `app/preeti`: The Garden of Growth cinematic experience.
+
 - `components/meghana`: Custom components, chapters, and UI elements for Meghana's journey.
-- `components/preeti`: Custom components, cinematic phases, and generative physics (like water and L-System trees) for Preeti's journey.
+
 - `lib/store.ts`: Zustand store managing unlocked chapters and completed journeys.
 
 ## 🌐 Deployment

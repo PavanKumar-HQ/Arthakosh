@@ -31,7 +31,7 @@ export function VaultDoor() {
       camera.position.z -= 0.2;
       if (camera.position.z < -5) {
         // Route when camera passes through
-        if (transitioning === 'preeti') router.push('/preeti');
+
         if (transitioning === 'meghana') router.push('/meghana');
         setTransitioning(null);
       }
@@ -60,32 +60,7 @@ export function VaultDoor() {
         <meshStandardMaterial color="#050505" />
       </mesh>
 
-      {/* Preeti's Seal (Left) */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5} position={[-2, 0, 0]}>
-        <mesh 
-          onPointerOver={() => setHovered('preeti')} 
-          onPointerOut={() => setHovered(null)}
-          onClick={() => handleSelect('preeti')}
-        >
-          <sphereGeometry args={[0.8, 64, 64]} />
-          <MeshDistortMaterial 
-            color={hovered === 'preeti' || transitioning === 'preeti' ? "#fcd34d" : "#fbbf24"} 
-            envMapIntensity={1} 
-            clearcoat={1} 
-            clearcoatRoughness={0.1} 
-            metalness={0.2} 
-            roughness={0.1} 
-            distort={hovered === 'preeti' ? 0.4 : 0.2} 
-            speed={3} 
-          />
-        </mesh>
-        <Text position={[0, -1.2, 0]} fontSize={0.3} color="#fcd34d" font="https://fonts.gstatic.com/s/caveat/v18/Wnz6HAc5bAfYB2Q7Yj8.woff">
-          Secret Garden
-        </Text>
-        {(hovered === 'preeti' || transitioning === 'preeti') && (
-          <pointLight color="#fcd34d" intensity={10} distance={10} />
-        )}
-      </Float>
+
 
       {/* Meghana's Seal (Right) */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5} position={[2, 0, 0]}>
