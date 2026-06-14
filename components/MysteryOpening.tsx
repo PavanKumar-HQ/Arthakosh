@@ -4,11 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 
-const typewriterLines = [
-  "To the one who has always been there.",
-  "Through every laugh and every tear.",
-  "This is your story...",
-];
+const typewriterLines: string[] = [];
 
 export function MysteryOpening({ onEnter }: { onEnter: () => void }) {
   const [currentLine, setCurrentLine] = useState(0);
